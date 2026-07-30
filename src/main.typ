@@ -6,4 +6,5 @@ Hello World!
 
 #bibliography(
   "bibliography.yml",
+  style: "assets/din-1505-2-alphanumeric.csl",
 )
