@@ -1,22 +1,23 @@
 #import "/template.typ"
 
-#show: template.template
+#show: template.template_base
+#{
+  show: template.template_preamble
 
-#set document(
-  title: [
-    Sim-to-Real-Transfer von Reinforcement-Learning-Modellen aus einem digitalen Zwilling auf einen physischen Kugellabyrinth-Roboter
-  ],
-  author: "Noah Jutz",
-  date: datetime(year: 2026, month: 12, day: 23),
-)
+  include "contents/00_preamble/title_page.typ"
+  pagebreak()
 
-#title()
+  include "contents/00_preamble/abstract.typ"
+  pagebreak()
 
-#outline()
+  outline()
+  pagebreak()
+}
 
-#pagebreak()
 
-Hello World @bib_cyberrunner!
+#show: template.template_doc
+
+#include "contents/01_introduction/intro.typ"
 
 #pagebreak()
 
