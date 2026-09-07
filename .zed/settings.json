@@ -1,0 +1,9 @@
+{
+    "lsp": {
+        "tinymist": {
+            "initialization_options": {
+                "pinMain": "src/main.typ",
+            },
+        },
+    },
+}
