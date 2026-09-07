@@ -23,6 +23,9 @@
 
     include "contents/02_related_works/main.typ"
     pagebreak()
+
+    include "contents/03_fundamentals/main.typ"
+    pagebreak()
 }
 
 #bibliography(
