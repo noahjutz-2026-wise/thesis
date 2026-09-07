@@ -20,3 +20,7 @@
 - #text(gray)[Diverse Sim2Real papers]
 
 // - GPU-Acceleration & Deployment
+
+== Domain Randomization
+
+- #text(gray)[Dynamics, Reality Gap, etc.]
