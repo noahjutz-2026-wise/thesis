@@ -1,0 +1,3 @@
+[submodule "src/vendor/literature"]
+	path = src/vendor/literature
+	url = https://github.com/noahjutz-2026-wise/literature.git
