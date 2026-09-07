@@ -22,6 +22,6 @@
 #pagebreak()
 
 #bibliography(
-  "bibliography.yml",
+  "/vendor/literature/sources.yaml",
   style: "assets/din-1505-2-alphanumeric.csl",
 )
