@@ -1,0 +1,2 @@
+betterbibtex.json filter=lfs diff=lfs merge=lfs -text
+sources.yaml filter=lfs diff=lfs merge=lfs -text

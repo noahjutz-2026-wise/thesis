@@ -2,8 +2,8 @@
   #stack(
     dir: ltr,
     spacing: 24pt,
-    image("/assets/logos/sappz.svg", height: 36pt, alt: "Logo SappZ"),
-    image("/assets/logos/oth.svg", height: 36pt, alt: "Logo OTH Regensburg"),
+    image("/src/assets/logos/sappz.svg", height: 36pt, alt: "Logo SappZ"),
+    image("/src/assets/logos/oth.svg", height: 36pt, alt: "Logo OTH Regensburg"),
   )
 ]
 

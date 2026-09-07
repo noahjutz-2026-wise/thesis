@@ -1,13 +1,13 @@
-#import "/template.typ"
+#import "/src/template.typ"
 
 #show: template.template_base
 #{
   show: template.template_preamble
 
-  include "contents/00_preamble/title_page.typ"
+  include "/src/contents/00_preamble/title_page.typ"
   pagebreak()
 
-  include "contents/00_preamble/abstract.typ"
+  include "/src/contents/00_preamble/abstract.typ"
   pagebreak()
 
   outline()
@@ -18,13 +18,13 @@
 #show: template.template_doc
 
 #{
-    include "contents/01_introduction/main.typ"
+    include "/src/contents/01_introduction/main.typ"
     pagebreak()
 
-    include "contents/02_related_works/main.typ"
+    include "/src/contents/02_related_works/main.typ"
     pagebreak()
 
-    include "contents/03_fundamentals/main.typ"
+    include "/src/contents/03_fundamentals/main.typ"
     pagebreak()
 }
 
