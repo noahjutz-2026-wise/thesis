@@ -1,3 +1,6 @@
+#import "/src/deps.typ": glossarium
+#import "/src/glossary.typ": glossary
+
 #let template_base(body) = {
   set document(
     title: [
@@ -7,6 +10,8 @@
     date: datetime(year: 2026, month: 12, day: 23),
   )
   set text(lang: "de")
+  show: glossarium.make-glossary
+  glossarium.register-glossary(glossary)
   body
 }
 
