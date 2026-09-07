@@ -17,9 +17,13 @@
 
 #show: template.template_doc
 
-#include "contents/01_introduction/intro.typ"
+#{
+    include "contents/01_introduction/main.typ"
+    pagebreak()
 
-#pagebreak()
+    include "contents/02_related_works/main.typ"
+    pagebreak()
+}
 
 #bibliography(
   "/vendor/literature/sources.yaml",

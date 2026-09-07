@@ -1,10 +1,13 @@
-= Hintergrund
+= Einleitung
+
+== Motivation
 
 - Motivation & Relevanz
   - Aktuelle Entwicklungen in Sim2Real Transfer
 - Problemstellung
   - Reproduktion CR schwierig
-  - Lösung: durch S2R vereinfachen und beschleunigen
+- Lösung
+    - durch S2R vereinfachen und beschleunigen
 - RL Grundlagen erklären
   - MDP, Tabellarische Methoden, Approximationsfunktionen @suttonReinforcementLearningIntroduction2020
   - Model-Based, #text(gray)[horizon, hyperparameters, NNs, EncDec]
