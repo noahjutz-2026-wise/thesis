@@ -16,14 +16,12 @@
 }
 
 #let template_preamble(body) = {
-  show: template_base
   set page(numbering: "i", footer: none)
   set heading(outlined: false, bookmarked: true)
   body
 }
 
 #let template_doc(body) = {
-  show: template_base
   counter(page).update(1)
   set page(numbering: "1")
   set heading(numbering: "1.1")

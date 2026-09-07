@@ -30,7 +30,7 @@
   pagebreak()
 }
 
-// #glossarium.print-glossary(glossary)
+#glossarium.print-glossary(glossary)
 
 #bibliography(
   "/vendor/literature/sources.yaml",

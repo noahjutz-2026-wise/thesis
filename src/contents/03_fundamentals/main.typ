@@ -7,6 +7,7 @@
 
 == Reinforcement Learning
 
+- @RL
 - MDP, Policy, Value Function, Exploration-Exploitation tradeoff @suttonReinforcementLearningIntroduction2020
 - Tabellarisch: Monte Carlo, Temporal Difference, n-step TD @suttonReinforcementLearningIntroduction2020
 - Approximationsfunktionen @suttonReinforcementLearningIntroduction2020
