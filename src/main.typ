@@ -30,6 +30,9 @@
   pagebreak()
 }
 
+#set heading(numbering: none)
+
+= Glossar
 #glossarium.print-glossary(glossary)
 
 #bibliography(

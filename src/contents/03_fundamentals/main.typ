@@ -2,8 +2,8 @@
 
 == Machine Learning
 
-- #text(gray)[NN]
-- #text(gray)[VAEs]
+- #text(gray)[@NN]
+- #text(gray)[@VAE:pl]
 
 == Reinforcement Learning
 
