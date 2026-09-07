@@ -1,15 +1,17 @@
 = Hintergrund
 
-- RL Konzepte erklären
-  - MDP
-  - environment
-  - Tabellarische Methoden
-  - Approximationsfunktionen
+- Motivation & Relevanz
+  - Aktuelle Entwicklungen in Sim2Real Transfer
+- Problemstellung
+  - Reproduktion CR schwierig
+  - Lösung: durch S2R vereinfachen und beschleunigen
+- RL Grundlagen erklären
+  - MDP, Tabellarische Methoden, Approximationsfunktionen @suttonReinforcementLearningIntroduction2020
   - Model-Based, #text(gray)[horizon, hyperparameters, NNs, EncDec]
   - GPU-Acceleration & Deployment
-- Wegweisende Recherche RL
-  - Barto & Sutton @suttonReinforcementLearningIntroduction2020
-- Relevante Recherche:
+- S2R Grundlagen erklären
+    - #text(gray)[Diverse Sim2Real papers]
+- Relevante Recherche & Zusammenhänge:
   - ML-Agents @julianiUnityGeneralPlatform2020
   - CyberRunner @biSampleEfficientLearningSolve2023 @biMasteringLabyrinthGame2025
   - Dreamer @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
@@ -18,3 +20,5 @@
   - #text(gray)[RLLib]
   - #text(gray)[PyTorch]
   - #text(gray)[TorchRL]
+- Versuchsaufbau
+- Überblick der nächsten Themenabschnitte
