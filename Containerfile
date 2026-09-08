@@ -21,6 +21,7 @@ CMD [ \
     "a-3b", \
     "--input", \
     "GIT_HASH=${GIT_HASH}", \
+    "--input", \
     "GIT_TAG=${GIT_TAG}", \
     "--root", \
     "src" \
