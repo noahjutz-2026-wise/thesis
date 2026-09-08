@@ -4,7 +4,7 @@
 
 - @MLAgents @julianiUnityGeneralPlatform2020
 - @CR @biSampleEfficientLearningSolve2023 @biMasteringLabyrinthGame2025
-- @Dreamer @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
+- @DreamerV3 @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
 - #text(gray)[@PPO] @schulmanProximalPolicyOptimization2017
 - #text(gray)[Ray]
 - #text(gray)[RLLib]

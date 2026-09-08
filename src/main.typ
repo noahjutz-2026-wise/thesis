@@ -28,6 +28,9 @@
 
   include "/src/contents/03_fundamentals/main.typ"
   pagebreak()
+
+  include "/src/contents/04_methodology/main.typ"
+  pagebreak()
 }
 
 #set heading(numbering: none)
