@@ -24,5 +24,5 @@ CMD [ \
     "--input", \
     "GIT_TAG=${GIT_TAG}", \
     "--root", \
-    "src" \
+    "." \
 ]
