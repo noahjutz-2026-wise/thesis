@@ -8,6 +8,7 @@ ENV GIT_TAG=${GIT_TAG}
 WORKDIR /app
 
 COPY src src
+COPY vendor vendor
 
 CMD [ \
     "typst", \
