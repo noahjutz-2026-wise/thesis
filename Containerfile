@@ -19,7 +19,7 @@ CMD [ \
     "src/assets", \
     "--pdf-standard", \
     "a-3b", \
-    "--input ", \
+    "--input", \
     "GIT_HASH=${GIT_HASH}", \
     "GIT_TAG=${GIT_TAG}", \
     "--root", \
