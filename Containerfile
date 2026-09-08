@@ -7,7 +7,6 @@ ENV GIT_TAG=${GIT_TAG}
 
 WORKDIR /app
 
-COPY build.sh .
 COPY src src
 
 CMD [ \
