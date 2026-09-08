@@ -8,4 +8,5 @@
   - CR-Servo
   - MM-Baseline
   - S2R
+- Statistische Signifikanz (Konfidenzintervall)
 - Statistischer Auswertungsprozess
