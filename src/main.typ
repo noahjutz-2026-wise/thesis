@@ -43,6 +43,9 @@
 
   include "contents/08_results/main.typ"
   pagebreak()
+
+  include "contents/09_discussion/main.typ"
+  pagebreak()
 }
 
 #{
