@@ -32,9 +32,8 @@
 
 #set heading(numbering: none)
 
-= Glossar
-// #glossarium.print-glossary(glossary)
 #glossy.glossary(
+  title: [Glossar],
   theme: glossy.theme-basic,
 )
 
