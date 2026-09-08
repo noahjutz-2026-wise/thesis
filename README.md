@@ -6,11 +6,11 @@
 ## Development
 
 ```sh
-tinymist preview --ignore-system-fonts --font-path src --pdf-standard a-3b --root src src/main.typ
+tinymist preview --ignore-system-fonts --font-path src/assets --pdf-standard a-3b --input revision=$(git rev-parse --short HEAD) --root . src/main.typ
 ```
 
 ## Compiling
 
 ```sh
-typst c --ignore-system-fonts --font-path src --pdf-standard a-3b --root src src/main.typ
+typst c --ignore-system-fonts --font-path src --pdf-standard a-3b --input revision=$(git rev-parse --short HEAD) --root . src/main.typ
 ```
