@@ -10,7 +10,10 @@
     date: datetime(year: 2026, month: 12, day: 23),
   )
   set text(lang: "de")
-  show: glossy.init-glossary.with(glossary)
+  show: glossy.init-glossary.with(
+    glossary,
+    term-links: true,
+  )
   body
 }
 

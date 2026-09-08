@@ -67,8 +67,8 @@
 )
 
 #let glossary = (
-  _rl.map(v => v + (group: "RL")),
-  _ml.map(v => v + (group: "ML")),
+  _rl.map(v => v + (group: "Reinforcement Learning")),
+  _ml.map(v => v + (group: "Machine Learning")),
   _software.map(v => v + (group: "Tools, Libraries & Frameworks")),
   _general,
 ).join()
