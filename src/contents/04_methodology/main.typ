@@ -20,8 +20,3 @@
   - Baseline-MM-Dreamer
 + @S2R
   - Baseline-MM-Dreamer Modell auf @CR evaluieren
-
-
-== @CR:long:noref
-
-== @MarbleMaze:noref
