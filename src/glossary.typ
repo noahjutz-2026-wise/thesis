@@ -57,12 +57,16 @@
   Ray: (
     short: "Ray",
   ),
+  WandB: (
+    short: "WandB",
+    long: "Weights & Biases",
+  ),
 )
 
 #let _general = (
   IPC: (
     short: "IPC",
-    long: "Inter-Process Communication",
+    long: "Inter-process Communication",
   ),
 )
 
