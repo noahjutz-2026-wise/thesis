@@ -34,6 +34,9 @@
 
   include "contents/05_requirements/main.typ"
   pagebreak()
+
+  include "contents/06_implementation/main.typ"
+  pagebreak()
 }
 
 #{
