@@ -1,3 +1,4 @@
+#show: align.with(center + horizon)
 #align(center)[
   #stack(
     dir: ltr,

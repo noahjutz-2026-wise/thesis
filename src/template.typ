@@ -9,7 +9,10 @@
     author: "Noah Jutz",
     date: datetime(year: 2026, month: 12, day: 23),
   )
-  set text(lang: "de")
+  set text(
+    lang: "de",
+    font: "New Computer Modern",
+  )
   show: glossy.init-glossary.with(
     glossary,
     term-links: true,
