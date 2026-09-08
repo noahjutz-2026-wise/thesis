@@ -23,3 +23,14 @@ Betreuer: Prof. Dr. Matthias Ehrnsperger, Sensorik-ApplikationsZentrum
 Vorgelegt von: #context document.author.join(",") \
 Matrikelnummer: 3343960 \
 Datum: Regensburg, den #context document.date.display("[day].[month].[year]")
+
+#align(bottom)[
+  #let hash = sys.inputs.at("GIT_HASH", default: none)
+  #let tag = sys.inputs.at("GIT_TAG", default: none)
+  #if hash != none [
+    #hash.slice(0, calc.min(10, hash.len()))
+    #if tag != none [
+      (#tag)
+    ]
+  ]
+]
