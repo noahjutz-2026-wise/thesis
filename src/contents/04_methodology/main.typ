@@ -13,9 +13,13 @@
 + @CR Experimente
   - Baseline-CR, vgl. mit @biSampleEfficientLearningSolve2023
   - Baseline-Servo mit umgebauter Hardware
-+ @MarbleMaze auf @DreamerV3 umstellen
-  - Baseline mit @PPO
++ @MarbleMaze anpassen
   - @MLAgents Schnittstelle für beliebige RL-Algorithmen
++ @MarbleMaze experimente
+  - Baseline-MM-PPO
+  - Baseline-MM-Dreamer
++ @S2R
+  - Baseline-MM-Dreamer Modell auf @CR evaluieren
 
 
 == @CR:long:noref
