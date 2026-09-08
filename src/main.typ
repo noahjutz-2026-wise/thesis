@@ -37,6 +37,9 @@
 
   include "contents/06_implementation/main.typ"
   pagebreak()
+
+  include "contents/07_experiments/main.typ"
+  pagebreak()
 }
 
 #{
