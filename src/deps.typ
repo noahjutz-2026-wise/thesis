@@ -1,1 +1,1 @@
-#import "@preview/glossarium:0.5.10"
+#import "@preview/glossy:0.9.2"

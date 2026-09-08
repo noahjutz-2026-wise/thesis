@@ -1,5 +1,5 @@
 #import "/src/template.typ"
-#import "/src/deps.typ": glossarium
+#import "/src/deps.typ": glossy
 #import "/src/glossary.typ": glossary
 
 #show: template.template_base
@@ -33,7 +33,10 @@
 #set heading(numbering: none)
 
 = Glossar
-#glossarium.print-glossary(glossary)
+// #glossarium.print-glossary(glossary)
+#glossy.glossary(
+  theme: glossy.theme-basic,
+)
 
 #bibliography(
   "/vendor/literature/sources.yaml",

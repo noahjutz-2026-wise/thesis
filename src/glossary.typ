@@ -1,71 +1,55 @@
-#let _add_group(dict, group: "") = {
-  dict.insert("group", group)
-  return dict
-}
+#let _add_group(dict, group) = {}
+
 
 #let _ml = (
-  (
-    key: "NN",
+  NN: (
     short: "NN",
     long: "Neural Network",
   ),
-  (
-    key: "VAE",
+  VAE: (
     short: "VAE",
     long: "Variational Auto-Encoder",
   ),
 )
 
 #let _rl = (
-  (
-    key: "CR",
+  CR: (
     short: "CR",
     long: "CyberRunner",
     description: "Ein Hardware- und Softwareprojkt, das mit Computer Vision und Reinforcement Learning das BRIO-Labyrinth spielt.",
   ),
-  (
-    key: "RL",
+  RL: (
     short: "RL",
     long: "Reinforcement Learning",
   ),
-  (
-    key: "S2R",
+  S2R: (
     short: "S2R",
     long: "Sim-to-Real Transfer",
   ),
-  (
-    key: "MDP",
+  MDP: (
     short: "MDP",
     long: "Markov Decision Process",
   ),
-  (
-    key: "TD",
+  TD: (
     short: "TD",
     long: "Temporal Difference",
   ),
-  (
-    key: "DP",
+  DP: (
     short: "DP",
     long: "Dynamic Programming",
   ),
-  (
-    key: "PPO",
+  PPO: (
     short: "PPO",
     long: "Proximal Policy Optimization",
   ),
-  (
-    key: "MLAgents",
-    short: none,
-    long: "ML-Agents",
+  MLAgents: (
+    short: "ML-Agents",
   ),
-  (
-    key: "Dreamer",
-    short: none,
-    long: "Dreamer",
+  Dreamer: (
+    short: "Dreamer",
   ),
 )
 
 #let glossary = (
-  _rl.map(_add_group.with(group: "Reinforcement Learning")),
-  _ml.map(_add_group.with(group: "Machine Learning")),
-).flatten()
+  _rl.map(v => v + (group: "RL")) + _ml.map(v => v + (group: "ML"))
+)
