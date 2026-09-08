@@ -10,20 +10,10 @@ WORKDIR /app
 COPY src src
 COPY vendor vendor
 
-CMD [ \
-    "typst", \
-    "compile", \
-    "src/main.typ", \
-    "/output/main.pdf", \
-    "--ignore-system-fonts", \
-    "--font-path", \
-    "src/assets", \
-    "--pdf-standard", \
-    "a-3b", \
-    "--input", \
-    "GIT_HASH=${GIT_HASH}", \
-    "--input", \
-    "GIT_TAG=${GIT_TAG}", \
-    "--root", \
-    "." \
-]
+CMD typst compile src/main.typ /output/main.pdf \
+    --ignore-system-fonts \
+    --font-path src/assets \
+    --pdf-standard a-3b \
+    --input "GIT_HASH=${GIT_HASH}" \
+    --input "GIT_TAG=${GIT_TAG}" \
+    --root .
