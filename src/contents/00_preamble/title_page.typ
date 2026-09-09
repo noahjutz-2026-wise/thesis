@@ -25,11 +25,11 @@ Matrikelnummer: 3343960 \
 Datum: Regensburg, den #context document.date.display("[day].[month].[year]")
 
 #align(bottom)[
-  #let hash = sys.inputs.at("GIT_HASH", default: none)
-  #let tag = sys.inputs.at("GIT_TAG", default: none)
-  #if hash != none [
+  #let hash = sys.inputs.at("GIT_HASH", default: "").trim()
+  #let tag = sys.inputs.at("GIT_TAG", default: "").trim()
+  #if hash.len() > 0 [
     #hash.slice(0, calc.min(10, hash.len()))
-    #if tag != none [
+    #if tag.len() > 0 [
       (#tag)
     ]
   ]
