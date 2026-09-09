@@ -4,7 +4,7 @@
 #let template_base(body) = {
   set document(
     title: [
-      Sim-to-Real-Transfer von Reinforcement-Learning-Modellen aus einem digitalen Zwilling auf einen physischen Kugellabyrinth-Roboter
+      CR-S2R: Sim-to-Real Transfer am Beispiel des CyberRunners mit ML-Agents
     ],
     author: "Noah Jutz",
     date: datetime(year: 2026, month: 12, day: 23),
