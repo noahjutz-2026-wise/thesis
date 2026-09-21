@@ -2,24 +2,27 @@
 
 == Machine Learning
 
+- Optional
 - #text(gray)[@NN]
 - #text(gray)[@VAE:pl]
 
-== Reinforcement Learning
+== @RL:long
 
-- @RL
-- @MDP:pl, Policy, Value Function, Exploration-Exploitation tradeoff @bartosutton
-- Tabellarisch: Monte Carlo, Temporal Difference, n-step TD @bartosutton
+- @MDP:pl:short, Policy, Value Function, Exploration-Exploitation tradeoff @bartosutton
+- Monte Carlo, n-step TD (sarsa, Q-learning) @bartosutton
 - Approximationsfunktionen @bartosutton
-- @PPO @ppo
+- @PPO @ppo @gae @suttonPolicyGradientMethods
 - Dreamer, Model-Based, Imagination @dreamerv1 @dreamerv3
 
 == Sim-to-Real Transfer
 
-- #text(gray)[Diverse @S2R papers]
+- @zhaoSimtoRealTransferDeep2020a (Survey)
+- @salvatoCrossingRealityGap2021 (Survey)
 
 // - GPU-Acceleration & Deployment
 
 == @RL:short mit stochastischen Delays
 
-- #text(gray)[Dynamics, Reality Gap, etc.]
+- @nathRevisitingStateAugmentation2021 (Formale Definition)
+- @yuanAsynchronousReinforcementLearning2022 (engineering reference)
+- @jiModelingDynamicsRandom2026 (bezug zu DreamerV3)
