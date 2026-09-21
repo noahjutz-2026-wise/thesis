@@ -11,10 +11,8 @@
 - @MDP:pl, Policy, Value Function, Exploration-Exploitation tradeoff @suttonReinforcementLearningIntroduction2020
 - Tabellarisch: Monte Carlo, Temporal Difference, n-step TD @suttonReinforcementLearningIntroduction2020
 - Approximationsfunktionen @suttonReinforcementLearningIntroduction2020
-- #text(gray)[PPO] @schulmanProximalPolicyOptimization2017
-- #text(
-    gray,
-  )[Dreamer, Model-Based, Imagination, tanh] @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
+- @PPO @schulmanProximalPolicyOptimization2017
+- Dreamer, Model-Based, Imagination @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
 
 == Sim-to-Real Transfer
 
@@ -22,6 +20,6 @@
 
 // - GPU-Acceleration & Deployment
 
-== Domain Randomization
+== @RL:short mit stochastischen Delays
 
 - #text(gray)[Dynamics, Reality Gap, etc.]

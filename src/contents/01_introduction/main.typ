@@ -1,6 +1,6 @@
 = Einleitung
 
-== Motivation & Relevanz
+== Motivation (Relevanz)
 
 - Aktuelle Entwicklungen in @S2R Transfer
 
@@ -10,6 +10,8 @@
 - Lösung
   - durch @S2R vereinfachen und beschleunigen
 
-== Übersicht
+== Hypothese
 
+- Hypothese
+- Abgrenzung der Arbeit
 - Überblick der Themenabschnitte
