@@ -11,7 +11,7 @@
 + @CR für Baseline anpassen
   - Hardware-Umbau für robuste lange tests
 + @CR Experimente
-  - Baseline-CR, vgl. mit @biSampleEfficientLearningSolve2023
+  - Baseline-CR, vgl. mit @cyberrunner
   - Baseline-Servo mit umgebauter Hardware
 + @MarbleMaze anpassen
   - @MLAgents Schnittstelle für beliebige RL-Algorithmen

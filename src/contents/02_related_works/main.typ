@@ -2,10 +2,10 @@
 
 == Grundlegende Arbeiten
 
-- @MLAgents @julianiUnityGeneralPlatform2020
-- @CR @biSampleEfficientLearningSolve2023 @biMasteringLabyrinthGame2025
-- @DreamerV3 @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
-- #text(gray)[@PPO] @schulmanProximalPolicyOptimization2017
+- @MLAgents @mlagents
+- @CR @cyberrunner @cyberrunner2
+- @DreamerV3 @dreamerv1 @dreamerv3
+- @PPO @ppo
 - #text(gray)[Ray]
 - #text(gray)[RLLib]
 - #text(gray)[PyTorch]

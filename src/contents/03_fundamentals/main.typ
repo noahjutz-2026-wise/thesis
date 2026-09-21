@@ -8,11 +8,11 @@
 == Reinforcement Learning
 
 - @RL
-- @MDP:pl, Policy, Value Function, Exploration-Exploitation tradeoff @suttonReinforcementLearningIntroduction2020
-- Tabellarisch: Monte Carlo, Temporal Difference, n-step TD @suttonReinforcementLearningIntroduction2020
-- Approximationsfunktionen @suttonReinforcementLearningIntroduction2020
-- @PPO @schulmanProximalPolicyOptimization2017
-- Dreamer, Model-Based, Imagination @hafnerDreamControlLearning2019 @hafnerMasteringDiverseControl2025
+- @MDP:pl, Policy, Value Function, Exploration-Exploitation tradeoff @bartosutton
+- Tabellarisch: Monte Carlo, Temporal Difference, n-step TD @bartosutton
+- Approximationsfunktionen @bartosutton
+- @PPO @ppo
+- Dreamer, Model-Based, Imagination @dreamerv1 @dreamerv3
 
 == Sim-to-Real Transfer
 
