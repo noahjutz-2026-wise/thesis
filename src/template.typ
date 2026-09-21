@@ -4,7 +4,7 @@
 #let template_base(body) = {
   set document(
     title: [
-      CR-S2R: Sim-to-Real Transfer am Beispiel des CyberRunners mit ML-Agents
+      Sim-to-Real Transfer an einem Murmelspiel
     ],
     author: "Noah Jutz",
     date: datetime(year: 2026, month: 12, day: 23),
