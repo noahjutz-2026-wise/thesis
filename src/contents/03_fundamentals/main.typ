@@ -6,6 +6,10 @@
 - #text(gray)[@NN]
 - #text(gray)[@VAE:pl]
 
+== @CR:long
+
+- @cyberrunner @cyberrunner2
+
 == @RL:long
 
 - @MDP:pl:short, Policy, Value Function, Exploration-Exploitation tradeoff @bartosutton
@@ -18,6 +22,8 @@
 
 - @zhaoSimtoRealTransferDeep2020a (Survey)
 - @salvatoCrossingRealityGap2021 (Survey)
+- @mlagents (MLAgents)
+-
 
 // - GPU-Acceleration & Deployment
 
@@ -26,3 +32,10 @@
 - @nathRevisitingStateAugmentation2021 (Formale Definition)
 - @yuanAsynchronousReinforcementLearning2022 (engineering reference)
 - @jiModelingDynamicsRandom2026 (bezug zu DreamerV3)
+
+== Implementierung
+
+- #text(gray)[Ray]
+- #text(gray)[RLLib]
+- #text(gray)[PyTorch]
+- #text(gray)[TorchRL]

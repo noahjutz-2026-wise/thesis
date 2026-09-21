@@ -23,9 +23,6 @@
   include "/src/contents/01_introduction/main.typ"
   pagebreak()
 
-  include "/src/contents/02_related_works/main.typ"
-  pagebreak()
-
   include "/src/contents/03_fundamentals/main.typ"
   pagebreak()
 
