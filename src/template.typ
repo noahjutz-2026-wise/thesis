@@ -4,13 +4,13 @@
 #let template_base(body) = {
   set document(
     title: [
-      Sim-to-Real Transfer an einem Murmelspiel
+      Sim2Real Transfer of Deep Reinforcement Learning Algorithms to solve a Labyrinth Game
     ],
     author: "Noah Jutz",
     date: datetime(year: 2026, month: 12, day: 23),
   )
   set text(
-    lang: "de",
+    lang: "en",
     font: "New Computer Modern",
   )
   show: glossy.init-glossary.with(
