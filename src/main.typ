@@ -43,7 +43,6 @@
   set heading(numbering: none)
   show heading.where(level: 2): set heading(outlined: false)
   glossy.glossary(
-    title: [Glossar],
     theme: glossy.theme-basic,
   )
 }
