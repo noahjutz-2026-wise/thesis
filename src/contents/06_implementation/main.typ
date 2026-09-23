@@ -28,5 +28,5 @@
 
 == marblemaze-gymnasium
 
-- Decouple @MarbleMaze from @PPO
+- Decouple @MM from @PPO
 - Gymnasium environment erstellen

@@ -6,11 +6,11 @@
   - Hardware nicht robust (beweis notwendig?)
   - Gleiche Algorithmen sind nur bei gleicher Implementierung vergleichbar
   - Latenz und Clock-Rate werden nicht berücksichtigt
-- @MarbleMaze Baseline
+- @MM Baseline
   - Unterschiedliche #[@RL]-Algorithmen (@PPO, @DreamerV3) sind nicht vergleichbar
   - Unterschiedliche Action Spaces und Observations sind nicht vergleichbar
 - @S2R
-  - @MarbleMaze muss Modell exportieren
+  - @MM muss Modell exportieren
   - #[@CR] muss Modell importieren, um es zu evaluieren
   - Physikalische Eigenschaften
 
@@ -18,7 +18,7 @@
 
 === Simulierte Umgebung
 
-- @MarbleMaze + Gymnasium
+- @MM + Gymnasium
 
 === Physisches System
 

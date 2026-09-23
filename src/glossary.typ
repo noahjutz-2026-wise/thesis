@@ -18,7 +18,7 @@
     long: "CyberRunner",
     description: "Ein Hardware- und Softwareprojkt, das mit Computer Vision und Reinforcement Learning das BRIO-Labyrinth spielt.",
   ),
-  MarbleMaze: (
+  MM: (
     short: "marble-maze",
   ),
   RL: (

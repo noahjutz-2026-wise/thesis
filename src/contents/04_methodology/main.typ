@@ -13,9 +13,9 @@
 + @CR Experimente
   - Baseline-CR, vgl. mit @cyberrunner
   - Baseline-Servo mit umgebauter Hardware
-+ @MarbleMaze anpassen
++ @MM anpassen
   - @MLAgents Schnittstelle für beliebige RL-Algorithmen
-+ @MarbleMaze experimente
++ @MM experimente
   - Baseline-MM-PPO
   - Baseline-MM-Dreamer
 + @S2R
