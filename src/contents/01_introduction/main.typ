@@ -1,18 +1,23 @@
-= Einleitung
+= Introduction
 
-== Motivation (Relevanz)
+== Motivation
 
 - Aktuelle Entwicklungen in @S2R Transfer
 
-== Problemstellung
+== Problem formulation
 
-- Reproduktion @CR schwierig
-- Lösung
-  - durch @S2R vereinfachen und beschleunigen
+Problems
+- Reproducing @CR proves difficult
+- Collecting experience is slow and unreliable
+- Safety concerns
 
-== Hypothese
+Solutions
+- @S2R
+- Reward shaping
+- (Stochastic) Latency-aware learning
 
-- Ähnliche Arbeiten
-- Hypothese
-- Abgrenzung der Arbeit
-- Überblick der Themenabschnitte
+== Similar Works
+
+- @jhaLearningTasksComplex: @S2R Circular Maze
+- @otaDataEfficientLearningComplex2021: @S2R Circular Maze
+- @baarSimtoRealTransferLearning2019: @S2R Circular Maze
