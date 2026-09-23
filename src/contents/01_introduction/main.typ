@@ -21,3 +21,5 @@ Solutions
 - @jhaLearningTasksComplex: @S2R Circular Maze
 - @otaDataEfficientLearningComplex2021: @S2R Circular Maze
 - @baarSimtoRealTransferLearning2019: @S2R Circular Maze
+- Contributions of this work
+- Differences to this work
