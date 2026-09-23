@@ -16,7 +16,7 @@ Solutions
 - Reward shaping
 - (Stochastic) Latency-aware learning
 
-== Similar Works
+== Related work
 
 - @jhaLearningTasksComplex: @S2R Circular Maze
 - @otaDataEfficientLearningComplex2021: @S2R Circular Maze
