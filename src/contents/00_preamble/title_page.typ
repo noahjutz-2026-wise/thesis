@@ -1,36 +1,38 @@
-#show: align.with(center + horizon)
-#align(center)[
-  #stack(
-    dir: ltr,
-    spacing: 24pt,
-    image("/src/assets/logos/sappz.svg", height: 36pt, alt: "Logo SappZ"),
-    image("/src/assets/logos/oth.svg", height: 36pt, alt: "Logo OTH Regensburg"),
-  )
-]
+#set align(center)
+
+#stack(
+  dir: ltr,
+  spacing: 24pt,
+  image("/src/assets/logos/sappz.svg", height: 36pt, alt: "Logo SappZ"),
+  image("/src/assets/logos/oth.svg", height: 36pt, alt: "Logo OTH Regensburg"),
+)
+
+#set align(horizon)
 
 #title()
 
-Bachelorarbeit
+Bachelor's Thesis
 
-An der \
-Ostbayerischen Technischen Hochschule Regensburg \
-Fakultät Informatik/Mathematik
+At the \
+Ostbayerische Technische Hochschule Regensburg \
+Faculty of Computer Science and Mathematics \
 
-Aufgabensteller: Prof. Dr. Martin Weiß \
-Zweitprüfer: Prof. Dr. Brijnesh Jain \
-Betreuer: Prof. Dr. Matthias Ehrnsperger, Sensorik-ApplikationsZentrum
+Examiner: Prof. Dr. Martin Weiß \
+Second Examiner: Prof. Dr. Brijnesh Jain \
+Advisor: Prof. Dr. Matthias Ehrnsperger, Sensorik-ApplikationsZentrum
 
-Vorgelegt von: #context document.author.join(",") \
-Matrikelnummer: 3343960 \
-Datum: Regensburg, den #context document.date.display("[day].[month].[year]")
+Submitted by: #context document.author.join(",") \
+Student ID: 3343960 \
 
-#align(bottom)[
-  #let hash = sys.inputs.at("GIT_HASH", default: "").trim()
-  #let tag = sys.inputs.at("GIT_TAG", default: "").trim()
-  #if hash.len() > 0 [
-    #hash.slice(0, calc.min(10, hash.len()))
-    #if tag.len() > 0 [
-      (#tag)
-    ]
+Regensburg, #context document.date.display()
+
+#set align(bottom)
+
+#let hash = sys.inputs.at("GIT_HASH", default: "").trim()
+#let tag = sys.inputs.at("GIT_TAG", default: "").trim()
+#if hash.len() > 0 [
+  Version #hash.slice(0, calc.min(10, hash.len()))
+  #if tag.len() > 0 [
+    (#tag)
   ]
 ]
