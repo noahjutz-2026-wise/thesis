@@ -32,13 +32,7 @@
   include "contents/06_implementation/main.typ"
   pagebreak()
 
-  include "contents/07_experiments/main.typ"
-  pagebreak()
-
   include "contents/08_results/main.typ"
-  pagebreak()
-
-  include "contents/09_discussion/main.typ"
   pagebreak()
 
   include "contents/10_conclusion/main.typ"
