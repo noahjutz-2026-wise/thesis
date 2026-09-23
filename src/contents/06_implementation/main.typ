@@ -1,32 +1,26 @@
-= Implementierung
+= Implementation
 
-== Architektur
+== Overview
 
-- Systemkontext
-  - Hardware
-- Bausteinsicht
+- HW/Unity $stretch(<->)^"gRPC"$ Env $stretch(<-)^"step"(a)$ Runtime
 
-== dreamerv3-deploy
+== Runtime
 
-- Reproduzierbares plug-and-play @DreamerV3 deployment
-- Verwendet @Ray in einem Container
-- Mit @WandB logging
-- Networking für Kommunikation mit Environment
-- Exportieren und importieren von Modellen
+- TorchRL DreamerV3 impl
+- TorchRL PPO impl
+- @WandB logging
+- Model serialization
+- Inference (tbd)
 
-== cyberrunner-3d-models
+== Gymnasium Environments
 
-- Servobasiertes Design
-- Robuste Nachladevorrichtung
+- Preexisting structures
+- Migrating @MM to @CR
 
-== cyberrunner-gymnasium
+== Changes to real-world environment
 
-- Fork von @CR
-- Decouple @CR from @DreamerV3
-- Gymnasium environment erstellen
-- Latenz und Clock rate fixieren
+== Changes to simulated environment
 
-== marblemaze-gymnasium
+== Revised real-world system
 
-- Decouple @MM from @PPO
-- Gymnasium environment erstellen
+- Servos
