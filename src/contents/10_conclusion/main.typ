@@ -1,4 +1,6 @@
-= Fazit
+= Conclusion
 
-- Zusammenfassung
-- Ausblick
+- Summary
+- Limitations
+- Implications
+- Future work

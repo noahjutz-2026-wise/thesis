@@ -1,5 +1,4 @@
-= Ergebnisse
+= Results
 
-- Diagramme Rohdaten
-- Median, Standardabweichungen, etc.
-- Vergleiche
+- Data, graphs, analysis, interpretation
+- Answer research question
