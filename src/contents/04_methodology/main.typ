@@ -1,22 +1,26 @@
-= Methodik
+= Methodology
 
-- Vorgehen, um Forschungsfrage zu beantworten
+== Overview
 
-+ Gemeinsame Architektur schaffen
-  - Gymnasium Environment (Observation & Reward)
-  - @DreamerV3 deployment (@Ray)
-  - Modularisierung durch @IPC
-  - Konsistente Clock Rate & Latenz
-  - Hardware- & #[@RL]-Metrics loggen (@WandB)
-+ @CR für Baseline anpassen
-  - Hardware-Umbau für robuste lange tests
-+ @CR Experimente
-  - Baseline-CR, vgl. mit @cyberrunner
-  - Baseline-Servo mit umgebauter Hardware
-+ @MM anpassen
-  - @MLAgents Schnittstelle für beliebige RL-Algorithmen
-+ @MM experimente
-  - Baseline-MM-PPO
-  - Baseline-MM-Dreamer
-+ @S2R
-  - Baseline-MM-Dreamer Modell auf @CR evaluieren
+- Which questions should be answered?
+- Which experiments are needed?
+- Which metrics are recorded?
+- How are metrics analyzed?
+- What possible answers exist?
+
+== Baselines
+
+- Experiments: (@CR, @MM) $times$ (@PPO, @DreamerV3) $times$ (original, modified)
+
+== Naive zero-shot transfer
+
+- Unify observation & reward shapes
+- Unify @RL\-Algorithms
+- Train N steps, export, inference
+- Experiments: (S2S, S2R, R2S, R2R) $times$ (@PPO, @DreamerV3) $times$ (original, modified)
+
+== Improvements
+
+- More realistic simulation environment
+- Stochastic delay
+- Domain randomization

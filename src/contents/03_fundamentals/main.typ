@@ -1,4 +1,4 @@
-= Theoretische Grundlagen
+= Theoretical Foundation
 
 == Machine Learning
 
