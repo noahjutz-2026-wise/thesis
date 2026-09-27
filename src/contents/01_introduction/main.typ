@@ -8,6 +8,16 @@ Training real-world systems entails new challenges that are subject to current r
 
 To address this issue, a multitude of solutions have been proposed, which can be categorized into those that aim to improve sample efficiency, and those that aim to lower the cost of generating samples. As for the former, @cyberrunner2 employs data augmentation to a symmetric marble game by mirroring camera observations, thereby increasing success rates. In this thesis, we want to focus on the latter case. By generating trajectories for training a model in simulation and transferring said model to the real world, we hope to reduce the amount of required training time on the physical system. This strategy, known as @S2R, has seen a stark increase in research activity recently, particularly in the fields of locomotion and navigation.
 
+@S2R comes with its own set of hurdles to overcome.
+
+Solutions
+- sample efficiency
+  - Reward shaping
+  - data augmenting
+  - selective sampling
+- cheaper samples
+  - sim2real
+
 == Problem formulation
 
 Throughout this work, we are going to restrict our attention to a particular commercialy available marble maze game known as the BRIO Labyrinth. The goal is to navigate a marble through a labyrinth on a perforated surface. Players use two rotating knobs, which together control the rotation of the surface around two perpendicular axes. The resulting composed surface rotation determines the direction that ball gravitates toward.
