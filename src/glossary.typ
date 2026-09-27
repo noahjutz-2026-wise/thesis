@@ -24,6 +24,10 @@
     short: "RL",
     long: "Reinforcement Learning",
   ),
+  DRL: (
+    short: "DRL",
+    long: "Deep Reinforcement Learning",
+  ),
   S2R: (
     short: "S2R",
     long: "Sim-to-Real Transfer",

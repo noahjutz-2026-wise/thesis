@@ -13,6 +13,7 @@
     lang: "en",
     font: "New Computer Modern",
   )
+  set par(justify: true)
   show: glossy.init-glossary.with(
     glossary,
     term-links: true,
