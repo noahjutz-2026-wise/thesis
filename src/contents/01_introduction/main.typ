@@ -24,6 +24,8 @@ Solutions
 
 == Related work
 
+Solving the labyrinth game at hand through the use of @RL has been the subject of rigorous experimentation.
+
 - @jhaLearningTasksComplex: @S2R Circular Maze
 - @otaDataEfficientLearningComplex2021: @S2R Circular Maze
 - @baarSimtoRealTransferLearning2019: @S2R Circular Maze
