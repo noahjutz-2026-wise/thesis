@@ -32,6 +32,10 @@
     short: "S2R",
     long: "Sim-to-Real Transfer",
   ),
+  RG: (
+    short: "RG",
+    long: "reality gap",
+  ),
   MDP: (
     short: "MDP",
     long: "Markov Decision Process",
