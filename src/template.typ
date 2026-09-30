@@ -13,7 +13,6 @@
     lang: "en",
     font: "New Computer Modern",
   )
-  set par(justify: true)
   show: glossy.init-glossary.with(
     glossary,
     term-links: true,
@@ -29,6 +28,7 @@
 
 #let template_doc(body) = {
   counter(page).update(1)
+  set par(justify: true)
   set page(numbering: "1")
   set heading(numbering: "1.1")
   body
