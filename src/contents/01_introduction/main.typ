@@ -14,7 +14,7 @@ A central activity in @RL research is the design of benchmark environments, in o
 
 By adapting state-of-the-art @S2R methods in this environment, we can quantify and compare their efficacy, as well as identify the most prevalent challenges. Our main contributions are:
 
-- *An evaluation of sim-to-real transfer on the BRIO Labyrinth.* Building on existing hardware @cyberrunner @cyberrunner2 and simulation @marble_maze components, we transfer policies trained in simulation to the physical system and quantify both the reduction in environment steps required on the physical system and the residual reality gap. We additionally compare model-based and model-free algorithms for fine-tuning on the physical system.
+- *An evaluation of @S2R on the BRIO Labyrinth.* Building on existing hardware @cyberrunner @cyberrunner2 and simulation @marble_maze components, we transfer policies trained in simulation to the physical system and quantify both the reduction in environment steps required on the physical system and the residual reality gap. We additionally compare model-based and model-free algorithms for fine-tuning on the physical system.
 
 - *Simulation fidelity extensions.* We extend the existing simulation of the labyrinth with configurable physical and timing parameters, such as actuator and sensor latencies, increasing its suitability as a source environment for @S2R.
 
