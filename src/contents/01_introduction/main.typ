@@ -8,9 +8,17 @@ Training real-world systems entails new challenges that are subject to current r
 
 To address this issue, a multitude of solutions have been proposed, which can be categorized into those that aim to improve sample efficiency, and those that aim to lower the cost of generating samples. As for the former, developments to improve general-purpose learning algorithms -- such as learned world models and latent states @dreamerv3 -- are ongoing. The same can be said for application-specific efforts such as reward shaping, data augmenting and selective sampling @cyberrunner2. In this thesis, we want to focus on the latter case. By generating trajectories for training a model in simulation and transferring said model to the real world, we hope to reduce the amount of required training steps on the physical system. This strategy, known as @S2R, has seen a stark increase in research activity recently.
 
+While @S2R offers a promising path toward lowering the cost of @RL research on control tasks, it introduces its own challenges. Replicating a system in simulation with high-fidelity dynamics requires not only a thorough understanding of the underlying physics but also careful modeling of sensor and actuator latencies. Furthermore, designers of simulated environments must navigate a set of interlocking trade-offs: simulation fidelity versus compute cost, the number of fine-tuning steps versus policy robustness, and the degree of domain randomization.
+
 A central activity in @RL research is the design of benchmark environments, in order to evaluate algorithms and methods. Of particular interest in the field of @S2R are tasks that present a considerable discrepancy in the performance of a model in simulation and in the real world; this is known as a @RG. Studying control tasks which exhibit this difficulty helps us to figure out why some methods work well under ideal conditions, but fail to transfer to the real world. One such task is the BRIO Labyrinth Game: despite being conceptually simple and inexpensive to replicate, it exhibits continuous, nonlinear, and only partially observable dynamics, which is why @metzenBRIOLabyrinthGameA2009[a:] proposed it as a testbed for reinforcement learning @metzenBRIOLabyrinthGameA2009.
 
-// We propose an easily reproducible #footnote[The source code can be found on (todo)] demonstration of the capabilities of
+By adapting state-of-the-art @S2R methods in this environment, we can quantify and compare their efficacy, as well as identify the most prevalent challenges. Our main contributions are:
+
+- *An evaluation of sim-to-real transfer on the BRIO Labyrinth.* Building on existing hardware @cyberrunner @cyberrunner2 and simulation @marble_maze components, we transfer policies trained in simulation to the physical system and quantify both the reduction in environment steps required on the physical system and the residual reality gap. We additionally compare model-based and model-free algorithms for fine-tuning on the physical system.
+
+- *Simulation fidelity extensions.* We extend the existing simulation of the labyrinth with configurable physical and timing parameters, such as actuator and sensor latencies, increasing its suitability as a source environment for @S2R.
+
+- *A reproducible experiment pipeline.* We provide a clean, modular pipeline for training, transfer, and evaluation built on Ray RLlib @rllib, enabling the results of this thesis to be reproduced and the setup to serve as a foundation for future experiments on this task.
 
 == Problem formulation
 
