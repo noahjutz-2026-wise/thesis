@@ -1,5 +1,4 @@
-#import "/src/deps.typ": glossy
-#import "/src/deps.typ": citesugar
+#import "/src/deps.typ": booktabs, citesugar, glossy
 #import "/src/glossary.typ": glossary
 
 #let template_base(body) = {
@@ -17,6 +16,7 @@
     lang: "en",
     font: "New Computer Modern",
   )
+  show figure: set block(breakable: true)
   show: glossy.init-glossary.with(
     glossary,
     term-links: true,
@@ -32,7 +32,7 @@
 
 #let template_doc(body) = {
   counter(page).update(1)
-  set par(justify: true)
+  show par: set par(justify: true)
   set page(numbering: "1")
   set heading(numbering: "1.1")
   body

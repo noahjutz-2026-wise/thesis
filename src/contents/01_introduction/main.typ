@@ -14,7 +14,7 @@ A central activity in @RL research is the design of benchmark environments, in o
 
 By adapting state-of-the-art @S2R methods in this environment, we can quantify and compare their efficacy, as well as identify the most prevalent challenges. Our main contributions are:
 
-- *An evaluation of @S2R on the BRIO Labyrinth.* Building on existing hardware @cyberrunner @cyberrunner2 and simulation @marble_maze components, we transfer policies trained in simulation to the physical system and quantify both the reduction in environment steps required on the physical system and the residual reality gap. We additionally compare model-based and model-free algorithms for fine-tuning on the physical system.
+- *An evaluation of @S2R methods on the BRIO Labyrinth.* Building on existing hardware @cyberrunner @cyberrunner2 and simulation @marble_maze components, we transfer policies trained in simulation to the physical system and quantify both the reduction in environment steps required on the physical system and the residual reality gap. We additionally compare model-based and model-free algorithms for fine-tuning on the physical system.
 
 - *Simulation fidelity extensions.* We extend the existing simulation of the labyrinth with configurable physical and timing parameters, such as actuator and sensor latencies, increasing its suitability as a source environment for @S2R.
 
@@ -36,10 +36,31 @@ Solutions
 
 == Related work
 
-Solving the labyrinth game at hand through the use of @RL has been the subject of rigorous experimentation.
+To our knowledge, @waldemarkUsingReinforcementLearning1995 is the earliest published work that attempts to solve the labyrinth game using @RL. It establishes a frictionless physical model with rolling inertia for simulation. The author notes a performance degradation when transferring to the real world, and cites timing and noise as major concerns. @abdenebaouiDiplomThesisImplementationEvaluation2007 @abdenebaouiConnectionistArchitectureLearning2007 leverages dedicated simulation software for the first time, taking into account friction. The authors rely on a manual subdivision of the playing field to split the maze into a set of smaller subproblems and use a discrete action space. The labyrinth game is first proposed as a benchmark environment in @metzenBRIOLabyrinthGameA2009, which focuses on the engineering aspect of automating the control task. The authors go on to use this environment as a testbed when they define a metric for quantifying the @RG in @bergattQuantificationMinimizationSimulationRealityGap2009. A similar, but not identical physical setup is introduced and described in detail in @ofjallCombiningVisionMachine2016. It covers the entire pipeline of solving the labyrinth game, encompassing the physical setup, control loop, visual object detection and learning algorithm. A breakthrough was achieved when @cyberrunner applied a sample-efficient @RL algorithm to the labyrinth game, which was able to beat the record held by a human for the fastest play-time. They later revised their approach through data augmentation and selective sampling in @cyberrunner2, reducing their original required training time from four hours to one and a half hours.
 
-- @jhaLearningTasksComplex: @S2R Circular Maze
-- @otaDataEfficientLearningComplex2021: @S2R Circular Maze
-- @baarSimtoRealTransferLearning2019: @S2R Circular Maze
-- Contributions of this work
-- Differences to this work
+See @table:publications-brio for a systematic comparison of publications that use the labyrinth game or a similar environment.
+
+#figure(caption: [Classification of publications tackling the labyrinth game])[
+  #table(
+    columns: 5,
+    table.header([Reference], [Real platform], [Simulator], [Algorithm], [@S2R]),
+    [@waldemarkUsingReinforcementLearning1995], [simplified BRIO], [Custom], [SRV-Net (RL)], [Direct policy transfer],
+
+    [@abdenebaouiDiplomThesisImplementationEvaluation2007 @abdenebaouiConnectionistArchitectureLearning2007],
+    [BRIO],
+    [ODE],
+    [QCON],
+    [],
+
+    [@metzenBRIOLabyrinthGameA2009], [BRIO], [ODE], [SARSA($lambda$) + CMAC], [✗],
+
+    [@bergattQuantificationMinimizationSimulationRealityGap2009], [BRIO], [ODE], [Evolution], [],
+
+    [@ofjallCombiningVisionMachine2016], [BRIO], [No], [LWPR], [#sym.crossmark],
+    [@jhaLearningTasksComplex], [CME], [Custom], [MF + MB RL], [✗],
+    [@baarSimtoRealTransferLearning2019], [CME], [Custom], [RL], [DR],
+    [@otaDataEfficientLearningComplex2021], [CME], [Physics+GP], [NMPC], [Sys-ID, GP Res.],
+    [@cyberrunner], [BRIO], [—], [DreamerV3], [✗],
+    [@cyberrunner2], [BRIO], [—], [DreamerV3 + PER], [✗],
+  )
+] <table:publications-brio>
