@@ -1,7 +1,11 @@
 #import "/src/deps.typ": glossy
+#import "/src/deps.typ": citesugar
 #import "/src/glossary.typ": glossary
 
 #let template_base(body) = {
+  show cite: citesugar.citesugar
+  show cite.where(form: "author"): set cite(style: "apa")
+  show cite.where(form: "prose"): set cite(style: "apa")
   set document(
     title: [
       Sim2Real Transfer of Deep Reinforcement Learning Algorithms to solve a Labyrinth Game
