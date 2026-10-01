@@ -6,11 +6,25 @@
 ## Development
 
 ```sh
-tinymist preview --ignore-system-fonts --font-path src/assets --pdf-standard a-3b --input revision=$(git rev-parse --short HEAD) --root . src/main.typ
+tinymist preview \
+    --ignore-system-fonts \
+    --font-path src \
+    --pdf-standard a-3b \
+    --input GIT_HASH="$(git rev-parse --short HEAD)" \
+    --input GIT_TAG="$(git describe --tags --exact-match)" \
+    --root . \
+    src/main.typ
 ```
 
 ## Compiling
 
 ```sh
-typst c --ignore-system-fonts --font-path src --pdf-standard a-3b --input revision=$(git rev-parse --short HEAD) --root . src/main.typ
+typst compile \
+    --ignore-system-fonts \
+    --font-path src \
+    --pdf-standard a-3b \
+    --input GIT_HASH=$(git rev-parse --short HEAD) \
+    --input GIT_TAG=$(git describe --tags --exact-match) \
+    --root . \
+    src/main.typ
 ```
