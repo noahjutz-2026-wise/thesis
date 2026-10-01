@@ -3,19 +3,8 @@
 #import "/src/glossary.typ": glossary
 
 #show: template.template_base
-#{
-  show: template.template_preamble
 
-  include "/src/contents/00_preamble/title_page.typ"
-  pagebreak()
-
-  include "/src/contents/00_preamble/abstract.typ"
-  pagebreak()
-
-  outline()
-  pagebreak()
-}
-
+#include "/src/contents/00_preamble/main.typ"
 
 #show: template.template_doc
 
