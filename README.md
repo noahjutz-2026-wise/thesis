@@ -23,8 +23,8 @@ typst compile \
     --ignore-system-fonts \
     --font-path src \
     --pdf-standard a-3b \
-    --input GIT_HASH=$(git rev-parse --short HEAD) \
-    --input GIT_TAG=$(git describe --tags --exact-match) \
+    --input GIT_HASH="$(git rev-parse --short HEAD)" \
+    --input GIT_TAG="$(git describe --tags --exact-match)" \
     --root . \
     src/main.typ
 ```
