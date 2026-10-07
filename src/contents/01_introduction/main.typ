@@ -22,11 +22,17 @@ By adapting state-of-the-art @S2R methods in this environment, we can quantify a
 
 == Problem formulation
 
-// Throughout this work, we are going to restrict our attention to a particular commercialy available marble maze game known as the BRIO Labyrinth. The goal is to navigate a marble through a labyrinth on a perforated surface. Players use two rotating knobs, which together control the rotation of the surface around two perpendicular axes. The resulting composed surface rotation determines the direction that ball gravitates toward.
+The goal of the labyrinth game is to navigate a marble along a predefined path through a labyrinth on a flat surface. The player uses two rotating knobs, which together control the rotation of the surface around two perpendicular axes. The resulting composed surface rotation determines the direction that ball gravitates toward. Holes adjacent to the path can cause the marble to fall, forcing the player to start over again. The maze is made up of walls, which constrain the ball's movement and make it difficult to skip sections of the path. We are going to limit our efforts to solving the game without cheating, i.e. without skipping sections of the path.
 
-We hypothesize that the accuracy of a model trained in a medium fidelity simulation remains within 15% of its fully real-world counterpart when deployed in the real world, while requiring 80% less real-world samples in fine-tuning. This is assuming that the @RG can be minimized
+Among other adversities associated with training real-world systems mentioned in the previous chapter, the following apply concretely to this environment: Human supervision is required to remedy failures that cannot be recovered from, such as a marble falling outside the playing area. Physical wear, such as strings fraying and eventually ripping due to constant friction with rotating rods, necessitates active maintenance and leads to downtime. Training cannot be artificially sped up due to the immutable gravitational forces acting upon the ball. Parallelizing the system brings about compounding material costs -- despite the game frequently being hailed as an affordable testbed for @RL, it relies on expensive electronics. These are just some of the challenges we faced while attempting to reproduce the results @cyberrunner2 produced.
 
-Since @cyberrunner2 achieved a 72% success rate by training only in the real world, we aim for at least 61.2%.
+To address these issues, and consequently facilitate the process of reproducing these results, we are going to use a simulation of the labyrinth game to create cheap samples for training a model which will be transferred to the real world.
+
+We hypothesize that the accuracy of a model trained in a medium fidelity simulation is no more than 15% worse than that of its counterpart trained in reality when deployed in the real world, while requiring 80% less real-world samples in fine-tuning. This is assuming that the @RG can be minimized sufficiently.
+
+We refer to @cyberrunner2 for our real-world baseline. In this paper, an accuracy of 72% was achieved by training only in the real world for 1.5 hours (or 300,000 steps at a control loop frequency of around $55 "Hz"$). Therefore, we aim for an accuracy of at least $0.85 dot 0.72=61.2%$ after fine-tuning for $0.2 dot 1.5 "h" = 18 "min"$ (or 59,400 steps). We have found that previous work on simulating the labyrinth game yielded an accuracy of TODO% in simulation @marble_maze. Thus, the relative performance degradation after transferring and fine-tuning must be no more than $("TODO"%-61.2%)/("TODO"%)$.
+
+Our main goal, then, is to evaluate and minimize this performance degragation.
 
 == Related work
 
