@@ -24,21 +24,15 @@ By adapting state-of-the-art @S2R methods in this environment, we can quantify a
 
 // Throughout this work, we are going to restrict our attention to a particular commercialy available marble maze game known as the BRIO Labyrinth. The goal is to navigate a marble through a labyrinth on a perforated surface. Players use two rotating knobs, which together control the rotation of the surface around two perpendicular axes. The resulting composed surface rotation determines the direction that ball gravitates toward.
 
-Problems
-- Reproducing @CR proves difficult
-- Collecting experience is slow and unreliable
-- Safety concerns
+We hypothesize that the accuracy of a model trained in a medium fidelity simulation remains within 15% of its fully real-world counterpart when deployed in the real world, while requiring 80% less real-world samples in fine-tuning. This is assuming that the @RG can be minimized
 
-Solutions
-- @S2R
-- Reward shaping
-- (Stochastic) Latency-aware learning
+Since @cyberrunner2 achieved a 72% success rate by training only in the real world, we aim for at least 61.2%.
 
 == Related work
 
 To our knowledge, @waldemarkUsingReinforcementLearning1995 is the earliest published attempt to solve the labyrinth game with @RL. The author simulates the task using a frictionless physical model with rolling inertia and observes a marked performance degradation upon transfer to the real world, citing timing and noise as the dominant causes. The first works to employ dedicated simulation software, which additionally accounts for friction, are @abdenebaouiDiplomThesisImplementationEvaluation2007 and @abdenebaouiConnectionistArchitectureLearning2007. There, the maze is manually subdivided into a set of smaller subproblems, which are solved in a discrete action space.
 
-The labyrinth game was first proposed as a benchmark environment by @metzenBRIOLabyrinthGameA2009, with an emphasis on the engineering aspects of automating the control task. The same environment later served as a testbed for @bergattQuantificationMinimizationSimulationRealityGap2009, in which a metric for quantifying the @RG is introduced. A similar, though not identical, physical setup is presented in @ofjallCombiningVisionMachine2016, which covers the entire pipeline from physical setup and control loop to visual object detection and learning.
+The labyrinth game was first proposed as a benchmark environment by @metzenBRIOLabyrinthGameA2009, with an emphasis on the engineering aspects of automating the control task. The same environment later served as a testbed for @bergattQuantificationMinimizationSimulationRealityGap2009, in which a metric for quantifying the @RG is introduced. A similar, though not identical, physical setup is presented in @ofjallCombiningVisionMachine2016, which covers the entire pipeline from physical setup and control loop to visual object detection and learning. The authors were able to solve the maze by explicitly providing the algorithm with a model of the physical behavior of the maze.
 
 A breakthrough was achieved by @cyberrunner, who applied a sample-efficient @RL algorithm to the labyrinth and surpassed the human record for the fastest play-time, without requiring simulated samples. In @cyberrunner2, they revised their approach through data augmentation and selective sampling, reducing the required training time from four hours to one and a half.
 
