@@ -36,6 +36,8 @@ Our main goal, then, is to evaluate and minimize this performance degragation.
 
 == Related work
 
+// The labyrinth game
+
 To our knowledge, @waldemarkUsingReinforcementLearning1995 is the earliest published attempt to solve the labyrinth game with @RL. The author simulates the task using a frictionless physical model with rolling inertia and observes a marked performance degradation upon transfer to the real world, citing timing and noise as the dominant causes. The first works to employ dedicated simulation software, which additionally accounts for friction, are @abdenebaouiDiplomThesisImplementationEvaluation2007 and @abdenebaouiConnectionistArchitectureLearning2007. There, the maze is manually subdivided into a set of smaller subproblems, which are solved in a discrete action space.
 
 The labyrinth game was first proposed as a benchmark environment by @metzenBRIOLabyrinthGameA2009, with an emphasis on the engineering aspects of automating the control task. The same environment later served as a testbed for @bergattQuantificationMinimizationSimulationRealityGap2009, in which a metric for quantifying the @RG is introduced. A similar, though not identical, physical setup is presented in @ofjallCombiningVisionMachine2016, which covers the entire pipeline from physical setup and control loop to visual object detection and learning. The authors were able to solve the maze by explicitly providing the algorithm with a model of the physical behavior of the maze.
@@ -68,3 +70,7 @@ See @table:publications-brio for a systematic comparison of publications that us
     [@cyberrunner2], [BRIO], [—], [DreamerV3 + PER], [✗],
   )
 ] <table:publications-brio>
+
+// Sim2Real Transfer
+
+// Unique value proposition
