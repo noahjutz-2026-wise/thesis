@@ -1,12 +1,9 @@
 = Theoretical Foundation
 
-== Machine Learning
-
-- Optional
-- #text(gray)[@NN]
-- #text(gray)[@VAE:pl]
-
 == @RL:long
+
+@RL:both is a branch of study that is concerned with learning to solve arbitrary problems through trial and error. It is born out of the field of dynamic programming, which provides us with a formal definition of the problem we are trying to solve. Bellman TODO defines a _multi-stage decision process_ as a sequence of choices which influence the variables that define the state of a physical system over time. A _policy_ governs these decisions. An _optimal policy_ maximizes some metric within the variables that define the physical system.
+
 
 Fundamentals
 - @MDP:pl:short, Policy, Value Function, Exploration-Exploitation tradeoff @bartosutton
