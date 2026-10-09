@@ -2,17 +2,7 @@
 
 == @RL:long
 
-Born out of the field of dynamic programming, @RL:both is a branch of study that is concerned with learning to solve problems through trial and error @bartosutton.
-
-A problem definition for _multi-stage processes_ was formalized in @bellmanDynamicProgramming1957 as finding the optimal sequence of choices which influence the variables that define the state of a physical system over time. Optimality is defined here as maximizing or minimizing some metric derived from the system's state.
-
-The fundamental model for a control loop in @RL are @MDP:pl: The interaction is structured as a series of discrete time steps $t$. The set of variables that describe the system at time $t$ are contained within the _state_ of the system $s_t in cal(S)$. There is a function which maps states to actions (in the deterministic case; $pi(s)$), or to action-probabilities (in the stochastic case; $pi(a|s)$).
-
-A _deterministic policy_ $pi(s)$ chooses an action $a_t in cal(A)$ given the current state, whereas a _stochastic policy_ $pi(a|s)$ yields the probability of choosing an action $a_t$ in the current state $s_t$. A _reward function_ $r(s, a, s')$ provides us with an objective to optimize against: Given the current state $s$, the taken action $a$ and subsequent state $s'$, it determines a scalar immediate _reward_ $r$.
-
-Putting this all together, a _trajectory_ $S_0,A_0,R_1,S_1,A_1,R_2,...$ consists of an environment state, which is manipulated in each step by an action chosen by a policy, resulting in a subsequent state and reward. How an action $a$ influences the state is stochastically determined by the _dynamics_ of the system $p(s', r | s, a)$. The reward function is derived from it.
-
-The goal of sequential decision making is to maximize the cumulative reward obtained over time, or _return_ $G_t$. The problem lies in finding an _optimal policy_ that
+Originating from dynamic programming @bellmanDynamicProgramming1957, @RL:both learns to solve _multi-stage processes_ via trial and error @bartosutton. It models interactions as @MDP:pl across discrete steps $t$: a _deterministic policy_ $pi(s)$ or _stochastic policy_ $pi(a|s)$ selects actions $a_t in cal(A)$ for a given _state_ $s_t in cal(S)$, generating an immediate _reward_ $r$ and next state according to the system's _dynamics_ $p(s', r | s, a)$ and _reward function_ $r(s, a, s')$. This interaction yields a _trajectory_ $S_0,A_0,R_1,S_1,A_1,R_2,...$ with the ultimate goal of finding an _optimal policy_ that maximizes the cumulative _return_ $G_t$.
 
 // State value and action value methods
 
