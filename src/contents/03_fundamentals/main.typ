@@ -26,28 +26,27 @@ Deep @RL
 Dreamer
 - Dreamer, dyn-rec-pol loss, Imagination @dreamerv1 @dreamerv3
 
-== Real-World System
-
-- @cyberrunner @cyberrunner2 (@CR)
-
-== Simulated System
-
-- @mlagents (@MLAgents)
-
 == @S2R:long
 
-- @zhaoSimtoRealTransferDeep2020a (Survey)
-- @salvatoCrossingRealityGap2021 (Survey)
+- Physics
+  - Inertial spherical movement in gravity
+  - Friction
+  - Approximations
+- Timing
+  - Sensor + actuator delays
+- Methods
+  - Domain Randomization
+  - Domain Adaptation
 
-== Delay-aware @RL
-
-- @nathRevisitingStateAugmentation2021 (Formale Definition)
-- @yuanAsynchronousReinforcementLearning2022 (engineering reference)
-- @jiModelingDynamicsRandom2026 (bezug zu DreamerV3)
-
-== Implementation
-
-- #text(gray)[Ray]
-- #text(gray)[RLLib]
-- #text(gray)[PyTorch]
-- #text(gray)[TorchRL]
+// == Delay-aware @RL
+//
+// - @nathRevisitingStateAugmentation2021 (Formale Definition)
+// - @yuanAsynchronousReinforcementLearning2022 (engineering reference)
+// - @jiModelingDynamicsRandom2026 (bezug zu DreamerV3)
+//
+// == Implementation
+//
+// - #text(gray)[Ray]
+// - #text(gray)[RLLib]
+// - #text(gray)[PyTorch]
+// - #text(gray)[TorchRL]
