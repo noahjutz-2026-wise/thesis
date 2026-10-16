@@ -10,24 +10,41 @@
     table.hline(),
     [CyberRunner],
     $
-      {
-        #box[
-          `image`: $[0..255]^(64,64,1)$ \
-          `states`: $[alpha, beta, x, y] in RR^4$ \
-          `goal`: $[x, y]^N in RR^(2N)$ \
-          `progress`: $RR$
-        ]
-      }
+      lr(
+        {
+          #box[$ #[`image`:] (0,...,255)^(64,64,1) \
+          #[`states`:] [x_b, y_b, alpha, beta] in RR^4 \
+          #[`goal`:] bold(upright(p))_(1:n_p) in RR^(n_p) \
+          #[`progress`:] l in RR $]
+        }
+      )
     $,
-    $
-      [-1, 1]^2
-    $,
-    [See env.py],
+    [$[-1, 1]^2$ (Target Speed)],
+    [$Delta_l$],
 
     [Marble-Maze],
-    [See BoardAgent.cs],
-    [See BoardAgent.cs],
-    [See BoardAgent.cs],
+    $
+      vec(
+        x_b, y_b,
+        alpha, beta,
+        bold(upright(p))_(h,1),
+        ...,
+        bold(upright(p))_(h,5),
+        bold(upright(v))^"nav"_x,
+        0,
+        bold(upright(v))^"nav"_z,
+        l,
+        d^"ray"_1,
+        ...,
+        d^"ray"_8
+      )^10
+    $,
+    [$[-1, 1]^2$ (Target rotation)],
+    [
+      $
+        -0.005 + 0.5 Delta_l + bold(m)_"bonus" dot bb(1)_(m_t>m_(t-1))
+      $
+    ],
 
     [Unified],
     [?],
