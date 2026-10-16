@@ -10,13 +10,12 @@
     table.hline(),
     [CyberRunner],
     $
-      lr(
-        {
-          #box[$ #[`image`:] (0,...,255)^(64,64,1) \
-          #[`states`:] [x_b, y_b, alpha, beta] in RR^4 \
-          #[`goal`:] bold(upright(p))_(1:n_p) in RR^(n_p) \
-          #[`progress`:] l in RR $]
-        }
+      mat(
+        delim: "{",
+        #[`image`:] & (0,...,255)^(64,64,1);
+        #[`states`:] & [x_b, y_b, alpha, beta] in RR^4;
+        #[`goal`:] & bold(upright(p))_(1:n_p) in RR^(n_p);
+        #[`progress`:] & l in RR;
       )
     $,
     [$[-1, 1]^2$ (Target Speed)],
