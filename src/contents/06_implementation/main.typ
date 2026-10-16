@@ -1,26 +1,12 @@
 = Implementation
 
-== Overview
+== System Context
 
-- HW/Unity $stretch(<->)^"gRPC"$ Env $stretch(<-)^"step"(a)$ Runtime
-
-== Runtime
-
-- TorchRL DreamerV3 impl
-- TorchRL PPO impl
-- @WandB logging
-- Model serialization
-- Inference (tbd)
-
-== Gymnasium Environments
-
-- Preexisting structures
-- Migrating @MM to @CR
-
-== Changes to real-world environment
-
-== Changes to simulated environment
-
-== Revised real-world system
-
-- Servos
+- Spaces
+  #table(
+    columns: 4,
+    table.header([Environment], [Obs], [Act], [Rew]),
+    [CyberRunner], [See env.py], [See env.py], [See env.py],
+    [Marble-Maze], [See BoardAgent.cs], [See BoardAgent.cs], [See BoardAgent.cs],
+    [Unified], [?], [?], [?],
+  )
