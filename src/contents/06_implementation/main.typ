@@ -4,11 +4,11 @@
 
 - Spaces
   #table(
-    columns: 4,
-    stroke: none,
-    table.header([*Environment*], table.vline(), [*Obs*], [*Act*], [*Rew*]),
+    columns: 3,
+    align: horizon,
+    table.header([], table.vline(), [*CyberRunner*], [*Marble-Maze*]),
     table.hline(),
-    [CyberRunner],
+    [*Obs*],
     $
       mat(
         delim: "{",
@@ -18,10 +18,6 @@
         #[`progress`:] & l in RR;
       )
     $,
-    [$[-1, 1]^2$ (Target Speed)],
-    [$r_t = Delta_l$],
-
-    [Marble-Maze],
     $
       vec(
         x_b, y_b,
@@ -38,24 +34,23 @@
         d^"ray"_8
       )^10
     $,
+
+    [*Act*],
+    [$[-1, 1]^2$ (Target Speed)],
     [$[-1, 1]^2$ (Target rotation)],
-    [
-      $
-        r_t = -0.005 + 0.5 Delta_l + bold(m)_"bonus" dot bb(1)_(m_t>m_(t-1))
-      $
 
-      $
-        r_T = cases(
-          +5 & "if goal",
-          -0.2 & "if hole",
-          0 & "if stall",
-          -0.005 & "if truncated"
-        )
-      $
-    ],
-
-    [Unified],
-    [?],
-    [?],
-    [?],
+    [*Rew*],
+    $
+      r_t & = Delta_l \
+      r_T & = 0
+    $,
+    $
+      r_t & = -0.005 + 0.5 Delta_l + bold(m)_"bonus" dot bb(1)_(m_t>m_(t-1)) \
+      r_T & = cases(
+              +5 & "if goal",
+              -0.2 & "if hole",
+              0 & "if stall",
+              -0.005 & "if truncated"
+            )
+    $,
   )
