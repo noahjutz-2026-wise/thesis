@@ -12,9 +12,9 @@
     $
       mat(
         delim: "{",
-        #[`image`:] & (0,...,255)^(64,64,1);
-        #[`states`:] & [x_b, y_b, alpha, beta] in RR^4;
-        #[`goal`:] & bold(upright(p))_(1:n_p) in RR^(n_p);
+        #[`image`:] & {0,...,255}^(64 times 64 times 1);
+        #[`states`:] & vec(x_b, y_b, alpha, beta);
+        #[`goal`:] & vec(x_(g,1), y_(g,1), ..., x_(g,5), y_(g,5));
         #[`progress`:] & l in RR;
       )
     $,
