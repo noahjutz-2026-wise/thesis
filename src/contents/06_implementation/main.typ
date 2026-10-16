@@ -2,7 +2,9 @@
 
 == System Context
 
-- Spaces
+The @S2R pipeline is constructed by leveraging existing open-source software rather than developing its components from scratch. The CyberRunner project provides the image processing and motor actuation logic required for the real-world backend, while the Marble-Maze project supplies a fully featured Unity simulation that replicates the same physical environment. Ray RLlib serves as the framework for orchestrating the reinforcement learning components, offering reference implementations of @DreamerV3 and @PPO. To interface the simulation with the learning framework, Unity’s ML-Agents toolkit is employed; it manages the communication of observations between Python and Unity, advances the simulation at each step, and provides additional utilities such as domain randomization. Finally, Weights & Biases (WandB) is used to aggregate and log the metrics reported by Ray, thereby facilitating the monitoring and analysis of training progress.
+
+#figure(caption: [Discrepancies between the existing simulation and real backend])[
   #table(
     columns: 3,
     align: horizon,
@@ -54,3 +56,4 @@
             )
     $,
   )
+]
