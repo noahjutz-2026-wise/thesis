@@ -20,7 +20,7 @@
       )
     $,
     [$[-1, 1]^2$ (Target Speed)],
-    [$Delta_l$],
+    [$r_t = Delta_l$],
 
     [Marble-Maze],
     $
@@ -42,7 +42,16 @@
     [$[-1, 1]^2$ (Target rotation)],
     [
       $
-        -0.005 + 0.5 Delta_l + bold(m)_"bonus" dot bb(1)_(m_t>m_(t-1))
+        r_t = -0.005 + 0.5 Delta_l + bold(m)_"bonus" dot bb(1)_(m_t>m_(t-1))
+      $
+
+      $
+        r_T = cases(
+          +5 & "if goal",
+          -0.2 & "if hole",
+          0 & "if stall",
+          -0.005 & "if truncated"
+        )
       $
     ],
 
