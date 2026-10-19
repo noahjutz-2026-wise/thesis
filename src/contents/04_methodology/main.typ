@@ -1,5 +1,7 @@
 = Methodology
 
+#include "figures/experiment.typ"
+
 == Overview
 
 - Which questions should be answered?
