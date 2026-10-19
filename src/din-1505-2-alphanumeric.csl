@@ -275,7 +275,7 @@
         </if>
         <!-- Tabelle 3 aus litverz.ps -->
         <else-if type="chapter paper-conference" match="any">
-          <text prefix=" " macro="title" suffix="."/>
+          <text prefix=" " macro="title"/>
           <text prefix=". " term="in" text-case="capitalize-all" suffix=": "/>
           <!-- verfahre nach Tabelle 1... -->
           <group delimiter=" ; " suffix=": ">
