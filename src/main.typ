@@ -38,5 +38,5 @@
 
 #bibliography(
   "/vendor/literature/sources.yaml",
-  style: "assets/din-1505-2-alphanumeric.csl",
+  style: "/src/din-1505-2-alphanumeric.csl",
 )
