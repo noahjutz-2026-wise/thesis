@@ -36,6 +36,8 @@ This reference pipeline can be decomposed and reconfigured to serve different ex
   #include "figures/experiment.typ"
 ] <fig_pipeline>
 
+Before we get into more advanced optimization techniques, we need to ensure that a naive zero-shot @S2R transfer works. The requisites for this include that both the simulated and real environment share some properties: They must have identical state and action spaces and utilize compatible model architectures.
+
 == Replicating physical parameters
 
 Modeling a realistic simulation of a robotics control tasks requires intricate knowledge of the dymanics, and therefore physical properties, of the system. We will evaluate which properties must be taken into account, how they can be approximated, and how we can gather the physical values that best represent the labyrinth game.
@@ -49,16 +51,3 @@ To make this simplified model match the real game, we need to measure a small se
 The rope drive requires the most careful measurement, as it deviates most from the ideal model. We first need the rod radius and the distance from each hinge to the rope attachment point, since their ratio gives the nominal transmission ratio between rod angle and board angle. We then compare this value with the real behavior in a sweep test, in which the rod is turned slowly back and forth while the board angle is recorded, for example with a tilt sensor or by tracking markers on the board with the camera. The resulting hysteresis loop reveals the size of the dead zone, the difference in transmission ratio between directions, and the drift of the zero position over time. Repeating the test at different speeds and with the ball at different positions indicates how strongly the rope’s behavior depends on load. A step test, in which the motor is suddenly commanded to a new angle, yields the delay and time constant of the board’s response. Together, these measurements provide the nominal values around which the rope parameters are randomized during training.
 
 For the sensors, the camera’s resolution, frame rate, and latency between image capture and availability of the ball position determine the quality of the state information. We further need a calibration that maps pixel coordinates to board coordinates, using known reference points such as the board corners, and an estimate of the noise in the detected ball position. For the actuators, we need each motor’s maximum speed and torque, its gear ratio, the encoder resolution, and any backlash in the connection between motor and rod, which adds to the dead zone identified above.
-
-== Naive zero-shot transfer
-
-- Unify observation & reward shapes
-- Unify @RL\-Algorithms
-- Train N steps, export, inference
-- Experiments: (S2S, S2R, R2S, R2R) $times$ (@PPO, @DreamerV3) $times$ (original, modified)
-
-== Improvements
-
-- More realistic simulation environment
-- Stochastic delay
-- Domain randomization
