@@ -15,3 +15,4 @@
 - *Hyperparameter Optimization*: Using Ray Tune
 - *Learner Parallelization:* Using Ray Core
 - *Runner Parallelization:* Using ??RL
+- *Different transfers:* R2S, S2S, R2R
