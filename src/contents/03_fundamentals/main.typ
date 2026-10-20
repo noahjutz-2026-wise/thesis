@@ -2,7 +2,9 @@
 
 == @RL:long
 
-Originating from dynamic programming @bellmanDynamicProgramming1957, @RL:both learns to solve _multi-stage processes_ via trial and error @bartosutton. It models interactions as @MDP:pl across discrete steps $t$: a _deterministic policy_ $pi(s)$ or _stochastic policy_ $pi(a|s)$ selects actions $a_t in cal(A)$ for a given _state_ $s_t in cal(S)$, generating an immediate _reward_ $r$ and next state according to the system's _dynamics_ $p(s', r | s, a)$ and _reward function_ $r(s, a, s')$. This interaction yields a _trajectory_ $S_0,A_0,R_1,S_1,A_1,R_2,...$ with the ultimate goal of finding an _optimal policy_ that maximizes the cumulative _return_ $G_t$.
+Originating from dynamic programming @bellmanDynamicProgramming1957, @RL:both is an optimization technique wherein a _policy_, which makes a sequence of decisions, is trained via trial and error @bartosutton. This is achieved by an agent which interacts with its environment. The environment's properties  _state_
+
+It models interactions as @MDP:pl across discrete steps $t$: a _deterministic policy_ $pi(s)$ or _stochastic policy_ $pi(a|s)$ selects actions $a_t in cal(A)$ for a given _state_ $s_t in cal(S)$, generating an immediate _reward_ $r$ and next state according to the system's _dynamics_ $p(s', r | s, a)$ and _reward function_ $r(s, a, s')$. This interaction yields a _trajectory_ $S_0,A_0,R_1,S_1,A_1,R_2,...$ with the ultimate goal of finding an _optimal policy_ that maximizes the cumulative _return_ $G_t$.
 
 // State value and action value methods
 
