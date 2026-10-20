@@ -16,3 +16,4 @@
 - *Learner Parallelization:* Using Ray Core
 - *Runner Parallelization:* Using ??RL
 - *Different transfers:* R2S, S2S, R2R
+- *GPU Acceleration:* New simulator engines like isaac lab, mjlab/mujoco warp/newton
