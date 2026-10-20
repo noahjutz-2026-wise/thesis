@@ -40,6 +40,14 @@
     short: "MDP",
     long: "Markov Decision Process",
   ),
+  POMDP: (
+    short: "POMDP",
+    long: "Partially Observable Markov Decision Process",
+  ),
+  GPI: (
+    short: "GPI",
+    long: "General Policy Improvement",
+  ),
   TD: (
     short: "TD",
     long: "Temporal Difference",
