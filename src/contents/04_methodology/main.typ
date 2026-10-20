@@ -11,7 +11,7 @@
 
 In order to formally ascertain whether a simulation trained model can work in reality, we are going to define some success indicators.
 
-- In therms of _performance_, accuracy is the fraction of evaluation episodes that end in success. This is the case when the goal is reached within a number of timesteps, without falling into a hole. Even if an episode doesn't end in success, we are interested in the distance along the path that was achieved. The duration of an episode shall be minimized, in order to solve the maze as quickly as possible. @S2R gap?
+- In terms of _performance_, accuracy is the fraction of evaluation episodes that end in success. This is the case when the goal is reached within a number of timesteps, without falling into a hole. Even if an episode doesn't end in success, we are interested in the distance along the path that was achieved. The duration of an episode shall be minimized, in order to solve the maze as quickly as possible. @S2R gap?
 - To measure how _robust_ a policy is to perturbations in sensing and actuation, we are going to evaluate its performance under conditions that quantitatively differ from its training environment.
 - The practicality of our approach is limited by its _cost_, in terms of sample efficiency and compute power.
 - Some metrics can explain to us why the approach might not work. Perhaps there is a discrepancy between actuation and real-world impact, or some delay.
