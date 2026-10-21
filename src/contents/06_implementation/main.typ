@@ -10,11 +10,15 @@ The choice of algorithm implementation warrants careful consideration, as seemin
 
 Systematic tracking of experiments, including their configurations, outcomes, and artifacts, is best supported by dedicated tooling. Reproducibility requires recording not only the configuration and random seed of each run but also the exact code revision used. Training metrics should be collected asynchronously, so that logging does not block or otherwise interfere with the training process. In addition, large files such as trained models and raw image observations must be versioned and stored at scale. Existing tools, including Hugging Face Datasets, MLflow, and Data Version Control, each address part of these requirements. We adopted @WandB because it satisfies all of them within a single tool and is simple to use.
 
-=== Environment Backend
+=== Simulation
 
 A simulated environment consists of two core components: a simulation engine that approximates the physical interactions of the system, and a renderer that produces visual observations. The choice of engine involves a trade-off between physical fidelity and computational performance, and the ability to run many instances in parallel is an additional consideration. The engine must also support domain randomization through parameterized physics. The renderer, in turn, must reproduce the specifications of the real camera, including its intrinsic parameters and field of view, and must provide realistic lighting and materials that can themselves be randomized.
 
 A range of simulators targeting robotics and @RL research is available, and each makes different trade-offs. MuJoCo is well suited to articulated mechanisms with hinges and actuators, but its collision detection operates on convex geometry, so a concave maze would have to be decomposed into convex sub-shapes. Its built-in renderer is also not designed for high visual fidelity, although MuJoCo can be integrated into Unity. Isaac Lab is a highly configurable framework, but its scope and infrastructure exceed the requirements of a single tilting maze. Gazebo is closely coupled to ROS, which the CyberRunner project employs, but we preferred a more contemporary toolchain that is not dependent on that ecosystem. General-purpose game engines such as Godot and Unreal Engine have likewise been used for @RL. Unity was selected on pragmatic grounds, since the existing @RL project @marble_maze provides a working foundation on which to build.
+
+=== Robotics
+
+In order to observe the environment and propagate control signals to physical actuators, we need a software stack that handles camera image post processing, object detection, message channels, the control loop, and low-level serial bus communication. We will be mostly reusing the code and hardware setup from @cyberrunner2.
 
 #figure(caption: [Discrepancies between the existing simulation and real backend])[
   #show table.cell.where(x: 0): rotate.with(90deg, reflow: true)
