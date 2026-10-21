@@ -2,7 +2,7 @@
 
 == System Context
 
-The @S2R pipeline is constructed by leveraging existing open-source software rather than developing its components from scratch. On the @RL side, we require an algorithm implementation for training a policy. In addition, we need a means to collect metrics during experiments, and the ability to export and import models. In terms of the backing environment, we need a simulation that replicates the labyrinth game. In addition, we need a physical system and code that actuates it. Lastly, we need to generalize both branches into a standardized interface so that the @RL side can request samples and drive the agent.
+The @S2R pipeline is assembled primarily from existing open-source software rather than from newly developed components. On the @RL side, the pipeline requires an implementation of a policy-training algorithm, a mechanism for logging metrics throughout experiments, and support for exporting and importing trained models. The environment side comprises two interchangeable backends: a simulation that reproduces the labyrinth game, and a physical system together with the control software that actuates it. Both backends are abstracted behind a common, standardized interface, which allows the @RL component to request samples and drive the agent without regard to whether it is interacting with the simulated or the physical environment. Finally, an orchestration layer sits above these components to run experiments under varying parameter configurations and to compare their outcomes systematically.
 
 A simulated environment requires a simulation engine, which approximates physical interactions, and a renderer for visual observations. We choose the unity game engine
 
