@@ -2,7 +2,12 @@
 
 == System Context
 
-The @S2R pipeline is constructed by leveraging existing open-source software rather than developing its components from scratch. The CyberRunner project provides the image processing and motor actuation logic required for the real-world backend, while the Marble-Maze project supplies a fully featured Unity simulation that replicates the same physical environment. Ray RLlib serves as the framework for orchestrating the reinforcement learning components, offering reference implementations of @DreamerV3 and @PPO. To interface the simulation with the learning framework, Unity’s ML-Agents toolkit is employed; it manages the communication of observations between Python and Unity, advances the simulation at each step, and provides additional utilities such as domain randomization. Finally, Weights & Biases (WandB) is used to aggregate and log the metrics reported by Ray, thereby facilitating the monitoring and analysis of training progress.
+The @S2R pipeline is constructed by leveraging existing open-source software rather than developing its components from scratch. On the @RL side, we require an algorithm implementation for training a policy. In addition, we need a means to collect metrics during experiments, and the ability to export and import models. In terms of the backing environment, we need a simulation that replicates the labyrinth game. In addition, we need a physical system and code that actuates it. Lastly, we need to generalize both branches into a standardized interface so that the @RL side can request samples and drive the agent.
+
+A simulated environment requires a simulation engine, which approximates physical interactions, and a renderer for visual observations. We choose the unity game engine
+
+
+// while the Marble-Maze project supplies a fully featured Unity simulation that replicates the same physical environment. Ray RLlib serves as the framework for orchestrating the reinforcement learning components, offering reference implementations of @DreamerV3 and @PPO. To interface the simulation with the learning framework, Unity’s ML-Agents toolkit is employed; it manages the communication of observations between Python and Unity, advances the simulation at each step, and provides additional utilities such as domain randomization. Finally, Weights & Biases (WandB) is used to aggregate and log the metrics reported by Ray, thereby facilitating the monitoring and analysis of training progress.
 
 #figure(caption: [Discrepancies between the existing simulation and real backend])[
   #show table.cell.where(x: 0): rotate.with(90deg, reflow: true)
