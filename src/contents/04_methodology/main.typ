@@ -51,3 +51,9 @@ To make the simplified model match the real game, we treat the dynamics as a bla
 For the drive, we apply the same inputs to the real game and the simulator: a slow back-and-forth sweep of the rod and a sudden step to a new angle. We record the board angle in both cases and adjust certain simulator parameters heuristically, such as the dead zone, the delay, and the time constant, until similar inputs lead to similar outputs. Repeating the tests at different speeds and with the ball at different positions shows how strongly the behavior depends on load. The resulting values are the nominal values around which the drive parameters are randomized during training.
 
 For the sensors, the camera’s resolution, frame rate, and latency between image capture and availability of the ball position determine the quality of the state information, along with an estimate of the noise in the detected ball position.
+
+#figure(
+  caption: [Latencies occured during sensing and actuation on real-world systems. Based on @nathRevisitingStateAugmentation2021],
+)[
+  #include "figures/latency.typ"
+]

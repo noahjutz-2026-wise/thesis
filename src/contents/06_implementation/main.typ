@@ -102,3 +102,5 @@ The structure of the @S2R project can be grouped into training orchestration, co
 The @S2R pipeline described previously includes training, fine-tuning and evaluating a policy given an experiment configuration.
 
 === Control Loop
+
+Having a consistent control frequency and latencies is essential for learning. However, real-world systems are asynchronous and have no ability to block physics. This in conjunction with the fact that previous implementations have delegated the responsibility of timing individual step calls to the learning framework or algorithm means we get no guarantees about timing, and cannot evaluate its impact on performance. Furthermore, ignoring these parameters in the simulation could bring about a severe reality gap.
