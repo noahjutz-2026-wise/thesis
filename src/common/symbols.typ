@@ -131,3 +131,14 @@
   line((0.35, 0.25), (0.48, 0.25))
   line((0.55, 0.25), (0.7, 0.25))
 }
+
+#let symbol_image = {
+  import cetz.draw: *
+  // Outer frame
+  rect((0.1, 0.1), (0.9, 0.9))
+  // Sun / moon
+  circle((0.32, 0.68), radius: 0.08, fill: black, stroke: none)
+  // Two mountains
+  line((0.15, 0.15), (0.45, 0.55), (0.65, 0.3), (0.75, 0.42), (0.85, 0.15))
+}
+
