@@ -1,6 +1,6 @@
 #import "/src/deps.typ": cetz, fletcher
-#import "symbols.typ"
-#import "util.typ": symbol
+#import "/src/common/symbols.typ"
+#import "/src/common/util.typ": symbol
 
 #set text(size: 8pt)
 

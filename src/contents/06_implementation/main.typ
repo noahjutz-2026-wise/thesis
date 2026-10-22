@@ -86,3 +86,19 @@ In order to observe the environment and propagate control signals to physical ac
     $,
   )
 ]
+
+== Components
+
+The structure of the @S2R project can be grouped into training orchestration, control loop, and the backend, which is split into real and simulated. Shared among both backends is any code pertaining to image processing.
+
+#figure(caption: [
+  Component diagram of the system architecture.
+])[
+  #include "figures/arch_components_2.typ"
+] <fig_components>
+
+=== Training orchestration
+
+The @S2R pipeline described previously includes training, fine-tuning and evaluating a policy given an experiment configuration.
+
+=== Control Loop

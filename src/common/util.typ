@@ -1,5 +1,5 @@
 #import "/src/deps.typ": cetz
-#import "symbols.typ"
+#import "/src/common/symbols.typ"
 
 #let symbol(body, canvas-size: 1cm, symbol-size: 1cm) = {
   box(
