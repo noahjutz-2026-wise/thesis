@@ -26,11 +26,21 @@ So far we have established how values can be estimated, but not how a policy can
 
 So far we have treated policies as deterministic and greedy, but this is rarely the case during training. Always exploiting the perceived optimal action can be detrimental for learning, since alternative pathways that could yield higher rewards are never explored. That's why we generally view policies as stochastic functions that yield the probability of selecting an action given a state $pi(a|s)$. For example, an epsilon-greedy policy chooses the greedy action with a probability of $1-epsilon+epsilon/abs(cal(A)(s))$, and any other action with a probability of $epsilon/abs(cal(A)(s))$.
 
-// off-policy algorithm
-// model-based / model-free
-// ordinary / weighted importance sampling
+While increasing entropy during training can be benefitial for exploration, it may be preferable to always exploit once the model has been deployed. To do this, the _behavior policy_ of an algorithm during training should differ from from its _target policy_. We call this type of learning _off-policy_. For example, an epsilon-greedy behavior policy during training can be swapped out for a greedy target policy during inference.
 
-(dynamics)
+Finally, another stochastic aspect of @MDP:pl that must be taken into account is the potentially non-deterministic impact an action has on the environment. We call this the _dynamics_, shown in @eq_dynamics. If the dynamics are known, the training algorithm is said to be _model-based_. Otherwise, it is said to be _model-free_.
+
+$
+  p(s', r | s, a) = Pr(S_t=s', R_t=r | S_(t-1)=s, A_(t-1)=a)
+$ <eq_dynamics>
+
+In summary, @RL is all about learning a policy that takes a state as input and provides actions as output, in order to maximize a cumulative reward. An episode consists of trajectories of alternating states, actions, and rewards, which begins as seen in @eq_trajectory. Important considerations aside from algorithm implementation details are observability, reward shaping, and exploration-exploitation tradeoff.
+
+$
+  S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,R_3,...
+$ <eq_trajectory>
+
+== @DRL:long
 
 Fundamentals
 - Approximation function @bartosutton
