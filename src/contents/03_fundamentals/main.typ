@@ -42,18 +42,18 @@ $ <eq_trajectory>
 
 == @DRL:long
 
-Fundamentals
-- Approximation function @bartosutton
+In cases where the state and action spaces are continuous, a value-based tabular policy that discretely maps state-action pairs to value estimates is impossible. Thus, approximation methods are used in the algorithms we utilize. Neural networks can encode mappings from states to actions. In supervised learning, where labeled data is available, the network output is compared to the true label, the resulting loss backpropagated, and parameters optimized through methods such as stochastic gradient descent.
 
-@DRL
-- ?
+(Actor-Critic)
 
-Algorithms
-- Monte Carlo
-- N-Step TD
-- TD(Lambda)
-- @PPO @ppo @gae @suttonPolicyGradientMethods
-- @DreamerV3, dyn-rec-pol loss, Imagination @dreamerv1 @dreamerv3
+(PPO)
+
+(DreamerV3)
+
+// Algorithms
+// - Monte Carlo
+// - N-Step TD
+// - TD(Lambda)
 
 == @S2R:long
 
