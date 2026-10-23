@@ -105,4 +105,10 @@ The @S2R pipeline described previously includes training, fine-tuning and evalua
 
 Having a consistent control frequency and latencies is essential for learning. However, real-world systems are asynchronous and have no ability to block physics. This in conjunction with the fact that previous implementations have delegated the responsibility of timing individual step calls to the learning framework or algorithm means we get no guarantees about timing, and cannot evaluate its impact on performance. Furthermore, ignoring these parameters in the simulation could bring about a severe reality gap.
 
-== Unity Backend
+== Simulated Backend
+
+An optimal simulation behaves identically to the real system. To get close to achieving this, we must accurately depict geometry, visual aspects, latencies, sensor noise and actuator dynamics.
+
+To replicate the geometry, the rig was measured using calipers. Intricate measurements of holes and and walls were reused from @cyberrunner2. While the unity project @marble_maze has an SVG level importer, we found its configurability insufficient and opted for the simpler solution of deploying @CAD software, specifically the build123d Python library. It is necessary to decompose the mesh into convex parts, because many physics engines including PhysX and @MuJoCo @mujoco need convex shapes for collision meshes. We deployed @CoACD @coacd for this.
+
+(visual aspects)

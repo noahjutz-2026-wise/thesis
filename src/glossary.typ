@@ -76,12 +76,23 @@
     short: "WandB",
     long: "Weights & Biases",
   ),
+  MuJoCo: (
+    short: "MuJoCo",
+    long: "Multi-Joint dynamics with Contact",
+  ),
+  CoACD: (
+    short: "CoACD",
+  ),
 )
 
 #let _general = (
   IPC: (
     short: "IPC",
     long: "Inter-process Communication",
+  ),
+  CAD: (
+    short: "CAD",
+    long: "Computer-Aided Design",
   ),
 )
 
