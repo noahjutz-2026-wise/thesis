@@ -97,15 +97,15 @@ The structure of the @S2R project can be grouped into training orchestration, co
   #include "figures/arch_components_2.typ"
 ] <fig_components>
 
-== Training orchestration
+=== Training orchestration
 
 The @S2R pipeline described previously includes training, fine-tuning and evaluating a policy given an experiment configuration.
 
-== Control Loop
+=== Control Loop
 
 Having a consistent control frequency and latencies is essential for learning. However, real-world systems are asynchronous and have no ability to block physics. This in conjunction with the fact that previous implementations have delegated the responsibility of timing individual step calls to the learning framework or algorithm means we get no guarantees about timing, and cannot evaluate its impact on performance. Furthermore, ignoring these parameters in the simulation could bring about a severe reality gap.
 
-== Simulated Backend
+=== Simulated Backend
 
 An optimal simulation behaves identically to the real system. To get close to achieving this, we must accurately depict geometry, visual aspects, latencies, sensor noise and actuator dynamics.
 
