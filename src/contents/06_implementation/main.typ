@@ -112,3 +112,9 @@ An optimal simulation behaves identically to the real system. To get close to ac
 To replicate the geometry, the rig was measured using calipers. Intricate measurements of holes and and walls were reused from @cyberrunner2. While the unity project @marble_maze has an SVG level importer, we found its configurability insufficient and opted for the simpler solution of deploying @CAD software, specifically the build123d Python library. It is necessary to decompose the mesh into convex parts, because many physics engines including PhysX and @MuJoCo @mujoco need convex shapes for collision meshes. We deployed @CoACD @coacd for this.
 
 (visual aspects)
+
+(sensor latencies)
+
+(sensor noise)
+
+To accurately model the impact an actuation has on the position of the board, we utilize a black-box system identification technique. After modeling the geometry and sensors in @MuJoCo, we collect sample data at various combinations of motor movements and use @MuJoCo's sysid package to minimize the error between simulation and reality.
