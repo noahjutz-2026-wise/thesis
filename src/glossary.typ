@@ -28,6 +28,10 @@
     short: "DRL",
     long: "Deep Reinforcement Learning",
   ),
+  DR: (
+    short: "DR",
+    long: "Domain Randomization",
+  ),
   S2R: (
     short: "S2R",
     long: "Sim-to-Real Transfer",

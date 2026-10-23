@@ -57,15 +57,12 @@ In cases where the state and action spaces are continuous, a value-based tabular
 
 == @S2R:long
 
-- Physics
-  - Inertial spherical movement in gravity
-  - Friction
-  - Approximations
-- Timing
-  - Sensor + actuator delays
-- Methods
-  - Domain Randomization
-  - Domain Adaptation
+Among the most common techniques in @S2R are System Identification, @DR, Domain Adaptation and Imitation Learning @zhaoSimtoRealTransferDeep2020a.
+
+_System Identification_ is the process of creating an idealized mathematical model for sensors and actuators that approximately replicates the behavior of the real system.
+
+_#[@DR]_ can be applied to visuals and dynamics. Altering textures and lighting during training can robustify the policy agains these perturbations during inference. As it pertains to dynamics randomization, dimensions, masses and friction coefficients are examples for targets of randomization.
+
 
 // == Delay-aware @RL
 //
