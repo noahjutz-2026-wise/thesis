@@ -50,7 +50,7 @@
   ),
   GPI: (
     short: "GPI",
-    long: "General Policy Improvement",
+    long: "Generalized Policy Improvement",
   ),
   TD: (
     short: "TD",
