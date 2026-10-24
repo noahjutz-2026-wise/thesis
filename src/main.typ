@@ -12,7 +12,7 @@
   include "/src/contents/01_introduction/main.typ"
   pagebreak()
 
-  include "/src/contents/03_fundamentals/main.typ"
+  include "/src/contents/02_fundamentals/main.typ"
   pagebreak()
 
   include "/src/contents/04_methodology/main.typ"
