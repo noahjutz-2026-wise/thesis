@@ -15,6 +15,9 @@
   include "/src/contents/02_fundamentals/main.typ"
   pagebreak()
 
+  include "/src/contents/03_task/main.typ"
+  pagebreak()
+
   include "/src/contents/04_methodology/main.typ"
   pagebreak()
 
