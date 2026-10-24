@@ -76,7 +76,8 @@ In order to observe the environment and propagate control signals to physical ac
     $
       n >= ? or \
       "goal" or \
-      "hole"
+      "hole" or \
+      "cheated"
     $,
     $
       n >= 50.000 or \
