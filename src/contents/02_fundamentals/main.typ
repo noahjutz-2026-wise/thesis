@@ -61,6 +61,8 @@ Despite these differences, @PPO and @DreamerV3 share a training structure in whi
 
 == @S2R:long
 
+@S2R refers to training a policy in a simulated environment, the source domain, and deploying it on the physical system, the target domain, where it is expected to solve the task. Because a simulator is only an approximation of the physical system, the two domains differ. The resulting discrepancy between simulated and real performance of a policy is called the @RG @salvatoCrossingRealityGap2021. Following @zhaoSimtoRealTransferDeep2020a, two sources can be distinguished. The first concerns the observations: images or sensor readings produced by the simulator differ from those of real sensors, so the policy receives inputs it has not seen during training. The second concerns the dynamics: the physical system responds differently to the same action than the simulator predicts, for example due to inaccurately modeled masses, friction, or actuators. A policy can fail in the target domain because of either source.
+
 Among the most common techniques in @S2R are System Identification, @DR, Domain Adaptation and Imitation Learning @zhaoSimtoRealTransferDeep2020a.
 
 _System Identification_ is the process of creating an idealized mathematical model for sensors and actuators that approximately replicates the behavior of the real system.
