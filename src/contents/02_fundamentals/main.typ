@@ -42,11 +42,11 @@ $ <eq_trajectory>
 
 == @DRL:long
 
-In cases where the state and action spaces are continuous, a value-based tabular policy that discretely maps state-action pairs to value estimates is impossible. Thus, approximation methods are used in the algorithms we utilize. Neural networks can encode mappings from states to actions. In supervised learning, where labeled data is available, the network output is compared to the true label, the resulting loss backpropagated, and parameters optimized through methods such as stochastic gradient descent.
+In settings with continuous state and action spaces, tabular representations, which store one value estimate per state or state-action pair, are not applicable. Such a table cannot enumerate an infinite set of states, and it cannot generalize from visited to unvisited states. Algorithms therefore rely on function approximation, in which policies, value functions, or environment models are represented by parametrized functions. Neural networks are a particularly expressive class of such approximators, since they can represent mappings from states to actions as well as to value estimates. In supervised learning, labeled data are available: the network output is compared with the true label, a loss function quantifies the discrepancy, the gradient of this loss with respect to the network parameters is computed via backpropagation, and the parameters are updated using optimization methods such as stochastic gradient descent.
 
 (Actor-Critic)
 
-(PPO)
+@PPO is
 
 (DreamerV3)
 
