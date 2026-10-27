@@ -10,6 +10,18 @@ $
   S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,R_3,...
 $ <eq_trajectory>
 
+The environment does not respond to the agent's actions deterministically: taking the same action in the same state may lead to different subsequent states and rewards. This stochastic behavior is captured by the _environment dynamics_, a probability distribution $p(s', r | s, a)$ over the _subsequent state_ $s'$ and the reward $r$ that follow from taking action $a$ in state $s$, as shown in @eq_dynamics.
+
+$
+  p(s', r | s, a) = Pr(S_t=s', R_t=r | S_(t-1)=s, A_(t-1)=a)
+$ <eq_dynamics>
+
+Together, the dynamics and the policy determine how likely a complete trajectory is. Since the agent chooses actions according to $pi(a|s)$ and the environment transitions according to the dynamics, the probability of a trajectory $tau$ under a policy $pi$ factorizes into the distribution $p(s_0)$ of the initial state times the probabilities of each action and transition along the way, as shown in @eq_trajectory_distribution.
+
+$
+  p(tau) = p(s_0) product_(t=0)^oo pi(a_t|s_t) p(s_(t+1), r_(t+1) | s_t, a_t)
+$ <eq_trajectory_distribution>
+
 Tasks differ in how a trajectory ends. _Episodic_ tasks group steps into _episodes_, each of which ends in a _terminal state_, for example when a goal is reached, a failure occurs, or a time limit expires. After that, the environment is reset and a new episode begins. This is in opposition to _continuing_ tasks, which have no terminal state and go on indefinitely, as is the case for a controller that regulates a process around the clock.
 
 The variables that define the situation of the environment at any given time are encapsulated within a number of numeric values, collectively comprising the _state_. The _state space_ $cal(S)$ is the set of all possible states the environment could find itself in. It may be finite in the case of simple environments such as Minigrid [CITATION NEEDED], where the state describes positions on a grid, or infinite when a variable is continuous, as is the case in real-world systems where quantities such as positions and velocities can take any real value.
@@ -46,11 +58,7 @@ Up to this point we have treated policies as _deterministic_, meaning that they 
 
 The randomness of a policy, which is measured by its _entropy_, is highest when all actions are equally likely and zero when it is deterministic. While a high entropy can be beneficial for exploration during training, it may be preferable to always exploit once the policy has been deployed. To do this, the _behavior policy_ of an algorithm, which is the policy used to collect experience during training, should differ from its _target policy_, which is the policy that is being learned and evaluated. We call this type of learning _off-policy_, as opposed to _on-policy_ learning, where both are the same. For example, an epsilon-greedy behavior policy used during training can be swapped out for a greedy target policy during inference.
 
-Finally, another stochastic aspect of @MDP:pl that must be taken into account is the potentially non-deterministic impact an action has on the environment: taking the same action in the same state may lead to different subsequent states and rewards. We call this the _dynamics_ of the environment, which are described by the probability distribution shown in @eq_dynamics. Together, they form a _model_ of the environment, since they allow predicting the consequences of actions. If the dynamics are known, the training algorithm is said to be _model-based_, because it can plan ahead using them. Otherwise, it is said to be _model-free_ and has to rely on experienced samples alone.
-
-$
-  p(s', r | s, a) = Pr(S_t=s', R_t=r | S_(t-1)=s, A_(t-1)=a)
-$ <eq_dynamics>
+Finally, another aspect of @MDP:pl to be taken into account is the environment's dynamics introduced earlier: if they are known, they form a _model_ of the environment, since they allow predicting the consequences of actions. If the dynamics are known, the training algorithm is said to be _model-based_, because it can plan ahead using them. Otherwise, it is said to be _model-free_ and has to rely on experienced samples alone.
 
 In summary, @RL is all about learning a policy that takes a state as input and provides actions as output, in order to maximize the expected return, which is the cumulative, possibly discounted, reward. An episode consists of a trajectory of alternating states, actions, and rewards, which begins as seen in @eq_trajectory. Important considerations aside from algorithm implementation details are observability, reward design, and the exploration-exploitation tradeoff.
 
