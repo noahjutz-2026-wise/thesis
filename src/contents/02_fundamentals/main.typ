@@ -34,11 +34,23 @@ In order to optimize the actions we take, we have to quantify their efficacy som
 
 The design of the reward function strongly influences how easily a policy can be trained. A reward function is _sparse_ when only few transitions lead to a significant positive or negative reward, for example when the agent is only rewarded upon reaching the goal. This makes it difficult for an agent to reliably tell which of its many preceding actions led to the reward. It is easier for a policy to converge if it is constantly fed rewards by a _dense_ reward function, which provides frequent feedback on progress. A good reward function bases its output on outcomes rather than methods, so that agents can develop potentially novel methods to solve a task optimally instead of being forced to imitate a prescribed one. Designing the reward function in this way is also called _reward shaping_.
 
-It would be short-sighted to decide actions solely based on the immediate reward, since an action with a small immediate reward may enable large rewards later. That's why the goal in @RL is to maximize the _return_ $G_t$, which is an aggregate of all rewards received from time step $t$ onwards. Because the future depends on random influences such as the agent's own action selection and the environment's behavior, we can only maximize the _expected return_, i.e. the average return we would obtain over many repetitions. Instead of simply summing all future rewards, we can apply a _discount rate_ $0<=gamma<=1$ that multiplies a reward $k$ steps in the future by $gamma^k$, so that immediate rewards are weighed more than distant ones. This is not only a good way to hedge uncertainty about the future, but also necessary to keep returns finite in continuing tasks, where an undiscounted sum over infinitely many rewards could grow without bound. The discounted return can be computed recursively as shown in @eq_discounted_return, i.e. as the next reward plus the discounted return from the following step on.
+It would be short-sighted to decide actions solely based on the immediate reward, since an action with a small immediate reward may enable large rewards later. That's why the goal in @RL is to maximize the _return_ $G_t$, defined explicitly as the discounted sum of future rewards in @eq_return_sum. For finite-horizon tasks with terminal step $T$, the sum truncates at $T$, whereas for continuing tasks, an infinite horizon is used.
+
+$
+  G_t = sum_(k=0)^oo gamma^k R_(t+k+1)
+$ <eq_return_sum>
+
+Here, $0<=gamma<=1$ is the _discount rate_, which weighs immediate rewards more than distant ones to account for uncertainty and ensure finite values in continuing tasks. The return can also be expressed recursively as shown in @eq_discounted_return.
 
 $
   G_t = R_(t+1) + gamma G_(t+1)
 $ <eq_discounted_return>
+
+The overall objective of reinforcement learning is to find a policy $pi$ that maximizes the expected return over full trajectories, formalized by the performance objective $J(pi)$ in @eq_rl_objective.
+
+$
+  J(pi) = EE_(tau ~ pi) [G_0]
+$ <eq_rl_objective>
 
 To decide which action is best, a policy needs a way to judge how promising a state or an action is in terms of the return it can be expected to lead to. The _state value_ $V(s)$ is the expected return when starting in state $s$ and following the policy thereafter. Likewise, the _action value_ $Q(s, a)$ is the expected return when starting in state $s$, taking action $a$, and following the policy thereafter. Methods that learn such estimates and derive their behavior from them are called value-based. A policy is _greedy_ with respect to $Q$ if it always selects the action with the highest estimated action value, as shown in @eq_greedy. Doing the same based on $V(s)$ alone would require knowing which state each action leads to.
 
