@@ -52,11 +52,37 @@ $
   J(pi) = EE_(tau ~ pi) [G_0]
 $ <eq_rl_objective>
 
-To decide which action is best, a policy needs a way to judge how promising a state or an action is in terms of the return it can be expected to lead to. The _state value_ $V(s)$ is the expected return when starting in state $s$ and following the policy thereafter. Likewise, the _action value_ $Q(s, a)$ is the expected return when starting in state $s$, taking action $a$, and following the policy thereafter. Methods that learn such estimates and derive their behavior from them are called value-based. A policy is _greedy_ with respect to $Q$ if it always selects the action with the highest estimated action value, as shown in @eq_greedy. Doing the same based on $V(s)$ alone would require knowing which state each action leads to.
+To decide which action is best, a policy needs a way to judge how promising a state or an action is in terms of expected return. The _state-value function_ $V_pi (s)$ defined in @eq_v_def represents the expected return when starting in state $s$ and following policy $pi$ thereafter.
 
 $
-  pi(s) = arg max_a Q(s, a)
-$ <eq_greedy>
+  V_pi (s) = EE_pi [G_t | S_t = s]
+$ <eq_v_def>
+
+Likewise, the _action-value function_ $Q_pi (s, a)$ defined in @eq_q_def represents the expected return when taking action $a$ in state $s$ and following policy $pi$ thereafter.
+
+$
+  Q_pi (s, a) = EE_pi [G_t | S_t = s, A_t = a]
+$ <eq_q_def>
+
+By expanding $G_t$ recursively, the state-value function satisfies the _Bellman expectation equation_ shown in @eq_bellman_expectation.
+
+$
+  V_pi (s) = sum_(a in cal(A)) pi(a|s) sum_(s', r) p(s', r | s, a) [r + gamma V_pi (s')]
+$ <eq_bellman_expectation>
+
+The optimal policy $pi^*$ achieves the maximum expected return, corresponding to the optimal value functions $V^*(s) = max_pi V_pi (s)$ and $Q^*(s, a) = max_pi Q_pi (s, a)$. The optimal action-value function satisfies the _Bellman optimality equation_ shown in @eq_bellman_optimality.
+
+$
+  Q^*(s, a) = sum_(s', r) p(s', r | s, a) [r + gamma max_(a') Q^*(s', a')]
+$ <eq_bellman_optimality>
+
+From $Q^*$, the optimal deterministic policy is obtained greedily via $pi^*(s) = arg max_a Q^*(s, a)$. To isolate the relative quality of an action compared to the expected baseline in state $s$, we define the _advantage function_ $A_pi (s, a)$ in @eq_advantage.
+
+$
+  A_pi (s, a) = Q_pi (s, a) - V_pi (s)
+$ <eq_advantage>
+
+A positive advantage indicates that action $a$ yields a higher return than the average action chosen by $pi$.
 
 As an example of how value estimates can be learned, consider tabular Monte Carlo control. _Tabular_ means that the state and action spaces are finite and small enough that one estimate can be stored for every state-action pair in a table. _Monte Carlo_ means that the estimates are computed from returns actually observed by sampling complete episodes, rather than from other estimates. _Control_ means that the goal is to find a good policy, as opposed to merely evaluating a given one. After each episode, the return $G_t$ that followed each visited state-action pair is used to nudge the corresponding table entry towards it, using the update rule in @eq_update_rule. Here, $alpha$ is the _learning rate_, which determines how much an estimate changes in a single update. If $alpha = 1/n$, where $n$ is the number of times the pair has been visited, the estimate is the _sample average_ of all returns observed for it.
 
