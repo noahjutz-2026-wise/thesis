@@ -100,6 +100,30 @@ Reinforcement learning algorithms differ in how they utilize environment dynamic
 
 In summary, @RL is all about learning a policy that takes a state as input and provides actions as output, in order to maximize the expected return, which is the cumulative, possibly discounted, reward. An episode consists of a trajectory of alternating states, actions, and rewards, which begins as seen in @eq_trajectory. Important considerations aside from algorithm implementation details are observability, reward design, and the exploration-exploitation tradeoff.
 
+== Function Approximation in Reinforcement Learning
+
+In environments with large or continuous state spaces, tabular representations are impractical. Instead, algorithms rely on function approximation, where a parameterized mathematical function represents the value estimates or policy. For example, the state-value function can be approximated with a weight vector $bold(w)$, denoted as $hat(v)(s, bold(w))$.
+
+To train this approximate value function, we must define an objective to minimize, known as a loss function. Because we are trying to predict a continuous numeric value -- the expected return -- we use a regression loss. A common choice is the mean squared value error shown in @eq_value_error, which minimizes the expected squared difference between the network's approximation and a chosen target return $G_t$.
+
+$
+  L(bold(w)) = EE[(hat(v)(S_t, bold(w)) - G_t)^2]
+$ <eq_value_error>
+
+The simplest choice for the target $G_t$ is the actual return sampled from a complete episode, an approach known as Monte Carlo. However, Monte Carlo targets suffer from high variance because they accumulate the randomness of many transitions over a full episode. We can improve upon this by using a one-step Temporal Difference (TD) target. Instead of waiting until the end of the episode to compute the exact return, a one-step TD method truncates the sum after the first immediate reward and substitutes the remainder of the trajectory with its own current estimate of the next state's value, $hat(v)(S_(t+1), bold(w))$. The practice of updating a learned estimate based on another learned estimate, rather than waiting for a final outcome, is called bootstrapping.
+
+The discrepancy between this bootstrapped one-step TD target and the current value estimate $hat(v)(S_t, bold(w))$ is called the TD error $delta_t$, defined in @eq_td_error. It quantifies the surprise of a single transition.
+
+$
+  delta_t = R_(t+1) + gamma hat(v)(S_(t+1), bold(w)) - hat(v)(S_t, bold(w))
+$ <eq_td_error>
+
+By generalizing between full Monte Carlo returns and one-step TD targets, we can define the $n$-step return, which accumulates $n$ actual rewards before bootstrapping from the approximate value of the $n$-th subsequent state. To balance the high variance of Monte Carlo and the high bias of one-step TD across different horizon lengths, Generalized Advantage Estimation (GAE) computes an exponentially weighted average of these $n$-step returns using a decay parameter $lambda$. The resulting GAE advantage estimate $hat(A)_t^"GAE"$ is defined in @eq_gae.
+
+$
+  hat(A)_t^"GAE" = sum_(l=0)^oo (gamma lambda)^l delta_(t+l)
+$ <eq_gae>
+
 == @DRL:long
 
 In settings with continuous state and action spaces, tabular representations, which store one value estimate per state or state-action pair, are not applicable. Such a table cannot enumerate an infinite set of states, and it cannot generalize from visited to unvisited states. Algorithms therefore rely on function approximation, in which policies, value functions, or environment models are represented by parametrized functions. Neural networks are a particularly expressive class of such approximators, since they can represent mappings from states to actions as well as to value estimates. In supervised learning, labeled data are available: the network output is compared with the true label, a loss function quantifies the discrepancy, the gradient of this loss with respect to the network parameters is computed via backpropagation, and the parameters are updated using optimization methods such as stochastic gradient descent.
