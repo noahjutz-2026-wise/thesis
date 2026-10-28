@@ -42,7 +42,7 @@ Having a consistent control frequency and latencies is essential for learning. H
 
 An optimal simulation behaves identically to the real system. To get close to achieving this, we must accurately depict geometry, visual aspects, latencies, sensor noise and actuator dynamics.
 
-To replicate the geometry, the rig was measured using calipers. Intricate measurements of holes and and walls were reused from @cyberrunner2. While the unity project @marble_maze has an SVG level importer, we found its configurability insufficient and opted for the simpler solution of deploying @CAD software, specifically the build123d Python library. It is necessary to decompose the mesh into convex parts, because many physics engines including PhysX and @MuJoCo @mujoco need convex shapes for collision meshes. We deployed @CoACD @coacd for this.
+To replicate the geometry, the rig was measured using calipers. Intricate measurements of holes and walls were reused from @cyberrunner2. To construct the model, we deployed @CAD software, specifically the build123d Python library. Because @MuJoCo @mujoco requires convex shapes for collision meshes, it was necessary to decompose the generated mesh into convex parts. We deployed @CoACD @coacd for this.
 
 (visual aspects)
 
