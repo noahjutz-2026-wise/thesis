@@ -24,6 +24,8 @@ There are many other configurations that can greatly impact the performance of t
 
 We will collect raw data that is generated on each step, episode or policy update. Of particular interest are observations, which describe the state of the environment and contain all the information we need to determine the performance of a policy. When compared with the subsequent rewards, the efficacy of the reward function can be determined. The interaction between observations and actions can shine light on the dynamics and whether they are accurately learned by the model. Aside from this, algorithm metrics such as loss and entropy can be introspected to determine how much the behavior changes as more policy updates occur.
 
+- *@S2R Gap Quantification:* https://consensus.app/search/sim-to-real-transfer-metrics/OUSO2zp8TkSDDfWzzJ4w8A/?utm_source=share&utm_medium=clipboard
+
 == Transfer
 
 Returning to the central theme of this work, namely the transfer of models across environments, it is useful to first consider the general methodological procedure. In seeking to offload sample collection to a simulated environment, the conventional approach consists of training a model in simulation until it works reasonably well, subsequently fine-tuning it with data collected in the real world, and finally evaluating its performance. @fig_pipeline shows our experiment pipeline for @S2R.
