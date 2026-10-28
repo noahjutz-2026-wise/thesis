@@ -24,10 +24,21 @@ There are many other configurations that can greatly impact the performance of t
 
 We will collect raw data that is generated on each step, episode or policy update. Of particular interest are observations, which describe the state of the environment and contain all the information we need to determine the performance of a policy. When compared with the subsequent rewards, the efficacy of the reward function can be determined. The interaction between observations and actions can shine light on the dynamics and whether they are accurately learned by the model. Aside from this, algorithm metrics such as loss and entropy can be introspected to determine how much the behavior changes as more policy updates occur.
 
-- *@S2R Gap measurements:*
-  - https://consensus.app/search/sim-to-real-transfer-metrics/OUSO2zp8TkSDDfWzzJ4w8A/?utm_source=share&utm_medium=clipboard
+== Transfer
 
-== Simulation
+Returning to the central theme of this work, namely the transfer of models across environments, it is useful to first consider the general methodological procedure. In seeking to offload sample collection to a simulated environment, the conventional approach consists of training a model in simulation until it works reasonably well, subsequently fine-tuning it with data collected in the real world, and finally evaluating its performance. @fig_pipeline shows our experiment pipeline for @S2R.
+
+This reference pipeline can be decomposed and reconfigured to serve different experimental objectives. To establish non-transfer baselines, the fine-tuning step may be omitted. To assess the performance of the simulated model in a more tractable setting, the model may be transferred to a different simulation rather than to the real world (sim-to-sim). Similarly, to iteratively improve the fidelity of the simulation, the order of the environments may be reversed (real-to-sim).
+
+#figure(caption: [
+  The @S2R pipeline, exemplifying the research procedure. A set of parameters is defined for each experiment. A model is trained in simulation, fine-tuned in reality and finally evaluated in reality. Data is collected at each step of the way.
+])[
+  #include "figures/experiment.typ"
+] <fig_pipeline>
+
+Before we get into more advanced optimization techniques, we need to ensure that a naive zero-shot @S2R transfer works. The requisites for this include that both the simulated and real environment share some properties: They must have identical state and action spaces and utilize compatible model architectures.
+
+== Replicating physical parameters
 
 Modeling a realistic simulation of a robotics control tasks requires intricate knowledge of the dymanics, and therefore physical properties, of the system. We will evaluate which properties must be taken into account, how they can be approximated, and how we can gather the physical values that best represent the labyrinth game.
 
@@ -46,17 +57,3 @@ For the sensors, the camera’s resolution, frame rate, and latency between imag
 )[
   #include "figures/latency.typ"
 ]
-
-== Transfer
-
-Returning to the central theme of this work, namely the transfer of models across environments, it is useful to first consider the general methodological procedure. In seeking to offload sample collection to a simulated environment, the conventional approach consists of training a model in simulation until it works reasonably well, subsequently fine-tuning it with data collected in the real world, and finally evaluating its performance. @fig_pipeline shows our experiment pipeline for @S2R.
-
-This reference pipeline can be decomposed and reconfigured to serve different experimental objectives. To establish non-transfer baselines, the fine-tuning step may be omitted. To assess the performance of the simulated model in a more tractable setting, the model may be transferred to a different simulation rather than to the real world (sim-to-sim). Similarly, to iteratively improve the fidelity of the simulation, the order of the environments may be reversed (real-to-sim).
-
-#figure(caption: [
-  The @S2R pipeline, exemplifying the research procedure. A set of parameters is defined for each experiment. A model is trained in simulation, fine-tuned in reality and finally evaluated in reality. Data is collected at each step of the way.
-])[
-  #include "figures/experiment.typ"
-] <fig_pipeline>
-
-Before we get into more advanced optimization techniques, we need to ensure that a naive zero-shot @S2R transfer works. The requisites for this include that both the simulated and real environment share some properties: They must have identical state and action spaces and utilize compatible model architectures.
