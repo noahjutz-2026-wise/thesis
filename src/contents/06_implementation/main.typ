@@ -1,6 +1,35 @@
 = Implementation
 
-== System Context
+== Requirements
+
+Derived from the data we want to collect, described in @sec_experiments, we will establish a set of requirements for the software stack that will allow us to conduct experiments.
+
+real system
+- timing data
+  - what:
+    - observation timestamps, actuation timestamps
+    - for every discrete step
+  - why:
+    - to perform system identification
+    - to evaluate how latency replication in simulation affects performance
+- control loop
+  - what:
+    - a fixed frequency + QoS level
+  - why:
+    - facilitate learning, ... ?
+
+simulation
+- physical fidelity
+  - what:
+    - accurate dimensions, parameters
+- sensors & actuators
+- domain randomization
+  - what:
+    - gaussian distribution with variance around physical parameters
+  - why:
+    - s2r technique
+
+== Design
 
 The @S2R pipeline is assembled primarily from existing open-source software rather than from newly developed components. On the @RL side, the pipeline requires an implementation of a policy-training algorithm, a mechanism for logging metrics throughout experiments, as well as managing datasets, trained models and checkpoints. The environment side comprises two interchangeable backends: a simulation that reproduces the labyrinth game, and a physical system together with the control software that actuates it. Both backends are abstracted behind a common, standardized interface, which allows the @RL component to request samples and drive the agent without regard to whether it is interacting with the simulated or the physical environment. Finally, an orchestration layer sits above these components to run experiments under varying parameter configurations and to compare their outcomes systematically.
 
