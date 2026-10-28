@@ -2,10 +2,6 @@
 
 = Implementation
 
-== Requirements
-
-Derived from the data we want to collect, described in @sec_experiments, we will establish a set of requirements for the software stack that will allow us to conduct experiments.
-
 == Requirements <sec:requirements>
 
 The hypothesis formulated in the problem statement can only be tested if the physical system and its simulation are comparable with respect to timing, measurement and interface. The requirements in @tab:requirements are derived from this condition and are grouped by the system to which they apply. Those concerning timing, state estimation and the parameters of the simulation determine the validity of the experimental results and are justified in more detail below the table.
