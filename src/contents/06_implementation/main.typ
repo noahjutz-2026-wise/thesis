@@ -4,136 +4,73 @@
 
 Derived from the data we want to collect, described in @sec_experiments, we will establish a set of requirements for the software stack that will allow us to conduct experiments.
 
-#text(size: 8pt)[
-  Real system
-  - R1 Timing data [~]
-    - what
-      - capture timestamp for every observation and issue timestamp for every action, per discrete step, on one shared clock [+]
-      - shared clock: single host, monotonic time base [+]
-    - why
-      - system identification needs input/output pairs with known timing
-      - quantify how replicating latency in simulation affects performance (ablation)
-      - latency = difference of timestamps, not an estimate [+]
-    - check
-      - per-stage latency distribution (6.1)
-  - R2 Fixed control rate [~]
-    - what
-      - fixed frequency (target: close to the ~55 Hz of [Bi+25])
-      - defined delivery policy [+]: latest-value-wins, bounded queues, no silent backlog
-    - why
-      - the MDP assumes a constant time step
-      - constant step makes the delay constant, so it can be modelled and replicated in simulation
-      - stale queued observations add hidden latency
-      - comparability with the baseline
-    - check
-      - achieved frequency and jitter, missed-cycle count (6.1)
-  - R3 Isolated, characterized state estimation [+]
-    - what
-      - pose estimate (ball position, board angle) callable on its own, including offline on recorded images
-      - calibration (fisheye undistortion) without proprietary tooling
-    - why
-      - the same measurement chain must feed sysid and the policy
-      - measurement noise is a simulation parameter and must be known
-      - reproducibility without MATLAB
-    - check
-      - noise and repeatability on a static scene, reprojection error (6.1)
-  - R4 Non-intrusive logging [+]
-    - what
-      - raw data (timestamps, actions, observations, ideally images) recorded without blocking the control loop
-    - why
-      - replay, offline analysis, evaluation from logs
-    - check
-      - loop jitter unchanged with logging on
-  - R5 Safe unattended operation [+]
-    - what
-      - actuator limits
-      - defined behaviour on sensor loss or ball-out-of-play
-    - why
-      - protects the rig
-      - reduces human supervision (a cost driver named in 1.2)
-    - check
-      - stated, tested once
-  - R6 Exchangeable components (secondary) [+]
-    - what
-      - transport, estimator and actuator behind narrow interfaces
-    - why
-      - transport swap (iceoryx2 trial) and estimator iteration without touching the rest
-  Simulation
-  - R7 Physical fidelity [~]
-    - what
-      - geometry from measurement
-      - masses and friction from measurement or identification
-      - each parameter tagged measured / identified / assumed [+]
-      - "medium fidelity" defined as the set of effects modelled (geometry, drive dynamics, latency, sensor noise) [+]
-    - why
-      - defines the fidelity level named in the hypothesis
-      - transparency about which values are known
-    - check
-      - held-out trajectory error vs. rig (6.2)
-  - R8 Sensors and actuators [~]
-    - what
-      - configurable observation delay, action delay
-      - drive dynamics (time constant, dead zone, gain variation)
-      - ball-position noise
-      - each effect individually switchable [+]
-    - why
-      - timing and noise are the dominant gap sources reported in [Wal95]
-      - switchability is what makes the ablations possible
-    - check
-      - on/off ablation runs (6.5)
-  - R9 Domain randomization [~]
-    - what
-      - per-episode sampling around identified nominal values
-      - distribution family and ranges configurable and seed-controlled
-      - positive-only parameters need a bounded family (truncated Gaussian or log-normal) [+]
-    - why
-      - S2R technique
-      - tests whether robustness to parameter error helps transfer
-    - check
-      - sampled ranges logged per episode
-  - R10 Speed and determinism [+]
-    - what
-      - simulation substantially faster than real time
-      - identical results for identical seed and config
-      - physics step consistent with the control period
-    - why
-      - cost reduction is the premise of the thesis
-      - reproducibility
-    - check
-      - steps/s vs. real time, repeat-run comparison
-  - Both backends
-  - R11 Common interface [+]
-    - what
-      - identical observation, action, reward and termination contract, selectable by configuration
-    - why
-      - zero-shot transfer requires identical spaces
-      - analysis code stays backend-agnostic
-    - check
-      - interface test run against both backends
-  - R12 Reproducible runs [+]
-    - what
-      - seed, config and code revision stored with every run
-      - open toolchain
-      - pinned dependencies
-    - why
-      - reproducibility is a stated contribution
-  - Notes on the open points
-  - "Facilitate learning, ...?" (R2)
-    - the defensible reasons are the three in R2's why: constant step keeps the MDP well defined, constant delay can be modelled, queued stale data adds invisible latency
-    - "facilitate learning" alone is too vague to defend
-  - QoS (R2)
-    - the term comes from DDS/ROS and your layer is ZeroMQ-based, so it is ambiguous
-    - replace it with the concrete policy you implemented (drop behaviour, queue depth) and define it in one sentence
-  - Timing (R1)
-    - say "capture time" explicitly
-    - arrival time at the estimator is not the observation time, and mixing them corrupts sysid
-  - Gaussian (R9)
-    - Gaussian sampling can produce negative masses or friction coefficients, hence the bounded family
-  - Order of reading
-    - R1 to R3 and R7 to R8 are load-bearing for the hypothesis
-    - R4 to R6 and R10 to R12 are support requirements, one or two lines each in the final text
-  - Each check maps to a Results subsection, so the requirements give you the skeleton of 6.1 and 6.2
-]
+== Requirements <sec:requirements>
+
+The hypothesis formulated in the problem statement can only be tested if the physical system and its simulation are comparable with respect to timing, measurement and interface. The requirements in @tab:requirements are derived from this condition and are grouped by the system to which they apply. Those concerning timing, state estimation and the parameters of the simulation determine the validity of the experimental results and are justified in more detail below the table.
+
+#figure(
+  table(
+    columns: (auto, 1fr, 1fr),
+    align: (center + horizon, left + horizon, left + horizon),
+    stroke: (x, y) => if y == 0 {
+      (bottom: 0.7pt)
+    } else {
+      (bottom: 0.3pt + luma(200))
+    },
+    inset: (x: 6pt, y: 5pt),
+    table.header[*ID*][*Requirement*][*Rationale*],
+
+    table.cell(colspan: 3, fill: luma(240))[*Real system*],
+    [R1],
+    [Every observation carries a capture timestamp and every action an issue timestamp, both taken from a single shared clock.],
+    [System identification; latency as a measured quantity; latency ablation.],
+    [R2],
+    [The control loop runs at a fixed frequency, and the delivery of observations follows a defined policy (latest value wins, bounded queues).],
+    [Constant time step; constant and replicable delay; comparability with the baseline.],
+    [R3],
+    [The state estimate (ball position and board angle) can be computed independently of the control loop, including offline from recorded images.],
+    [Identical measurement chain for system identification and policy; noise characteristics must be known.],
+    [R4], [Actuator commands are limited to a range that cannot damage the rig.],
+    [Protection of the hardware; reduced supervision.],
+
+    table.cell(colspan: 3, fill: luma(240))[*Simulation*],
+    [R5],
+    [The simulated board, walls, holes and ball reproduce the measured dimensions of the physical rig, and the measurement uncertainty of each dimension is reported.],
+    [Geometric reality gap; traceability of the model.],
+    [R6 #footnote[*TODO REMOVE*]],
+    [Mass, friction and actuator parameters are obtained by measurement or system identification, and the origin of each value (measured, identified or assumed) is recorded.],
+    [Distinguishes evidence-based values from assumptions.],
+    [R7],
+    [Observation delay, action delay, drive dynamics and ball-position noise are configurable and can each be switched off individually.],
+    [Isolating the contribution of each effect to the reality gap.],
+    [R8],
+    [Physical parameters are sampled per episode around their nominal values from bounded, seed-controlled distributions.],
+    [Domain randomization; physically valid parameter values.],
+    [R9],
+    [The simulation runs substantially faster than real time and yields identical results for identical seed and configuration.],
+    [Cost reduction as the premise of the thesis; reproducibility.],
+
+    table.cell(colspan: 3, fill: luma(240))[*Both backends*],
+    [R10],
+    [Both backends provide the same observation, action, reward and termination interface, selectable by configuration.],
+    [Zero-shot transfer requires identical spaces.],
+    [R11],
+    [Observation, action, reward and termination flag of every step are recorded with timestamps without altering the timing of the step loop.],
+    [Offline analysis; evaluation from logs.],
+    [R12], [Random seed, configuration and code revision are stored with every run.],
+    [Reproducibility of results.],
+  ),
+  caption: [Requirements for the real system, the simulation and both backends.],
+) <tab:requirements>
+
+The first group of justifications concerns timing (R1, R2). The formulation of reinforcement learning as a Markov decision process presupposes a constant interval between decisions, whereas a physical system operates asynchronously and cannot be paused. If the interval varies, the same action has different consequences from the point of view of the policy, and the delay between sensing and acting becomes a random quantity, a setting that requires dedicated treatment @bouteillerReinforcementLearningRandom2020 @nathRevisitingStateAugmentation2021. A fixed control frequency keeps this delay constant, so that it can be measured once and reproduced in simulation. Timing has also been reported as a dominant cause of the reality gap on this very task @waldemarkUsingReinforcementLearning1995. The delivery policy is as relevant as the frequency itself: if observations accumulate in unbounded queues, the policy acts on outdated data and the resulting latency remains invisible. The target frequency is chosen close to the roughly 55 Hz of the baseline @cyberrunner2 to keep results comparable. Timestamps must refer to the instant of capture rather than to the arrival at the estimator, since the two differ by the processing and transport time, and conflating them corrupts every latency derived from them. On a single host with a monotonic clock, latencies are exact differences of timestamps and require no estimation. The same data serve as input for system identification and for the ablation that switches the replication of latency in simulation on and off.
+
+State estimation (R3) is subject to a related consideration. System identification compares measured and simulated trajectories, which is only meaningful if the measurement chain used on the rig is the one that provides the policy with its observations during deployment. The estimator must therefore be usable on its own and on recorded data. Its noise and repeatability are parameters of the simulated sensor model (R7) and have to be known in order to be modeled.
+
+The requirements on the simulation (R5 to R7) specify what is to be reproduced, and to what degree of traceability. Geometry is reported with its measurement uncertainty, so that remaining deviations from the rig can be attributed to the model and not to unrecorded measurement error. Recording the origin of each parameter makes explicit which values rest on measurement or identification and which are assumptions. Because each effect in R7 can be disabled individually, its contribution to the transfer result can be isolated in an ablation, which a simulation with fixed, inseparable effects would not permit. Parameters that are sampled during training (R8) must remain physically valid. Quantities that cannot be negative, such as masses and friction coefficients, therefore require a bounded distribution, for example a truncated Gaussian or a log-normal distribution, since a plain Gaussian can yield unphysical values. Seeding the sampling and recording the sampled values keeps the runs reproducible.
+
+The remaining requirements ensure that experiments can be carried out safely, repeatedly and with identical interfaces on both backends.
+
 == Design
 
 The @S2R pipeline is assembled primarily from existing open-source software rather than from newly developed components. On the @RL side, the pipeline requires an implementation of a policy-training algorithm, a mechanism for logging metrics throughout experiments, as well as managing datasets, trained models and checkpoints. The environment side comprises two interchangeable backends: a simulation that reproduces the labyrinth game, and a physical system together with the control software that actuates it. Both backends are abstracted behind a common, standardized interface, which allows the @RL component to request samples and drive the agent without regard to whether it is interacting with the simulated or the physical environment. Finally, an orchestration layer sits above these components to run experiments under varying parameter configurations and to compare their outcomes systematically.
