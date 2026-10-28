@@ -30,3 +30,17 @@
     v(1fr),
   )
 })
+
+#let ref_requirement(l) = box[
+  #stack[
+    #hide[
+      #figure(
+        kind: "requirement",
+        supplement: none,
+        numbering: n => [R#n],
+      )[] #label(l)
+    ]
+  ][
+    #ref(label(l))
+  ]
+]

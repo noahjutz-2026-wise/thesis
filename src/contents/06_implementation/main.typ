@@ -1,3 +1,5 @@
+#import "/src/common/util.typ": ref_requirement
+
 = Implementation
 
 == Requirements
@@ -21,53 +23,54 @@ The hypothesis formulated in the problem statement can only be tested if the phy
     table.header[*ID*][*Requirement*][*Rationale*],
 
     table.cell(colspan: 3, fill: luma(240))[*Real system*],
-    [R1],
+    [#ref_requirement("req:timestamps")],
     [Every observation carries a capture timestamp and every action an issue timestamp, both taken from a single shared clock.],
     [System identification; latency as a measured quantity; latency ablation.],
-    [R2],
+    [#ref_requirement("req:control-frequency")],
     [The control loop runs at a fixed frequency, and the delivery of observations follows a defined policy (latest value wins, bounded queues).],
     [Constant time step; constant and replicable delay; comparability with the baseline.],
-    [R3],
+    [#ref_requirement("req:state-estimation")],
     [The state estimate (ball position and board angle) can be computed independently of the control loop, including offline from recorded images.],
     [Identical measurement chain for system identification and policy; noise characteristics must be known.],
-    [R4], [Actuator commands are limited to a range that cannot damage the rig.],
+    [#ref_requirement("req:safety")], [Actuator commands are limited to a range that cannot damage the rig.],
     [Protection of the hardware; reduced supervision.],
 
     table.cell(colspan: 3, fill: luma(240))[*Simulation*],
-    [R5],
+    [#ref_requirement("req:geometry")],
     [The simulated board, walls, holes and ball reproduce the measured dimensions of the physical rig, and the measurement uncertainty of each dimension is reported.],
     [Geometric reality gap; traceability of the model.],
-    [R6 #footnote[*TODO REMOVE*]],
+    [#ref_requirement("req:parameter-origin") #footnote[*TODO REMOVE*]],
     [Mass, friction and actuator parameters are obtained by measurement or system identification, and the origin of each value (measured, identified or assumed) is recorded.],
     [Distinguishes evidence-based values from assumptions.],
-    [R7],
+    [#ref_requirement("req:ablation")],
     [Observation delay, action delay, drive dynamics and ball-position noise are configurable and can each be switched off individually.],
     [Isolating the contribution of each effect to the reality gap.],
-    [R8],
+    [#ref_requirement("req:domain-randomization")],
     [Physical parameters are sampled per episode around their nominal values from bounded, seed-controlled distributions.],
     [Domain randomization; physically valid parameter values.],
-    [R9],
+    [#ref_requirement("req:performance")],
     [The simulation runs substantially faster than real time and yields identical results for identical seed and configuration.],
     [Cost reduction as the premise of the thesis; reproducibility.],
 
     table.cell(colspan: 3, fill: luma(240))[*Both backends*],
-    [R10],
+    [#ref_requirement("req:interface")],
     [Both backends provide the same observation, action, reward and termination interface, selectable by configuration.],
     [Zero-shot transfer requires identical spaces.],
-    [R11],
+    [#ref_requirement("req:logging")],
     [Observation, action, reward and termination flag of every step are recorded with timestamps without altering the timing of the step loop.],
     [Offline analysis; evaluation from logs.],
-    [R12], [Random seed, configuration and code revision are stored with every run.],
+    [#ref_requirement("req:reproducibility")],
+    [Random seed, configuration and code revision are stored with every run.],
     [Reproducibility of results.],
   ),
   caption: [Requirements for the real system, the simulation and both backends.],
 ) <tab:requirements>
 
-The first group of justifications concerns timing (R1, R2). The formulation of reinforcement learning as a Markov decision process presupposes a constant interval between decisions, whereas a physical system operates asynchronously and cannot be paused. If the interval varies, the same action has different consequences from the point of view of the policy, and the delay between sensing and acting becomes a random quantity, a setting that requires dedicated treatment @bouteillerReinforcementLearningRandom2020 @nathRevisitingStateAugmentation2021. A fixed control frequency keeps this delay constant, so that it can be measured once and reproduced in simulation. Timing has also been reported as a dominant cause of the reality gap on this very task @waldemarkUsingReinforcementLearning1995. The delivery policy is as relevant as the frequency itself: if observations accumulate in unbounded queues, the policy acts on outdated data and the resulting latency remains invisible. The target frequency is chosen close to the roughly 55 Hz of the baseline @cyberrunner2 to keep results comparable. Timestamps must refer to the instant of capture rather than to the arrival at the estimator, since the two differ by the processing and transport time, and conflating them corrupts every latency derived from them. On a single host with a monotonic clock, latencies are exact differences of timestamps and require no estimation. The same data serve as input for system identification and for the ablation that switches the replication of latency in simulation on and off.
+The first group of justifications concerns timing (@req:timestamps, @req:control-frequency). The formulation of reinforcement learning as @MDP:a presupposes a constant interval between decisions, whereas a physical system operates asynchronously and cannot be paused. If the interval varies, the same action has different consequences from the point of view of the policy, and the delay between sensing and acting becomes a random quantity, a setting that requires dedicated treatment /*@bouteillerReinforcementLearningRandom2020*/ @nathRevisitingStateAugmentation2021. A fixed control frequency keeps this delay constant, so that it can be measured once and reproduced in simulation. Timing has also been reported as a dominant cause of the reality gap on this very task @waldemarkUsingReinforcementLearning1995. Timestamps must refer to the instant of capture rather than to the arrival at the estimator, since the two differ by the processing and transport time, and conflating them corrupts every latency derived from them. On a single host with a monotonic clock, latencies are exact differences of timestamps and require no estimation. The same data serve as input for system identification and for the ablation that switches the replication of latency in simulation on and off.
 
-State estimation (R3) is subject to a related consideration. System identification compares measured and simulated trajectories, which is only meaningful if the measurement chain used on the rig is the one that provides the policy with its observations during deployment. The estimator must therefore be usable on its own and on recorded data. Its noise and repeatability are parameters of the simulated sensor model (R7) and have to be known in order to be modeled.
+State estimation (@req:state-estimation) is subject to a related consideration. System identification compares measured and simulated trajectories, which is only meaningful if the measurement chain used on the rig is the one that provides the policy with its observations during deployment. The estimator must therefore be usable on its own and on recorded data. Its noise and repeatability are parameters of the simulated sensor model (@req:ablation) and have to be known in order to be modeled.
 
-The requirements on the simulation (R5 to R7) specify what is to be reproduced, and to what degree of traceability. Geometry is reported with its measurement uncertainty, so that remaining deviations from the rig can be attributed to the model and not to unrecorded measurement error. Recording the origin of each parameter makes explicit which values rest on measurement or identification and which are assumptions. Because each effect in R7 can be disabled individually, its contribution to the transfer result can be isolated in an ablation, which a simulation with fixed, inseparable effects would not permit. Parameters that are sampled during training (R8) must remain physically valid. Quantities that cannot be negative, such as masses and friction coefficients, therefore require a bounded distribution, for example a truncated Gaussian or a log-normal distribution, since a plain Gaussian can yield unphysical values. Seeding the sampling and recording the sampled values keeps the runs reproducible.
+The requirements on the simulation (@req:geometry, @req:parameter-origin and @req:ablation) specify what is to be reproduced, and to what degree of traceability. Geometry is reported with its measurement uncertainty, so that remaining deviations from the rig can be attributed to the model and not to unrecorded measurement error. Recording the origin of each parameter makes explicit which values rest on measurement or identification and which are assumptions. Because each effect in @req:ablation can be disabled individually, its contribution to the transfer result can be isolated in an ablation, which a simulation with fixed, inseparable effects would not permit. Parameters that are sampled during training (@req:domain-randomization) must remain physically valid. Quantities that cannot be negative, such as masses and friction coefficients, therefore require a bounded distribution, for example a truncated Gaussian or a log-normal distribution, since a plain Gaussian can yield unphysical values. Seeding the sampling and recording the sampled values keeps the runs reproducible.
 
 The remaining requirements ensure that experiments can be carried out safely, repeatedly and with identical interfaces on both backends.
 
