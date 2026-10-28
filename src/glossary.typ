@@ -52,6 +52,10 @@
     short: "GPI",
     long: "Generalized Policy Improvement",
   ),
+  GAE: (
+    short: "GAE",
+    long: "Generalized Advantage Estimation",
+  ),
   TD: (
     short: "TD",
     long: "Temporal Difference",
@@ -97,6 +101,14 @@
   CAD: (
     short: "CAD",
     long: "Computer-Aided Design",
+  ),
+  ROS: (
+    short: "ROS",
+    long: "Robot Operating System",
+  ),
+  SVG: (
+    short: "SVG",
+    long: "Scalable Vector Graphics",
   ),
 )
 

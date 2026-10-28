@@ -110,15 +110,15 @@ $
   L(bold(w)) = EE[(hat(v)(S_t, bold(w)) - G_t)^2]
 $ <eq_value_error>
 
-The simplest choice for the target $G_t$ is the actual return sampled from a complete episode, an approach known as Monte Carlo. However, Monte Carlo targets suffer from high variance because they accumulate the randomness of many transitions over a full episode. We can improve upon this by using a one-step Temporal Difference (TD) target. Instead of waiting until the end of the episode to compute the exact return, a one-step TD method truncates the sum after the first immediate reward and substitutes the remainder of the trajectory with its own current estimate of the next state's value, $hat(v)(S_(t+1), bold(w))$. The practice of updating a learned estimate based on another learned estimate, rather than waiting for a final outcome, is called bootstrapping.
+The simplest choice for the target $G_t$ is the actual return sampled from a complete episode, an approach known as Monte Carlo. However, Monte Carlo targets suffer from high variance because they accumulate the randomness of many transitions over a full episode. We can improve upon this by using a one-step @TD target. Instead of waiting until the end of the episode to compute the exact return, a one-step @TD method truncates the sum after the first immediate reward and substitutes the remainder of the trajectory with its own current estimate of the next state's value, $hat(v)(S_(t+1), bold(w))$. The practice of updating a learned estimate based on another learned estimate, rather than waiting for a final outcome, is called bootstrapping.
 
-The discrepancy between this bootstrapped one-step TD target and the current value estimate $hat(v)(S_t, bold(w))$ is called the TD error $delta_t$, defined in @eq_td_error. It quantifies the surprise of a single transition.
+The discrepancy between this bootstrapped one-step @TD target and the current value estimate $hat(v)(S_t, bold(w))$ is called the @TD error $delta_t$, defined in @eq_td_error. It quantifies the surprise of a single transition.
 
 $
   delta_t = R_(t+1) + gamma hat(v)(S_(t+1), bold(w)) - hat(v)(S_t, bold(w))
 $ <eq_td_error>
 
-By generalizing between full Monte Carlo returns and one-step TD targets, we can define the $n$-step return, which accumulates $n$ actual rewards before bootstrapping from the approximate value of the $n$-th subsequent state. To balance the high variance of Monte Carlo and the high bias of one-step TD across different horizon lengths, Generalized Advantage Estimation (GAE) computes an exponentially weighted average of these $n$-step returns using a decay parameter $lambda$. The resulting GAE advantage estimate $hat(A)_t^"GAE"$ is defined in @eq_gae.
+By generalizing between full Monte Carlo returns and one-step @TD targets, we can define the $n$-step return, which accumulates $n$ actual rewards before bootstrapping from the approximate value of the $n$-th subsequent state. To balance the high variance of Monte Carlo and the high bias of one-step @TD across different horizon lengths, @GAE:long computes an exponentially weighted average of these $n$-step returns using a decay parameter $lambda$. The resulting @GAE advantage estimate $hat(A)_t^"GAE"$ is defined in @eq_gae.
 
 $
   hat(A)_t^"GAE" = sum_(l=0)^oo (gamma lambda)^l delta_(t+l)
