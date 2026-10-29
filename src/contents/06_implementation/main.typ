@@ -1,24 +1,26 @@
 #import "/src/common/util.typ": ref_requirement
 
-= Implementation
+= System Design
 
-== Requirements <sec:requirements>
+== Goals and Requirements <sec:requirements>
 
 The hypothesis formulated in the problem statement can only be tested if the physical system and its simulation are comparable with respect to timing, measurement and interface. The requirements in @tab:requirements are derived from this condition and are grouped by the system to which they apply. Those concerning timing, state estimation and the parameters of the simulation determine the validity of the experimental results and are justified in more detail below the table.
 
 #figure(
-  table(
+  caption: [Requirements for the real system, the simulation and both backends.],
+)[
+  #table(
     columns: (auto, 1fr, 1fr),
     align: (center + horizon, left + horizon, left + horizon),
     stroke: (x, y) => if y == 0 {
-      (bottom: 0.7pt)
+      (bottom: 1pt)
     } else {
       (bottom: 0.3pt + luma(200))
     },
     inset: (x: 6pt, y: 5pt),
     table.header[*ID*][*Requirement*][*Rationale*],
 
-    table.cell(colspan: 3, fill: luma(240))[*Real system*],
+    table.cell(colspan: 3, fill: luma(240))[*Real backend*],
     [#ref_requirement("req:timestamps")],
     [Every observation carries a capture timestamp and every action an issue timestamp, both taken from a single shared clock.],
     [System identification; latency as a measured quantity; latency ablation.],
@@ -31,7 +33,7 @@ The hypothesis formulated in the problem statement can only be tested if the phy
     [#ref_requirement("req:safety")], [Actuator commands are limited to a range that cannot damage the rig.],
     [Protection of the hardware; reduced supervision.],
 
-    table.cell(colspan: 3, fill: luma(240))[*Simulation*],
+    table.cell(colspan: 3, fill: luma(240))[*Simulation backend*],
     [#ref_requirement("req:geometry")],
     [The simulated board, walls, holes and ball reproduce the measured dimensions of the physical rig, and the measurement uncertainty of each dimension is reported.],
     [Geometric reality gap; traceability of the model.],
@@ -55,9 +57,8 @@ The hypothesis formulated in the problem statement can only be tested if the phy
     [#ref_requirement("req:reproducibility")],
     [Random seed, configuration and code revision are stored with every run.],
     [Reproducibility of results.],
-  ),
-  caption: [Requirements for the real system, the simulation and both backends.],
-) <tab:requirements>
+  )
+] <tab:requirements>
 
 The first group of justifications concerns timing (@req:timestamps, @req:control-frequency). The formulation of reinforcement learning as @MDP:a presupposes a constant interval between decisions, whereas a physical system operates asynchronously and cannot be paused. If the interval varies, the same action has different consequences from the point of view of the policy, and the delay between sensing and acting becomes a random quantity, a setting that requires dedicated treatment /*@bouteillerReinforcementLearningRandom2020*/ @nathRevisitingStateAugmentation2021. A fixed control frequency keeps this delay constant, so that it can be measured once and reproduced in simulation. Timing has also been reported as a dominant cause of the reality gap on this very task @waldemarkUsingReinforcementLearning1995. Timestamps must refer to the instant of capture rather than to the arrival at the estimator, since the two differ by the processing and transport time, and conflating them corrupts every latency derived from them. On a single host with a monotonic clock, latencies are exact differences of timestamps and require no estimation. The same data serve as input for system identification and for the ablation that switches the replication of latency in simulation on and off.
 
