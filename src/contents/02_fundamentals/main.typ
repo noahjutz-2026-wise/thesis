@@ -132,7 +132,27 @@ In @RL, no labeled data are available. The learning signal is the reward receive
 
 Two function approximators are central to the algorithms considered in this thesis. The policy (or actor) maps a state to a probability distribution over actions. The value function (or critic) estimates the expected future return from a given state and thus evaluates how good the current situation is under the policy. Methods that learn both are called actor-critic methods: the critic’s estimate is used to judge whether an action performed better or worse than expected, and the actor is adjusted accordingly. This corresponds to @GPI, where the critic carries out policy evaluation and the actor carries out policy improvement via gradient updates instead of greedy maximization, which is impractical for continuous actions. Both @PPO @ppo and @DreamerV3 @dreamerv3 belong to this family and differ mainly in the data from which actor and critic are trained.
 
-@PPO is a model-free actor-critic algorithm. It collects a batch of trajectories with the current policy in the environment and uses it to update the actor and critic networks. A central difficulty of policy-based methods is that an overly large update can degrade the policy and, because new data are collected with this policy, hinder recovery. @PPO addresses this by comparing the probability of an action under the updated policy to its probability under the policy that collected the data, and by clipping this ratio to a small interval around one. Updates that would move the policy too far from the data-collecting policy therefore receive no additional incentive. This promotes stable learning and allows multiple gradient updates on the same batch, which improves data usage compared to a single update per batch. For continuous actions, the actor outputs the parameters of a probability distribution over actions, from which actions are sampled during training.
+@PPO is a model-free actor-critic algorithm. It collects a batch of trajectories with the current policy in the environment and uses it to update the actor and critic networks. A central difficulty of policy-based methods is that an overly large update can degrade the policy and, because new data are collected with this policy, hinder recovery. @PPO addresses this by comparing the probability of an action under the updated policy parameterized by $bold(theta)$ to its probability under the old policy parameterized by $bold(theta)_"old"$ that collected the data. This is expressed as the probability ratio $r_t (bold(theta))$ in @eq_ppo_ratio.
+
+$
+  r_t (bold(theta)) = (pi_bold(theta) (a_t | s_t)) / (pi_(bold(theta)_"old") (a_t | s_t))
+$ <eq_ppo_ratio>
+
+To prevent destructively large policy updates, @PPO clips this ratio to a small interval $[1-epsilon, 1+epsilon]$ around one. The clipped surrogate objective $L^"CLIP" (bold(theta))$ is defined in @eq_ppo_clip, which scales the ratio by the advantage estimate $hat(A)_t^"GAE"$ from @eq_gae. Updates that would move the policy too far from the data-collecting policy therefore receive no additional incentive.
+
+$
+  L^"CLIP" (bold(theta)) = EE_t [min(r_t (bold(theta)) hat(A)_t^"GAE", "clip"(r_t (bold(theta)), 1-epsilon, 1+epsilon) hat(A)_t^"GAE")]
+$ <eq_ppo_clip>
+
+This promotes stable learning and allows multiple gradient updates on the same batch, which improves data usage compared to a single update per batch.
+
+// In addition to the policy objective, @PPO simultaneously optimizes the state-value function $hat(v)(s, bold(w))$ using a squared-error loss $L^"VF" (bold(w))$ similar to @eq_value_error. To encourage exploration, an entropy bonus $S(pi_bold(theta) (s_t))$ is added. The total objective maximized during training combines these three components, as shown in @eq_ppo_total, where $c_1$ and $c_2$ are coefficients.
+//
+// $
+//   L^"TOTAL" (bold(theta), bold(w)) = EE_t [L^"CLIP" (bold(theta)) - c_1 L^"VF" (bold(w)) + c_2 S(pi_bold(theta) (s_t))]
+// $ <eq_ppo_total>
+//
+// For continuous actions, the actor outputs the parameters of a probability distribution over actions, from which actions are sampled during training.
 
 @DreamerV3 is a model-based actor-critic algorithm. Instead of learning solely from real environment interaction, it learns a world model, a neural network that encodes observations into a compact latent state and predicts how this state evolves given the agent’s actions, along with the resulting rewards. To ensure the latent state retains task-relevant information, the world model is trained to reconstruct the observations. Actor and critic are then trained on trajectories imagined in this latent space, starting from states encountered in real experience. Because imagined trajectories can be generated at no cost to the real environment, DreamerV3 requires considerably fewer real interactions than model-free methods. The approach depends on the accuracy of the learned world model: errors in the model can mislead the actor and critic.
 
