@@ -36,7 +36,19 @@ The hypothesis formulated in the problem statement can only be tested if the phy
     [#ref_requirement("req:real_speed")],
     [Sufficient Frequency],
     [],
+    [#ref_requirement("req:real_human")],
+    [Humanoid actuation and sensing],
+    [Comparability to human performance],
     table.cell(colspan: 3, fill: luma(240))[*Experiment pipeline*],
+    [#ref_requirement("req:run_baselines")],
+    [Train simulated and real baselines],
+    [],
+    [#ref_requirement("req:run_eval")],
+    [Evaluation],
+    [],
+    [#ref_requirement("req:run_checkpoint")],
+    [Save and transfer models],
+    [@S2R],
     [#ref_requirement("req:run_comparability")],
     [Stable conditions (algo+spaces)],
     [Comparable outcomes],
@@ -46,9 +58,6 @@ The hypothesis formulated in the problem statement can only be tested if the phy
     [#ref_requirement("req:run_data")],
     [Collect data],
     [Answer RQ],
-    [#ref_requirement("req:run_checkpoint")],
-    [Save and transfer models],
-    [],
   )
 ] <tab:requirements>
 
@@ -72,3 +81,11 @@ Necessitated by the requirement for stable conditions (@req:run_comparability) (
 An overview of components and their relationships is shown in fig:components.
 
 (TODO fig:components)
+
+== Real Backend
+
+-
+
+== Simulation Backend
+
+== Experiment Pipeline
