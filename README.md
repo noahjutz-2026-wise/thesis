@@ -37,11 +37,10 @@ To TXT:
 typst compile \
     --ignore-system-fonts \
     --font-path src \
-    --features html \
-    --format html \
+    --pdf-standard a-3b \
     --input GIT_HASH="$(git rev-parse --short HEAD)" \
     --input GIT_TAG="$(git describe --tags --exact-match)" \
     --root . \
     src/main.typ && \
-    pandoc src/main.html -t plain --wrap none -o main.txt
+    pdftotext src/main.pdf main.txt
 ```
