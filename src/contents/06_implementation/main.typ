@@ -86,8 +86,30 @@ An overview of components and their relationships is shown in fig:components.
 
 == Real Backend
 
--
+- overview
+  - messaging: ZMQ over IPC
+  - actuation: dynamixel-sdk + python
+  - sensing:
+    - Vision: OpenCV + Fisheye + PnP
+    - IMU
+  - control loop: linux os timer fd
+    - local inference and batch updates
+  - interface: gymnasium
 
 == Simulation Backend
 
+- overview
+  - Mesh: build123d + CoACD
+  - Engine: MuJoCo
+    - Unity was evaluated
+  - Rendering: None
+  - Dynamics: sysid
+  - Parameterization: ?
+  - interface: gymnasium
+
 == Experiment Pipeline
+
+- overview
+  - Algorithm: RLLib PPO / DreamerV3
+  - Environment: sim: gymnasium, real: external inference server
+  - logging: W&B
