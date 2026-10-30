@@ -39,6 +39,11 @@
   )
 }
 
+#show: template.template_appendix
+
+#heading()[Appendix]
+== x
+
 #bibliography(
   "/vendor/literature/sources.yaml",
   style: "/src/din-1505-2-alphanumeric.csl",

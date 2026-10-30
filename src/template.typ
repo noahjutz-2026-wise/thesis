@@ -38,3 +38,11 @@
   set heading(numbering: "1.1")
   body
 }
+
+#let template_appendix(body) = {
+  counter(heading).update(1)
+  set heading(numbering: (_, ..b) => {
+    ("A", ..b.pos().map(str)).join(".", default: "")
+  })
+  body
+}
