@@ -61,9 +61,11 @@ The hypothesis formulated in the problem statement can only be tested if the phy
   )
 ] <tab:requirements>
 
-constraints:
-- actuation same as human
-- sensing only through camera
+The simulation backend serves as the source domain and must therefore be a faithful enough replica of the physical labyrinth for a policy to transfer. It has to reproduce the geometry of the rig, the actuator and board dynamics, and the timing of sensing and actuation (@req:sim_fidelity), since a mismatch in any of these widens the reality gap. At the same time, these properties must not be hard-coded. Friction coefficients, masses, motor speeds, and latencies must be exposed as parameters (@req:sim_configurability), so that they can be sampled per episode and used for @DR.
+
+The real backend is the target domain and the source of the baseline, which places different demands on it. To make learning on the physical system as fast and stable as possible, sources of stochasticity that the agent cannot influence, such as jitter in the control loop, should be minimized (@req:real_determinism). Since the rig is failure-prone and subject to wear, it must protect itself from damaging commands, for example by limiting motor speeds and ranges of motion, so that training can run unattended (@req:real_safety). The control loop must also run at a sufficient frequency (@req:real_speed), comparable to the roughly 55 Hz of the baseline we compare against. Finally, the way the system is actuated and sensed should resemble that of a human player (@req:real_human), so that the achieved performance can be meaningfully compared to human performance.
+
+The experiment pipeline ties both backends together and must answer the research question. It must be able to train baselines in simulation and in reality (@req:run_baselines) and to evaluate any policy with the metrics defined in the methodology (@req:run_eval). Because @S2R relies on moving a model from one environment to another, models have to be saved and restored across backends (@req:run_checkpoint). For the outcomes of different experiments to be comparable, everything except the factor under study, in particular the algorithm and the observation and action spaces, has to remain fixed (@req:run_comparability). Each experiment is configured through a set of parameters, including those used for @DR (@req:run_parameterize). Finally, data must be collected at every stage of a run (@req:run_data), as it is the basis for the analysis in the results chapter.
 
 == Architectural Overview
 
