@@ -114,7 +114,12 @@ While generating meshes directly is computationally faster and can accelerate pr
 
 // Sensors, actuators
 
+
 // Black box sysid
+
+#figure(caption: [Black-Box residual optimization])[
+  #include "figures/sysid.typ"
+]
 
 === Simulating
 
