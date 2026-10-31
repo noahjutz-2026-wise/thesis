@@ -193,16 +193,4 @@ _System Identification_ is the process of creating an idealized mathematical mod
 
 _#[@DR]_ can be applied to visuals and dynamics. Altering textures and lighting during training can robustify the policy agains these perturbations during inference. As it pertains to dynamics randomization, dimensions, masses and friction coefficients are examples for targets of randomization.
 
-
-// == Delay-aware @RL
-//
-// - @nathRevisitingStateAugmentation2021 (Formale Definition)
-// - @yuanAsynchronousReinforcementLearning2022 (engineering reference)
-// - @jiModelingDynamicsRandom2026 (bezug zu DreamerV3)
-//
-// == Implementation
-//
-// - #text(gray)[Ray]
-// - #text(gray)[RLLib]
-// - #text(gray)[PyTorch]
-// - #text(gray)[TorchRL]
+== Dynamics
