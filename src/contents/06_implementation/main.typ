@@ -115,7 +115,8 @@ While generating meshes directly is computationally faster and can accelerate pr
 // Sensors, actuators
 
 
-// Black box sysid
+// System Identification
+Accurately replicating the dynamics of the system requires selecting a set of parameters such as friction coefficients and gear ratios. We use a gray-box system identification method, in which we explicitly measure certain values such as body weights and dimensions, and approximate the remaining parameters using regression methods.
 
 #figure(caption: [Black-Box residual optimization])[
   #include "figures/sysid.typ"
