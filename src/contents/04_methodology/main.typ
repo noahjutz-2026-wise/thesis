@@ -1,7 +1,7 @@
 = Methodology
 
 
-== Experiments <sec_experiments>
+== Experiments <sec:experiments>
 
 // - Which questions should be answered?
 // - Which experiments are needed?
@@ -28,7 +28,7 @@ We will collect raw data that is generated on each step, episode or policy updat
 
 == Transfer
 
-Returning to the central theme of this work, namely the transfer of models across environments, it is useful to first consider the general methodological procedure. In seeking to offload sample collection to a simulated environment, the conventional approach consists of training a model in simulation until it works reasonably well, subsequently fine-tuning it with data collected in the real world, and finally evaluating its performance. @fig_pipeline shows our experiment pipeline for @S2R.
+Returning to the central theme of this work, namely the transfer of models across environments, it is useful to first consider the general methodological procedure. In seeking to offload sample collection to a simulated environment, the conventional approach consists of training a model in simulation until it works reasonably well, subsequently fine-tuning it with data collected in the real world, and finally evaluating its performance. @fig:pipeline shows our experiment pipeline for @S2R.
 
 This reference pipeline can be decomposed and reconfigured to serve different experimental objectives. To establish non-transfer baselines, the fine-tuning step may be omitted. To assess the performance of the simulated model in a more tractable setting, the model may be transferred to a different simulation rather than to the real world (sim-to-sim). Similarly, to iteratively improve the fidelity of the simulation, the order of the environments may be reversed (real-to-sim).
 
@@ -36,7 +36,7 @@ This reference pipeline can be decomposed and reconfigured to serve different ex
   The @S2R pipeline, exemplifying the research procedure. A set of parameters is defined for each experiment. A model is trained in simulation, fine-tuned in reality and finally evaluated in reality. Data is collected at each step of the way.
 ])[
   #include "figures/experiment.typ"
-] <fig_pipeline>
+] <fig:pipeline>
 
 Before we get into more advanced optimization techniques, we need to ensure that a naive zero-shot @S2R transfer works. The requisites for this include that both the simulated and real environment share some properties: They must have identical state and action spaces and utilize compatible model architectures.
 

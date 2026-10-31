@@ -44,7 +44,7 @@ The labyrinth game was first proposed as a benchmark environment by @metzenBRIOL
 
 A breakthrough was achieved by @cyberrunner, who applied a sample-efficient @RL algorithm to the labyrinth and surpassed the human record for the fastest play-time, without requiring simulated samples. In @cyberrunner2, they revised their approach through data augmentation and selective sampling, reducing the required training time from four hours to one and a half.
 
-See @table:publications-brio for a systematic comparison of publications that use the labyrinth game or a similar environment.
+See @tbl:publications-brio for a systematic comparison of publications that use the labyrinth game or a similar environment.
 
 #figure(caption: [Classification of publications tackling the labyrinth game])[
   #table(
@@ -69,7 +69,7 @@ See @table:publications-brio for a systematic comparison of publications that us
     [@cyberrunner], [BRIO], [—], [DreamerV3], [✗],
     [@cyberrunner2], [BRIO], [—], [DreamerV3 + PER], [✗],
   )
-] <table:publications-brio>
+] <tbl:publications-brio>
 
 // Sim2Real Transfer
 
