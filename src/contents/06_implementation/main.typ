@@ -86,29 +86,30 @@ An overview of components and their relationships is shown in fig:components.
 
 == Real Backend
 
-- overview
-  - messaging: ZMQ over IPC
-  - actuation: dynamixel-sdk + python
-  - sensing:
-    - Vision: OpenCV + Fisheye + PnP
-    - IMU
-  - control loop: linux os timer fd
-    - local inference and batch updates
-  - interface: gymnasium
+// - overview
+//   - messaging: ZMQ over IPC
+//   - actuation: dynamixel-sdk + python
+//   - sensing:
+//     - Vision: OpenCV + Fisheye + PnP
+//     - IMU
+//   - control loop: linux os timer fd
+//     - local inference and batch updates
+//   - interface: gymnasium
 
 == Simulation Backend
 
-- overview
-  - Mesh: build123d + CoACD
-  - Engine: MuJoCo
-    - Unity was evaluated
-  - Rendering: None
-  - Dynamics: sysid
-  - Parameterization: ?
-  - interface: gymnasium
+// - overview
+//   - Mesh: build123d + CoACD
+//   - Engine: MuJoCo
+//     - Unity was evaluated
+//   - Rendering: None
+//   - Dynamics: sysid
+//   - Parameterization: ?
+//   - interface: gymnasium
 
 === Modeling
 
+// CAD
 While generating meshes directly is computationally faster and can accelerate procedural level generation, the present scope is restricted to a single maze level. Therefore, our primary objectives are high-fidelity dimensional accuracy and implementation simplicity. To achieve this, we eschewed direct mesh generation -- and the insufficiently configurable @SVG importer provided by @marble_maze -- in favor of a #[@CAD]-based approach. We selected build123d @build123d, an open-source @CAD modeling library, due to its Pythonic interface. This programmatic approach facilitates rapid design drafting and the creation of parameterized models, establishing a robust foundation that can be extended in the future to support randomized mazes and curriculum learning. Furthermore, because @MuJoCo requires convex shapes for collision meshes, we integrated @CoACD @coacd to automatically decompose the generated geometry.
 
 // Sensors, actuators
