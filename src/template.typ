@@ -1,5 +1,5 @@
 #import "/src/deps.typ": booktabs, citesugar, glossy
-#import "/src/glossary.typ": glossary
+#import "/src/glossary.typ": glossary, gl-refs
 
 #let template_base(body) = {
   show cite: citesugar.citesugar
@@ -21,6 +21,7 @@
     glossary,
     term-links: true,
   )
+  show: gl-refs
   set math.equation(numbering: "(1)")
   body
 }

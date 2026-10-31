@@ -118,3 +118,22 @@
   _software.map(v => v + (group: "Tools, Libraries & Frameworks")),
   _general,
 ).join()
+
+// Lets glossary references be written with a `gl:` prefix, e.g. @gl:RL.
+// glossy's `show ref` handler splits the ref target on ":" and treats the
+// first component as the key, so a raw `@gl:RL` would look up the key "gl"
+// and fall through unstyled. This rule strips the prefix before glossy's
+// rule (applied further out) sees the ref.
+#let gl-refs(body) = {
+  show ref: it => {
+    let target = str(it.target)
+    if target.starts-with("gl:") {
+      let key = target.slice(3)
+      if key != "" {
+        return ref(label(key), supplement: it.supplement)
+      }
+    }
+    it
+  }
+  body
+}
