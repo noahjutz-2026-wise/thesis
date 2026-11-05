@@ -194,3 +194,13 @@ _System Identification_ is the process of creating an idealized mathematical mod
 _#[@gl:DR]_ can be applied to visuals and dynamics. Altering textures and lighting during training can robustify the policy agains these perturbations during inference. As it pertains to dynamics randomization, dimensions, masses and friction coefficients are examples for targets of randomization.
 
 == Dynamics
+
+- Rigidbody joint underactuated robotics mechanical systems
+
+== Sensing
+
+- Computer vision
+- fisheye lens
+- PnP
+- IMU
+- Kalman Filter
