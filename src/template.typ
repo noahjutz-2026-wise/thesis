@@ -1,5 +1,18 @@
 #import "/src/deps.typ": booktabs, citesugar, glossy
-#import "/src/glossary.typ": glossary, gl-refs
+#import "/src/glossary.typ": gl-refs, glossary
+
+#let _template_subimg(body) = {
+  show figure.caption: it => {
+    if it.kind == "subimg" {
+      let idx = counter(figure.where(kind: "subimg")).get()
+      numbering("(a) ", idx.last())
+      it.body
+    } else {
+      it
+    }
+  }
+  body
+}
 
 #let template_base(body) = {
   show cite: citesugar.citesugar
@@ -23,6 +36,8 @@
   )
   show: gl-refs
   set math.equation(numbering: "(1)")
+
+  show: _template_subimg
   body
 }
 

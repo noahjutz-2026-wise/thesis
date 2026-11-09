@@ -44,8 +44,3 @@
     #ref(label(l))
   ]
 ]
-
-#let subfign() = context {
-  let idx = counter(figure.where(kind: "subimg")).get()
-  numbering("(a)", idx.last())
-}

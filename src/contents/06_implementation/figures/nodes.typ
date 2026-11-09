@@ -1,5 +1,4 @@
 #import "/src/deps.typ": cetz, diagraph, fletcher, lilaq as lq, oxifmt
-#import "/src/common/util.typ": subfign
 
 #let col_green = green
 #let col_gray = gray
@@ -103,7 +102,7 @@
       fgn + numbering("a", ns)
     },
     kind: "subimg",
-    supplement: none,
+    supplement: "Figure",
   )
   #block(width: 100%)[
     #place(bottom + right, dy: -12pt)[
@@ -113,12 +112,12 @@
       columns: 2,
       column-gutter: 16pt,
       [
-        #figure(caption: [#subfign() @CR @ROS Nodes])[
+        #figure(caption: [@CR @ROS Nodes])[
           #cr_nodes
         ] <fig:nodes.cr>
       ],
       [
-        #figure(caption: [#subfign() Reimplementation nodes])[
+        #figure(caption: [Reimplementation nodes])[
           #crs2r_modules
         ] <fig:nodes.reimpl>
       ],
