@@ -6,3 +6,5 @@
 #import "@preview/lilaq:0.6.0"
 
 #import "@preview/diagraph:0.3.8"
+
+#import "@preview/oxifmt:1.0.0"

@@ -1,4 +1,4 @@
-#import "/src/deps.typ": cetz, diagraph, fletcher, lilaq as lq
+#import "/src/deps.typ": cetz, diagraph, fletcher, lilaq as lq, oxifmt
 
 #let col_green = green
 #let col_gray = gray
@@ -47,19 +47,23 @@
       (it, rect(it))
     })
     .to-dict(),
-  "
-    digraph {
+  oxifmt.strfmt(
+    "
+    digraph {{
       fontname=\"JetBrainsMono NF\"
       node[shape=none,margin=0,height=0,width=0]
       camera
-      edge[style=dashed,color=gray]
+      edge[style=dashed,color=\"{gray}\"]
       interfaces -> dreamer
       interfaces -> dynamixel
       interfaces -> state_estimation
-      edge[style=solid,color=green]
+      edge[style=solid,color=\"{green}\"]
       camera -> state_estimation -> dreamer -> dynamixel
-    }
+    }}
     ",
+    gray: col_gray.to-hex(),
+    green: col_green.to-hex(),
+  ),
 )
 
 #grid(
