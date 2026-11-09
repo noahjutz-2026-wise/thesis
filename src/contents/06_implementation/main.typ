@@ -84,18 +84,6 @@ An overview of components and their relationships is shown in fig:components.
 
 (TODO fig:components)
 
-== Real Backend
-
-// - overview
-//   - messaging: ZMQ over IPC
-//   - actuation: dynamixel-sdk + python
-//   - sensing:
-//     - Vision: OpenCV + Fisheye + PnP
-//     - IMU
-//   - control loop: linux os timer fd
-//     - local inference and batch updates
-//   - interface: gymnasium
-
 == Simulation Backend
 
 // - overview
@@ -127,6 +115,21 @@ Accurately replicating the dynamics of the system requires selecting a set of pa
 A simulated environment consists of two core components: a simulation engine that approximates the physical interactions of the system, and a renderer that produces visual observations. The choice of engine involves a trade-off between physical fidelity and computational performance, and the ability to run many instances in parallel is an additional consideration. The engine must also support domain randomization through parameterized physics. The renderer, in turn, must reproduce the specifications of the real camera, including its intrinsic parameters and field of view, and must provide realistic lighting and materials that can themselves be randomized.
 
 A range of simulators targeting robotics and @gl:RL research is available, and each makes different trade-offs. Isaac Lab is a highly configurable framework, but its scope and infrastructure exceed the requirements of a single tilting maze. Gazebo is closely coupled to @gl:ROS, which the CyberRunner project employs, but we preferred a more contemporary toolchain that is not dependent on that ecosystem. General-purpose game engines such as Godot and Unreal Engine have likewise been used for @gl:RL. Unity was initially considered on pragmatic grounds, since the existing @gl:RL project @marble_maze provides a working foundation. However, we ultimately chose @gl:MuJoCo @mujoco over Unity. Although MuJoCo's built-in renderer is not designed for high visual fidelity and its collision detection requires concave mazes to be decomposed into convex sub-shapes, it is highly suited to articulated mechanisms with hinges and actuators, and it provides a dedicated sysid package necessary for accurately modeling actuator dynamics.
+
+== Real Backend
+
+We orient our work upon @cyberrunner @cyberrunner2 for establishing a control loop that senses and actuates the labyrinth during training and evaluation. In order to address hurdles including software rot #footnote[For example, old dependencies whose versions were not pinned make reproducing difficult], compatibility with new tools and libraries #footnote[For example, NumPy version 2 is unsupported.], and to include new requirements including consistent timing (@req:real_determinism) and operational safety (@req:real_safety), we found the path of least resistance was a reimplementation of the @cyberrunner codebase, while reusing its hardware and architecture.
+
+// - overview
+//   - messaging: ZMQ over IPC
+//   - actuation: dynamixel-sdk + python
+//   - sensing:
+//     - Vision: OpenCV + Fisheye + PnP
+//     - IMU
+//   - control loop: linux os timer fd
+//     - local inference and batch updates
+//   - interface: gymnasium
+
 
 == Experiment Pipeline
 
