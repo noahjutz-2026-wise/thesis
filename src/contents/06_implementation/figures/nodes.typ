@@ -97,7 +97,7 @@
   ),
 )
 
-#figure(caption: [CyberRunner nodes and reimplementation])[
+#figure(caption: [@CR nodes (left) and reimplementation (right).])[
   #show: template_subfigure
   #block(width: 100%)[
     #place(bottom + right, dy: -12pt)[
