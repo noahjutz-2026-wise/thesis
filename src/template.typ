@@ -15,13 +15,13 @@
   body
 }
 
-#let template_subfigure(it) = {
+#let template_subfigure(it) = context {
   counter(figure.where(kind: "subimg")).update(0)
-  let fgn = context counter(figure.where(kind: image)).get().join()
+  let fig_number = counter(figure.where(kind: image)).get()
   set figure(
     kind: "subimg",
-    numbering: ns => {
-      fgn + numbering("a", ns)
+    numbering: n => {
+      numbering("1a", ..fig_number, n)
     },
     supplement: "Figure",
   )
