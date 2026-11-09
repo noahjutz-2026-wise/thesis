@@ -25,7 +25,7 @@
     arr("-|>", stroke: (paint: col_green, thickness: 1pt)),
     [Publishes],
     arr("-|>", stroke: (paint: col_gray, dash: "dashed", thickness: 1pt)),
-    [Dependency],
+    [Depends on],
     rect(width: 1cm, height: 6pt),
     [Node],
     rect(width: 1cm, height: 6pt, stroke: col_gray),
@@ -46,7 +46,7 @@
   engine: "dot",
   labels: it => (
     () => {
-      if it == "interfaces" { return shape_module }
+      if it == "dreamerv3" { return shape_module }
       return shape_node
     }
   )()(it),
@@ -57,11 +57,13 @@
       node[shape=none,margin=0,height=0,width=0]
       camera
       edge[style=dashed,color=\"{gray}\"]
-      interfaces -> dreamer
-      interfaces -> dynamixel
-      interfaces -> state_estimation
+      // interfaces -> dreamer [dir=back]
+      // interfaces -> dynamixel [dir=back]
+      // interfaces -> state_estimation [dir=back]
+      dreamer -> dreamerv3
       edge[style=solid,color=\"{green}\"]
-      camera -> state_estimation -> dreamer -> dynamixel
+      camera -> state_estimation -> dreamer
+      dynamixel -> dreamer [dir=back]
     }}
     ",
     gray: col_gray.to-hex(),
@@ -87,7 +89,7 @@
       mpu -> gymnasium
       actuator -> gymnasium [dir=back]
       edge[style=dashed,color=\"{gray}\"]
-      gymnasium -> rllib
+      gymnasium -> rllib [dir=back]
     }}
     ",
     gray: col_gray.to-hex(),
