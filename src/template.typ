@@ -11,7 +11,21 @@
       it
     }
   }
+  show figure.where(kind: "subimg"): set figure(supplement: "Figure")
   body
+}
+
+#let template_subfigure(it) = {
+  counter(figure.where(kind: "subimg")).update(0)
+  let fgn = context counter(figure.where(kind: image)).get().join()
+  set figure(
+    kind: "subimg",
+    numbering: ns => {
+      fgn + numbering("a", ns)
+    },
+    supplement: "Figure",
+  )
+  it
 }
 
 #let template_base(body) = {

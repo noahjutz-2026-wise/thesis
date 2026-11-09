@@ -1,4 +1,5 @@
 #import "/src/deps.typ": cetz, diagraph, fletcher, lilaq as lq, oxifmt
+#import "/src/template.typ": template_subfigure
 
 #let col_green = green
 #let col_gray = gray
@@ -95,15 +96,7 @@
 )
 
 #figure(caption: [CyberRunner nodes and reimplementation])[
-  #let fgn = context counter(figure.where(kind: image)).get().join()
-  #counter(figure.where(kind: "subimg")).update(0)
-  #set figure(
-    numbering: ns => {
-      fgn + numbering("a", ns)
-    },
-    kind: "subimg",
-    supplement: "Figure",
-  )
+  #show: template_subfigure
   #block(width: 100%)[
     #place(bottom + right, dy: -12pt)[
       #leg
@@ -125,4 +118,4 @@
   ]
 ] <fig:nodes>
 
-@fig:nodes.reimpl
+b @fig:nodes.reimpl
