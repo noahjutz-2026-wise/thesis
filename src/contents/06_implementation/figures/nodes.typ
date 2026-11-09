@@ -117,5 +117,3 @@
     )
   ]
 ] <fig:nodes>
-
-b @fig:nodes.reimpl
