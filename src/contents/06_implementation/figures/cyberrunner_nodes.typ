@@ -1,5 +1,6 @@
 #import "/src/deps.typ": diagraph
-#diagraph.render(
+
+#let cr_nodes = diagraph.render(
   engine: "dot",
   labels: (
     "interfaces",
@@ -14,15 +15,20 @@
     .to-dict(),
   "
     digraph {
-      // fontname=\"JetBrainsMono NF\"
+      fontname=\"JetBrainsMono NF\"
       node[shape=none,margin=0,height=0,width=0]
       camera
-      edge[label=dependency,style=dashed,color=gray]
+      edge[style=dashed,color=gray]
       interfaces -> dreamer
       interfaces -> dynamixel
       interfaces -> state_estimation
-      edge[label=publishes,style=solid,color=green]
+      edge[style=solid,color=green]
       camera -> state_estimation -> dreamer -> dynamixel
     }
     ",
+)
+
+#grid(
+  columns: 3,
+  cr_nodes,
 )
