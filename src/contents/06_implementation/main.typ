@@ -120,11 +120,7 @@ A range of simulators targeting robotics and @gl:RL research is available, and e
 
 We orient our work upon @cyberrunner @cyberrunner2 for establishing a control loop that senses and actuates the labyrinth during training and evaluation. In order to address hurdles including software rot #footnote[For example, old dependencies whose versions were not pinned make reproducing difficult], compatibility with new tools and libraries #footnote[For example, NumPy version 2 is unsupported.], and to include new requirements including consistent timing (@req:real_determinism) and operational safety (@req:real_safety), we found the path of least resistance was a reimplementation of the @cyberrunner codebase, while reusing its hardware and architecture.
 
-#figure(
-  caption: "CyberRunner Packages",
-)[
-  #include "figures/cyberrunner_nodes.typ"
-] <source-packages>
+#include "figures/cyberrunner_nodes.typ"
 
 // - overview
 //   - messaging: ZMQ over IPC
