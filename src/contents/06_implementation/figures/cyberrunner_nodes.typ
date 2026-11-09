@@ -36,17 +36,7 @@
 
 #let cr_nodes = diagraph.render(
   engine: "dot",
-  labels: (
-    "interfaces",
-    "dreamer",
-    "dynamixel",
-    "state_estimation",
-    "camera",
-  )
-    .map(it => {
-      (it, rect(it))
-    })
-    .to-dict(),
+  labels: rect,
   oxifmt.strfmt(
     "
     digraph {{
