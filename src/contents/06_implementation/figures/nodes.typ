@@ -4,6 +4,9 @@
 #let col_green = green
 #let col_gray = gray
 
+#let shape_node = rect
+#let shape_module = rect.with(stroke: col_gray)
+
 #let leg = {
   let arr(length: .6cm, ..args) = cetz.canvas(length: length, {
     import cetz.draw: *
@@ -41,7 +44,12 @@
 
 #let cr_nodes = diagraph.render(
   engine: "dot",
-  labels: rect,
+  labels: it => (
+    () => {
+      if it == "interfaces" { return shape_module }
+      return shape_node
+    }
+  )()(it),
   oxifmt.strfmt(
     "
     digraph {{
@@ -63,7 +71,12 @@
 
 #let crs2r_modules = diagraph.render(
   engine: "dot",
-  labels: rect,
+  labels: it => (
+    () => {
+      if it == "rllib" { return shape_module }
+      return shape_node
+    }
+  )()(it),
   oxifmt.strfmt(
     "
     digraph {{
