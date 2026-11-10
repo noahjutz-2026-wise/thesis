@@ -1,5 +1,6 @@
 #import "@preview/glossy:0.9.2"
 #import "@preview/citesugar:0.1.0"
+#import "@preview/booktyps:0.1.1"
 
 // graphing
 #import "@preview/fletcher:0.5.8"
