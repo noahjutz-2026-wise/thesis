@@ -1,13 +1,13 @@
 #table(
   columns: 5,
-  table.header([Reference], [Real platform], [Simulator], [Algorithm], [@gl:S2R]),
-  [@waldemarkUsingReinforcementLearning1995], [simplified BRIO], [Custom], [SRV-Net (RL)], [Direct policy transfer],
+  table.header([*Reference*], [*Real platform*], [*Simulator*], [*Algorithm*], [*@gl:S2R*]),
+  [@waldemarkUsingReinforcementLearning1995],
+  [simplified BRIO],
+  [Custom],
+  [SRV-Net (@RL:short)],
+  [Direct policy transfer],
 
-  [@abdenebaouiDiplomThesisImplementationEvaluation2007 @abdenebaouiConnectionistArchitectureLearning2007],
-  [BRIO],
-  [ODE],
-  [QCON],
-  [],
+  [@abdenebaouiConnectionistArchitectureLearning2007], [BRIO], [ODE], [QCON], [],
 
   [@metzenBRIOLabyrinthGameA2009], [BRIO], [ODE], [SARSA($lambda$) + CMAC], [✗],
 
