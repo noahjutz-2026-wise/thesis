@@ -2,13 +2,7 @@
 #table(
   columns: 3,
   align: (center + horizon, start + horizon, start + horizon),
-  stroke: (x, y) => if y == 0 {
-    (bottom: 1pt)
-  } else {
-    (bottom: 0.3pt + luma(200))
-  },
   table.header[*ID*][*Requirement*][*Rationale*],
-
   table.cell(colspan: 3, fill: luma(240))[*Simulation backend*],
   [#ref_requirement("req:sim_fidelity")],
   [Replicate dimensions, dynamics, timing],
