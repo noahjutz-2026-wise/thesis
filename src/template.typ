@@ -1,4 +1,4 @@
-#import "/src/deps.typ": booktabs, citesugar, glossy
+#import "/src/deps.typ": citesugar, glossy
 #import "/src/glossary.typ": gl-refs, glossary
 
 #let _template_subimg(body) = {
