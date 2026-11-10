@@ -1,5 +1,3 @@
-#import "/src/common/util.typ": ref_requirement
-
 = System Design
 
 == Goals and Requirements <sec:requirements>
@@ -9,56 +7,7 @@ The hypothesis formulated in the problem statement can only be tested if the phy
 #figure(
   caption: [Requirements for the real system, the simulation and both backends.],
 )[
-  #table(
-    columns: 3,
-    align: (center + horizon, start + horizon, start + horizon),
-    stroke: (x, y) => if y == 0 {
-      (bottom: 1pt)
-    } else {
-      (bottom: 0.3pt + luma(200))
-    },
-    table.header[*ID*][*Requirement*][*Rationale*],
-
-    table.cell(colspan: 3, fill: luma(240))[*Simulation backend*],
-    [#ref_requirement("req:sim_fidelity")],
-    [Replicate dimensions, dynamics, timing],
-    [Transferability],
-    [#ref_requirement("req:sim_configurability")],
-    [Parameter configurability],
-    [@gl:DR],
-    table.cell(colspan: 3, fill: luma(240))[*Real backend*],
-    [#ref_requirement("req:real_determinism")],
-    [Minimize stochasticity],
-    [Faster learning],
-    [#ref_requirement("req:real_safety")],
-    [Safety (don't self-destruct)],
-    [Unattended operation],
-    [#ref_requirement("req:real_speed")],
-    [Sufficient Frequency],
-    [],
-    [#ref_requirement("req:real_human")],
-    [Humanoid actuation and sensing],
-    [Comparability to human performance],
-    table.cell(colspan: 3, fill: luma(240))[*Experiment pipeline*],
-    [#ref_requirement("req:run_baselines")],
-    [Train simulated and real baselines],
-    [],
-    [#ref_requirement("req:run_eval")],
-    [Evaluation],
-    [],
-    [#ref_requirement("req:run_checkpoint")],
-    [Save and transfer models],
-    [@gl:S2R],
-    [#ref_requirement("req:run_comparability")],
-    [Stable conditions (algo+spaces)],
-    [Comparable outcomes],
-    [#ref_requirement("req:run_parameterize")],
-    [Parameterization],
-    [@gl:DR],
-    [#ref_requirement("req:run_data")],
-    [Collect data],
-    [Answer RQ],
-  )
+  #include "tables/requirements.typ"
 ] <tbl:requirements>
 
 The simulation backend serves as the source domain and must therefore be a faithful enough replica of the physical labyrinth for a policy to transfer. It has to reproduce the geometry of the rig, the actuator and board dynamics, and the timing of sensing and actuation (@req:sim_fidelity), since a mismatch in any of these widens the reality gap. At the same time, these properties must not be hard-coded. Friction coefficients, masses, motor speeds, and latencies must be exposed as parameters (@req:sim_configurability), so that they can be sampled per episode and used for @gl:DR.
