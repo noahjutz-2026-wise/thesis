@@ -15,14 +15,18 @@
 #show: lq.set-diagram(
   width: 3cm,
   height: 2cm,
-  yaxis: (format-ticks: none),
+  yaxis: (label: [Ep. Return]),
   xaxis: (ticks: none),
   legend: none,
 )
 
-#show grid.cell.where(x: 0): it => {
-  show: lq.set-diagram(yaxis: (format-ticks: auto, label: [Ep. Return]))
-  it
+#show grid.cell: it => {
+  if it.x != 0 {
+    show: lq.set-diagram(yaxis: (label: none, format-ticks: none))
+    it
+  } else {
+    it
+  }
 }
 
 #show grid.cell.where(x: 3): it => {
@@ -40,7 +44,13 @@
     x,
     y,
     mark: none,
-    label: [Return],
+    label: [15%],
+  ),
+  lq.plot(
+    x,
+    y.map(i => i / 2),
+    mark: none,
+    label: [30%],
   ),
 )
 
