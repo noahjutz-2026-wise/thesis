@@ -8,6 +8,6 @@
 
 == @S2R:long
 
-#figure(caption: [Simulated training performance])[
+#figure(caption: [Training performance metrics for different @gl:DR conditions])[
   #include "figures/returns.typ"
 ]
