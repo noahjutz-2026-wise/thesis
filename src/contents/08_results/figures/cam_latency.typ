@@ -14,8 +14,8 @@
   lq.bar(
     offset: interval / 2,
     width: 100%,
-    stroke: 1pt + black,
-    fill: gray,
+    stroke: .4pt + black.lighten(20%),
+    fill: black.transparentize(80%),
     edges.slice(0, -1),
     counts,
   ),
