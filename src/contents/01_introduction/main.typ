@@ -49,3 +49,5 @@ See @tbl:publications-brio for a systematic comparison of publications that use 
 #figure(caption: [Classification of publications tackling the labyrinth game])[
   #include "tables/brio_papers.typ"
 ] <tbl:publications-brio>
+
+TODO @fischertechnik_kugellabyrinth : include?
