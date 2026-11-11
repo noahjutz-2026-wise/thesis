@@ -1,7 +1,7 @@
 #import "/src/deps.typ": lilaq as lq, suiji
 
 #let col_titles = ("armature", "frictionloss", "gain", "all")
-#let row_ylabels = ("sim return", "sim accuracy")
+#let row_ylabels = ("sim return", "sim accuracy", "fine-tune r", "fine-tune acc")
 
 #let rng = suiji.gen-rng-f(39)
 #let x = lq.linspace(0, 1, num: 150)
@@ -55,7 +55,7 @@
   it
 }
 
-#show grid.cell.where(x: 2): it => {
+#show grid.cell.where(x: 2, y: 0): it => {
   show: lq.set-diagram(legend: (position: left + top, dx: 100%))
   it
 }
@@ -79,6 +79,8 @@
   columns: 3,
   column-gutter: 8pt,
   row-gutter: 8pt,
+  diag, diag, diag,
+  diag, diag, diag,
   diag, diag, diag,
   diag, diag, diag,
 )
