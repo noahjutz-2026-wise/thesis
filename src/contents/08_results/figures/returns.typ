@@ -1,7 +1,7 @@
 #import "/src/deps.typ": lilaq as lq, suiji
 
-#let xtitles = ("armature", "frictionloss", "gain", "all")
-#let ytitles = ("sim return", "sim accuracy")
+#let col_titles = ("armature", "frictionloss", "gain", "all")
+#let row_ylabels = ("sim return", "sim accuracy")
 
 #let rng = suiji.gen-rng-f(39)
 #let x = lq.linspace(0, 1, num: 150)
@@ -27,7 +27,7 @@
   if it.x == 0 {
     return {
       show: lq.set-diagram(
-        yaxis: (label: ytitles.at(it.y), format-ticks: auto),
+        yaxis: (label: row_ylabels.at(it.y), format-ticks: auto),
       )
       it
     }
@@ -38,11 +38,11 @@
 #show grid.cell: it => {
   if it.y == 0 {
     return {
-      show: lq.set-diagram(title: xtitles.at(it.x))
+      show: lq.set-diagram(title: col_titles.at(it.x))
       it
     }
   }
-  if it.y == ytitles.len() - 1 {
+  if it.y == row_ylabels.len() - 1 {
     return {
       show: lq.set-diagram(xaxis: (
         label: [Step %],
