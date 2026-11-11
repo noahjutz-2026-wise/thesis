@@ -22,11 +22,12 @@
 
 #show grid.cell: it => {
   if it.x != 0 {
-    show: lq.set-diagram(yaxis: (label: none, format-ticks: none))
-    it
-  } else {
-    it
+    return {
+      show: lq.set-diagram(yaxis: (label: none, format-ticks: none))
+      it
+    }
   }
+  return it
 }
 
 #show grid.cell.where(x: 3): it => {
