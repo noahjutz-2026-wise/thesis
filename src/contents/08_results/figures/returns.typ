@@ -17,23 +17,30 @@
   height: 2cm,
   yaxis: (format-ticks: none),
   xaxis: (ticks: none),
+  legend: none,
 )
 
 #show grid.cell.where(x: 0): it => {
-  show: lq.set-diagram(yaxis: (format-ticks: auto, label: [Return]))
+  show: lq.set-diagram(yaxis: (format-ticks: auto, label: [Ep. Return]))
+  it
+}
+
+#show grid.cell.where(x: 3): it => {
+  show: lq.set-diagram(legend: (position: left + top, dx: 100%))
   it
 }
 
 #let diag = lq.diagram(
   title: "train-mujoco",
   xaxis: (
-    label: "Step",
+    label: "Step %",
   ),
   yaxis: (:),
   lq.plot(
     x,
     y,
     mark: none,
+    label: [Return],
   ),
 )
 
