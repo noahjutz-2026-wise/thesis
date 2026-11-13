@@ -1,6 +1,7 @@
 #import "/src/deps.typ": lilaq as lq
 
 #lq.diagram(
+  width: 100%,
   xaxis: (
     label: [max episode return],
   ),
