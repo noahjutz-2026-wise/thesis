@@ -6,8 +6,10 @@
   #include "figures/cam_latency.typ"
 ]
 
-== @S2R:long
+== Simulation Training
 
 #figure(caption: [Training performance metrics for different @gl:DR conditions])[
   #include "figures/returns.typ"
 ]
+
+== @S2R:long
