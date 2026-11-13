@@ -8,6 +8,10 @@
 
 == Simulation Training
 
+#figure(caption: [Violin Plot of max return distribution for different experiments])[
+  #include "figures/sim_optim_methods.typ"
+]
+
 #figure(caption: [Training performance metrics for different @gl:DR conditions])[
   #include "figures/returns.typ"
 ]
