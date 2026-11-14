@@ -81,7 +81,7 @@
   engine: "dot",
   labels: it => (
     () => {
-      if it == "pipeline_rllib" { return shape_module }
+      if it in ("pipeline_rllib", "gym_real") { return shape_module }
       return shape_node
     }
   )()(it),
@@ -91,11 +91,11 @@
       node[shape=none,margin=0,height=0,width=0]
       edge[style=solid,color=\"{green}\"]
       camera -> vision
-      vision -> gymnasium
-      mpu -> gymnasium
-      actuator -> gymnasium [dir=back]
+      vision -> gym_real
+      mpu -> gym_real
+      actuator -> gym_real [dir=back]
       edge[style=dashed,color=\"{gray}\"]
-      gymnasium -> pipeline_rllib [dir=back]
+      gym_real -> pipeline_rllib [dir=back]
     }}
     ",
     gray: col_gray.to-hex(),
