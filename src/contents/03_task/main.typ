@@ -31,3 +31,7 @@ A defining feature in the @gl:CR project is its ability to work with only a came
 (partial observability)
 
 As for the action space, a normalized continuous value in $[-1, 1]$ is passed for each of the two motors. By multiplying with a current value, we can tune the real-world motor speed this corresponds to.
+
+== Dynamics
+
+@bergattMinimierungUndUntersuchung

@@ -11,7 +11,7 @@
 
   [@metzenBRIOLabyrinthGameA2009], [BRIO], [ODE], [SARSA($lambda$) + CMAC], [✗],
 
-  [@bergattQuantificationMinimizationSimulationRealityGap2009], [BRIO], [ODE], [Evolution], [],
+  [@Bergatt2009Quantification], [BRIO], [ODE], [$crossmark$], [$crossmark$],
 
   [@ofjallCombiningVisionMachine2016], [BRIO], [No], [LWPR], [#sym.crossmark],
   [@jhaLearningTasksComplex], [CME], [Custom], [MF + MB RL], [✗],
