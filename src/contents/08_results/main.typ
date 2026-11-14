@@ -17,3 +17,7 @@
 ]
 
 == @S2R:long
+
+#figure[
+  #include "figures/s2r.typ"
+]
