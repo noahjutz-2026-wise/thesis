@@ -81,7 +81,7 @@
   engine: "dot",
   labels: it => (
     () => {
-      if it == "rllib" { return shape_module }
+      if it == "pipeline_rllib" { return shape_module }
       return shape_node
     }
   )()(it),
@@ -95,7 +95,7 @@
       mpu -> gymnasium
       actuator -> gymnasium [dir=back]
       edge[style=dashed,color=\"{gray}\"]
-      gymnasium -> rllib [dir=back]
+      gymnasium -> pipeline_rllib [dir=back]
     }}
     ",
     gray: col_gray.to-hex(),
