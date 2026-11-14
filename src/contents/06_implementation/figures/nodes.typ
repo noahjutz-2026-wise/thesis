@@ -60,7 +60,7 @@
       // interfaces -> dreamer [dir=back]
       // interfaces -> dynamixel [dir=back]
       // interfaces -> state_estimation [dir=back]
-      dreamer -> dreamerv3
+      dreamer -> dreamerv3 [dir=back]
       edge[style=solid,color=\"{green}\"]
       camera -> state_estimation -> dreamer
       dynamixel -> dreamer [dir=back]
