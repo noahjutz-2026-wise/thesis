@@ -50,6 +50,11 @@
       return shape_node
     }
   )()(it),
+  edges: (
+    "dreamer": (
+      "dreamerv3": [#footnote[https://github.com/thomasbi1/cyberrunner/blob/40cf614cb84a46bd8cf2da37ecc048166a4bd848/cyberrunner_dreamer/cyberrunner_dreamer/eval.py#L4]],
+    ),
+  ),
   oxifmt.strfmt(
     "
     digraph {{
@@ -60,6 +65,7 @@
       // interfaces -> dreamer [dir=back]
       // interfaces -> dynamixel [dir=back]
       // interfaces -> state_estimation [dir=back]
+      dreamer -> dreamerv3
       dreamer -> dreamerv3 [dir=back]
       edge[style=solid,color=\"{green}\"]
       camera -> state_estimation -> dreamer
@@ -99,8 +105,9 @@
 
 #figure(caption: [@CR nodes (left) and reimplementation (right).])[
   #show: template_subfigure
+  #set align(bottom)
   #block(width: 100%)[
-    #place(bottom + right, dy: -12pt)[
+    #place(top + right)[
       #leg
     ]
     #grid(
