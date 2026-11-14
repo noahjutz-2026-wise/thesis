@@ -34,4 +34,4 @@ As for the action space, a normalized continuous value in $[-1, 1]$ is passed fo
 
 == Dynamics
 
-@bergattMinimierungUndUntersuchung
+A thorough system identification of the BRIO Labyrinth game has been conducted in @bergattMinimierungUndUntersuchung.
