@@ -91,6 +91,9 @@
   CoACD: (
     short: "CoACD",
   ),
+  OpenCV: (
+    short: "OpenCV",
+  ),
 )
 
 #let _general = (
@@ -109,6 +112,10 @@
   SVG: (
     short: "SVG",
     long: "Scalable Vector Graphics",
+  ),
+  CV: (
+    short: "CV",
+    long: "Computer Vision",
   ),
 )
 

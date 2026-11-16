@@ -197,10 +197,20 @@ _#[@gl:DR]_ can be applied to visuals and dynamics. Altering textures and lighti
 
 - Rigidbody joint underactuated robotics mechanical systems
 
-== Sensing
+== @CV:long
 
-- Computer vision
-- fisheye lens
-- PnP
-- IMU
-- Kalman Filter
+A pipeline for estimating the ball position on the labyrinth board using @CV is described in @bergattMinimierungUndUntersuchung[pp. 57 - 75], however there is no indication of the source code having been made publicly available. On the other hand, @cyberrunner doesn't describe their implementation but provides their source code, including their @CV pipeline, under a free and open-source license. After evaluating both sources, we can summarize their main contributions.
+
+=== Camera Intrinsics
+
+Both utilize the @OpenCV library, which contains reference implementations of various @CV algorithms. Our wide-angle fisheye camera has the advantage of a wider field of view, and therefore does not need to be mounted as far from the board to get a full view. However, this leads to parallel lines no longer appearing parallel, as can be seen in @fig:lensdistort.
+They utilize gaussian blur to preprocess the camera image and smoothen the position estimation.
+
+#include "figures/dist_coeff.typ"
+
+=== Perspective-n-Point
+
+=== Homography
+// Ball position
+
+Both track the ball based on its color, where @bergattMinimierungUndUntersuchung uses a white ball and @cyberrunner a blue one. To reduce computation and prevent jumps in the detection, both estimate subsequent positions based on a small patch centered around the ball in subsequent frames.
