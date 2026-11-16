@@ -207,21 +207,25 @@ Both utilize the @OpenCV library, which contains reference implementations of va
 
 #include "figures/dist_coeff.typ"
 
-To correct this geometric warping, the camera's intrinsic parameters are determined through calibration using a known reference pattern, such as a checkerboard. In the @OpenCV fisheye camera model, these intrinsics consist of the camera matrix $K$ (encoding focal lengths and the optical center) and a vector of four radial distortion coefficients $D = (k_1, k_2, k_3, k_4)$.
+To remove this radial warping, the camera's intrinsic parameters are calibrated using a checkerboard pattern. In the @OpenCV fisheye model, these parameters consist of the camera matrix $K$ (which maps 3D camera rays to 2D pixel coordinates using focal length and optical center) and four distortion coefficients $D = (k_1, k_2, k_3, k_4)$.
 
-For any normalized image point $bold(v) = (x, y)^T$ at Euclidean distance $r = sqrt(x^2 + y^2)$ from the optical center, the incoming ray angle $theta = arctan(r)$ is mapped to a distorted angle $theta_d$ via a 9th-degree odd polynomial:
+Consider a 3D point $(X, Y, Z)$ in front of the camera. Projecting it onto a flat plane at unit depth ($Z = 1$) gives ideal, undistorted coordinates $bold(v) = (x, y)^T = (X\/Z, Y\/Z)^T$ at radial distance $r = sqrt(x^2 + y^2)$ from the center. Because this plane sits at depth $1$, the incoming light ray forms a right triangle with angle $theta = arctan(r)$ relative to the optical axis, as illustrated in @fig:raygeometry.
+
+#include "figures/ray_geometry.typ"
+
+A physical fisheye lens bends this ray to a distorted angle $theta_d$, modeled by a 9th-degree odd polynomial:
 
 $
   theta_d = theta (1 + k_1 theta^2 + k_2 theta^4 + k_3 theta^6 + k_4 theta^8)
 $
 
-The resulting distorted coordinates $bold(v)'$ on the sensor are obtained by scaling $bold(v)$ radially by $theta_d / r$:
+Since radial distortion pushes or pulls points straight along lines radiating from the optical center without rotating them, the distorted plane coordinates $bold(v)'$ are obtained by scaling $bold(v)$ from radius $r$ to radius $theta_d$:
 
 $
   bold(v)' = (theta_d / r) bold(v)
 $
 
-Because this forward projection from ideal rectilinear coordinates to distorted sensor coordinates is closed-form, undistorting a captured frame requires no polynomial inversion. Instead, each pixel in the target undistorted image is projected forward using $K$ and $D$ to sample the corresponding intensity value from the raw distorted input frame via bilinear interpolation, restoring straight lines for downstream ball detection.
+Finally, multiplying $bold(v)'$ by the camera matrix $K$ yields the exact pixel location in the raw fisheye image. To generate an undistorted output frame, @OpenCV loops over every target pixel in the clean output grid, maps it backward through $K^(-1)$ onto the unit-depth plane, applies the forward distortion equations above, and samples the corresponding pixel color from the raw fisheye image via bilinear interpolation.
 
 === Perspective-n-Point
 

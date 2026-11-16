@@ -132,6 +132,17 @@
   line((0.55, 0.25), (0.7, 0.25))
 }
 
+#let symbol_camera = {
+  import cetz.draw: *
+  // Camera body
+  rect((0.05, 0.25), (0.55, 0.75))
+  // Lens: triangle with its apex touching the body's right edge, flaring
+  // out to a vertical edge on the right as tall as the body, like a beam
+  // widening toward the scene. The optical center sits at the center of
+  // the triangle's right vertical edge.
+  line((0.55, 0.5), (0.95, 0.25), (0.95, 0.75), close: true)
+}
+
 #let symbol_image = {
   import cetz.draw: *
   // Outer frame
