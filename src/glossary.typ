@@ -117,6 +117,10 @@
     short: "CV",
     long: "Computer Vision",
   ),
+  PnP: (
+    short: "PnP",
+    long: "Perspective-n-Point",
+  ),
 )
 
 #let glossary = (

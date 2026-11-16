@@ -234,6 +234,16 @@ $
 
 Finally, multiplying $bold(v)'$ by the camera matrix $K$ yields the exact pixel location in the raw fisheye image. To generate an undistorted output frame, @OpenCV loops over every target pixel in the clean output grid, maps it backward through $K^(-1)$ onto the unit-depth plane, applies the forward distortion equations above, and samples the corresponding pixel color from the raw fisheye image via bilinear interpolation.
 
-=== Perspective-n-Point
+=== @gl:PnP:long
+
+Before the ball's position can be estimated, the pipeline needs to know how the board is tilted relative to the camera. This is recovered with @gl:PnP, which solves the following problem: given $n$ 3D points whose coordinates are known in the board's own frame, and their 2D pixel positions observed in the image, find the board pose -- a rotation $bold(R)$ and translation $bold(t)$ -- that projects each 3D point exactly onto its observed pixel, as illustrated in @fig:pnp. Because the board is fitted with marker dots whose positions are known from construction, detecting them in each frame and solving @gl:PnP yields the board's tilt for that frame.
+
+#include "figures/pnp.typ"
 
 === Homography
+
+A _homography_ is a projective transformation, represented by a $3 times 3$ matrix $bold(H)$, that maps points between two planes: for every flat surface there exists a homography that relates positions on that surface to pixel positions in its image. Since the board is planar, the pose recovered by @gl:PnP determines the homography between the board plane and the image.
+
+We plan to use this to find the ball's position, as illustrated in @fig:homography. The ball's detected pixel $bold(u)$ fixes a single viewing ray through the optical center, and the intersection of this ray with the tilted board plane is the ball's position $bold(b)$ on the board. In other words, the ball's pixel is mapped through $bold(H)^(-1)$ onto the board plane, which yields its position in board coordinates directly.
+
+#include "figures/homography.typ"
