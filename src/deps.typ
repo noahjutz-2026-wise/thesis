@@ -12,3 +12,4 @@
 #import "@preview/komet:0.3.0" // for histogram
 #import "@preview/oxifmt:1.0.0" // for diagraph
 #import "@preview/suiji:0.5.1"
+#import "@preview/equate:0.3.3"

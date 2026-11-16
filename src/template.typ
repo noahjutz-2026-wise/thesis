@@ -1,4 +1,4 @@
-#import "/src/deps.typ": booktyps, citesugar, glossy
+#import "/src/deps.typ": booktyps, citesugar, equate, glossy
 #import "/src/glossary.typ": gl-refs, glossary
 
 #let _template_subimg(body) = {
@@ -31,6 +31,7 @@
 #let template_base(body) = {
   show table: booktyps.booktabs
   show cite: citesugar.citesugar
+  show: equate.equate.with(number-mode: "label")
   show cite.where(form: "author"): set cite(style: "apa")
   show cite.where(form: "prose"): set cite(style: "apa")
   set document(
