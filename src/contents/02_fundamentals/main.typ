@@ -237,6 +237,3 @@ Finally, multiplying $bold(v)'$ by the camera matrix $K$ yields the exact pixel 
 === Perspective-n-Point
 
 === Homography
-// Ball position
-
-Both track the ball based on its color, where @bergattMinimierungUndUntersuchung uses a white ball and @cyberrunner a blue one. To reduce computation and prevent jumps in the detection, both estimate subsequent positions based on a small patch centered around the ball in subsequent frames.
