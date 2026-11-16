@@ -210,8 +210,15 @@ Both utilize the @OpenCV library, which contains reference implementations of va
 To remove this radial warping, the camera's intrinsic parameters are calibrated using a checkerboard pattern. In the @OpenCV fisheye model, these parameters consist of the camera matrix $K$ (which maps 3D camera rays to 2D pixel coordinates using focal length and optical center) and four distortion coefficients $D = (k_1, k_2, k_3, k_4)$.
 
 Consider a 3D point $(X, Y, Z)$ in front of the camera. Projecting it onto a flat plane at unit depth ($Z = 1$) gives ideal, undistorted coordinates $bold(v) = (x, y)^T = (X\/Z, Y\/Z)^T$ at radial distance $r = sqrt(x^2 + y^2)$ from the center. Because this plane sits at depth $1$, the incoming light ray forms a right triangle with angle $theta = arctan(r)$ relative to the optical axis, as illustrated in @fig:raygeometry.
-
-#include "figures/ray_geometry.typ"
+#figure(
+  caption: [
+    Geometry of the fisheye projection model. A point on the unit-depth
+    plane at radial distance $r$ from the optical center is seen by the
+    lens under the angle $theta = arctan(r)$ relative to the optical axis.
+  ],
+)[
+  #include "figures/ray_geometry.typ"
+] <fig:raygeometry>
 
 A physical fisheye lens bends this ray to a distorted angle $theta_d$, modeled by a 9th-degree odd polynomial:
 

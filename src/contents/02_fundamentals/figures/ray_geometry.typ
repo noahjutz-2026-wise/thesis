@@ -1,7 +1,7 @@
 #import "/src/deps.typ": cetz
 #import "/src/common/symbols.typ": symbol_camera
 
-#let ray-geometry = cetz.canvas(length: 0.75cm, {
+#cetz.canvas(length: 0.75cm, {
   import cetz.draw: *
   import cetz.angle: angle, right-angle
 
@@ -31,13 +31,3 @@
     symbol_camera
   })
 })
-
-#figure(
-  caption: [
-    Geometry of the fisheye projection model. A point on the unit-depth
-    plane at radial distance $r$ from the optical center is seen by the
-    lens under the angle $theta = arctan(r)$ relative to the optical axis.
-  ],
-)[
-  #ray-geometry
-] <fig:raygeometry>
