@@ -203,10 +203,25 @@ A pipeline for estimating the ball position on the labyrinth board using @CV is 
 
 === Camera Intrinsics
 
-Both utilize the @OpenCV library, which contains reference implementations of various @CV algorithms. Our wide-angle fisheye camera has the advantage of a wider field of view, and therefore does not need to be mounted as far from the board to get a full view. However, this leads to parallel lines no longer appearing parallel, as can be seen in @fig:lensdistort.
-They utilize gaussian blur to preprocess the camera image and smoothen the position estimation.
+Both utilize the @OpenCV library, which contains reference implementations of various @CV algorithms. Our wide-angle fisheye camera has the advantage of a wider field of view, and therefore does not need to be mounted as far from the board to get a full view. However, this leads to parallel lines no longer appearing parallel, as can be seen in @fig:lensdistort.barrel.
 
 #include "figures/dist_coeff.typ"
+
+To correct this geometric warping, the camera's intrinsic parameters are determined through calibration using a known reference pattern, such as a checkerboard. In the @OpenCV fisheye camera model, these intrinsics consist of the camera matrix $K$ (encoding focal lengths and the optical center) and a vector of four radial distortion coefficients $D = (k_1, k_2, k_3, k_4)$.
+
+For any normalized image point $bold(v) = (x, y)^T$ at Euclidean distance $r = sqrt(x^2 + y^2)$ from the optical center, the incoming ray angle $theta = arctan(r)$ is mapped to a distorted angle $theta_d$ via a 9th-degree odd polynomial:
+
+$
+  theta_d = theta (1 + k_1 theta^2 + k_2 theta^4 + k_3 theta^6 + k_4 theta^8)
+$
+
+The resulting distorted coordinates $bold(v)'$ on the sensor are obtained by scaling $bold(v)$ radially by $theta_d / r$:
+
+$
+  bold(v)' = (theta_d / r) bold(v)
+$
+
+Because this forward projection from ideal rectilinear coordinates to distorted sensor coordinates is closed-form, undistorting a captured frame requires no polynomial inversion. Instead, each pixel in the target undistorted image is projected forward using $K$ and $D$ to sample the corresponding intensity value from the raw distorted input frame via bilinear interpolation, restoring straight lines for downstream ball detection.
 
 === Perspective-n-Point
 
