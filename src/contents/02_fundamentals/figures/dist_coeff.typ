@@ -42,7 +42,7 @@
     (px * k, py * k)
   }
 
-  set-style(stroke: 0.7pt + blue)
+  set-style(stroke: 1pt)
 
   // Draw vertical and horizontal grid lines
   for i in range(-5, 6) {
