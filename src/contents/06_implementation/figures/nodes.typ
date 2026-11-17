@@ -68,12 +68,14 @@
   #show: template_subfigure
   #set align(bottom)
   #block(width: 100%)[
-    #place(top + right)[
-      #leg
-    ]
     #grid(
       columns: 2,
       column-gutter: 16pt,
+      row-gutter: 8pt,
+      grid.cell(colspan: 2)[
+        #leg
+
+      ],
       [
         #figure(caption: [@CR @ROS Nodes])[
           #cr_nodes
