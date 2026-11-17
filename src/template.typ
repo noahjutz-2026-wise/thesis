@@ -29,7 +29,7 @@
 }
 
 #let template_base(body) = {
-  show table: booktyps.booktabs
+  show table: booktyps.booktabs.with(rule-steals-space: true)
   show cite: citesugar.citesugar
   show: equate.equate.with(number-mode: "label")
   show cite.where(form: "author"): set cite(style: "apa")

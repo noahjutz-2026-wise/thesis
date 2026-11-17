@@ -2,13 +2,7 @@
 
 == Goals and Requirements <sec:requirements>
 
-The hypothesis formulated in the problem statement can only be tested if the physical system and its simulation are comparable with respect to their dynamics and learning algorithm. The requirements in @tbl:requirements are derived from this condition and are grouped by the system to which they apply. Those concerning timing, state estimation and the parameters of the simulation determine the validity of the experimental results and are justified in more detail below the table.
-
-#figure(
-  caption: [Requirements for the real system, the simulation and both backends.],
-)[
-  #include "tables/requirements.typ"
-] <tbl:requirements>
+The hypothesis formulated in the problem statement can only be tested if the physical system and its simulation are comparable with respect to their dynamics and learning algorithm. The requirements derived from this condition are grouped by the system to which they apply, and are given in @tbl:req-sim, @tbl:req-real and @tbl:req-run, alongside the corresponding sections below. Those concerning timing, state estimation and the parameters of the simulation determine the validity of the experimental results and are justified in more detail in the following.
 
 The simulation backend serves as the source domain and must therefore be a faithful enough replica of the physical labyrinth for a policy to transfer. It has to reproduce the geometry of the rig, the actuator and board dynamics, and the timing of sensing and actuation (@req:sim_fidelity), since a mismatch in any of these widens the reality gap. At the same time, these properties must not be hard-coded. Friction coefficients, masses, motor speeds, and latencies must be exposed as parameters (@req:sim_configurability), so that they can be sampled per episode and used for @gl:DR.
 
@@ -18,22 +12,17 @@ The experiment pipeline ties both backends together and must answer the research
 
 == Architectural Overview
 
-// fig:components design decision justification by requirements
-
-To achieve high fidelity simulation (@req:sim_fidelity), we need to do system identification. First, we need to take care of dimensions, which we achieve by #[@gl:CAD]-modeling a replica. Further, we need to take care of timing, which we achieve my manually measuring camera latency (the camera is the only sensor). Next, we need to take care of physical parameters, i.e. creating a simplified model of the actuator dynamics, which we do by treating it as a black box and regressing a model.
-
-Necessitated by the requirement for stable conditions (@req:run_comparability) (such as algorithm implementation, spaces) across experiments, we create a standardized gymnasium interface for both backends.
-
-
-// one hierarchy deeper in design decisions: opencv
-
-
-
 An overview of components and their relationships is shown in fig:components.
 
 (TODO fig:components)
 
 == Simulation Backend
+
+#figure(
+  caption: [Requirements for the simulation backend.],
+)[
+  #include "tables/requirements-simulation.typ"
+] <tbl:req-sim>
 
 // - overview
 //   - Mesh: build123d + CoACD
@@ -67,6 +56,12 @@ A range of simulators targeting robotics and @gl:RL research is available, and e
 
 == Real Backend
 
+#figure(
+  caption: [Requirements for the real backend.],
+)[
+  #include "tables/requirements-real.typ"
+] <tbl:req-real>
+
 // We orient our work upon @cyberrunner @cyberrunner2 for establishing a control loop that senses and actuates the labyrinth during training and evaluation. In order to address hurdles including software rot #footnote[For example, old dependencies whose versions were not pinned make reproducing difficult], compatibility with new tools and libraries #footnote[For example, NumPy version 2 is unsupported.], and to include new requirements including consistent timing (@req:real_determinism) and operational safety (@req:real_safety), we found the path of least resistance was a reimplementation of the @cyberrunner codebase, while reusing its hardware and architecture. @cyberrunner[Sec 2]
 
 // Justification for reimplementation
@@ -96,6 +91,12 @@ TODO move from above
 === @CV:long
 
 == Experiment Pipeline
+
+#figure(
+  caption: [Requirements for the experiment pipeline.],
+)[
+  #include "tables/requirements-pipeline.typ"
+] <tbl:req-run>
 
 - overview
   - Algorithm: RLLib PPO / DreamerV3
