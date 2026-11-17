@@ -1,18 +1,19 @@
 #import "/src/deps.typ": lilaq as lq
 
+#let data = json("/vendor/data/wandb_returns.json")
+
 #lq.diagram(
   width: 100%,
+  height: 12cm,
   xaxis: (
     label: [max episode return],
   ),
   yaxis: (
-    ticks: ("x", "y", "z").enumerate(),
+    ticks: data.keys().enumerate(),
     subticks: none,
   ),
   lq.hviolin(
-    y: range(3),
-    (1, 2),
-    (2, 3, 10),
-    (-1, 1, 3, 4, 5),
+    y: range(data.len()),
+    ..data.values(),
   ),
 )
