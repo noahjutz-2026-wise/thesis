@@ -1,30 +1,20 @@
-#import "/src/deps.typ": cetz, diagraph, fletcher, lilaq as lq, oxifmt
+#import "/src/deps.typ": fletcher, lilaq as lq
 #import "/src/template.typ": template_subfigure
+#import fletcher: diagram, edge, node
 
 #let col_green = green
 #let col_gray = gray
 
-#let shape_node = rect
-#let shape_module = rect.with(stroke: col_gray)
-
 #let leg = {
-  let arr(length: .6cm, ..args) = cetz.canvas(length: length, {
-    import cetz.draw: *
-    let kwargs = args.named()
-    line((0, 0), (1, 0), ..kwargs)
-  })
-
-  let arr(length: 1cm, ..args) = fletcher.diagram(spacing: (length, length), {
-    import fletcher: edge
-    let kwargs = args.named()
-    let posargs = args.pos()
-    edge(..posargs, ..kwargs)
-  })
+  let arr(marks, stroke) = diagram(
+    spacing: 1cm,
+    edge((0, 0), (1, 0), marks, stroke: stroke),
+  )
 
   let legend = lq.legend(
-    arr("-|>", stroke: (paint: col_green, thickness: 1pt)),
+    arr("->", 1pt + col_green),
     [Publishes],
-    arr("-|>", stroke: (paint: col_gray, dash: "dashed", thickness: 1pt)),
+    arr("-->", 1pt + col_gray),
     [Depends on],
     rect(width: 1cm, height: 6pt),
     [Node],
@@ -42,65 +32,36 @@
   legend
 }
 
-#let cr_nodes = diagraph.render(
-  engine: "dot",
-  labels: it => (
-    () => {
-      if it == "dreamerv3" { return shape_module }
-      return shape_node
-    }
-  )()(it),
-  edges: (
-    "dreamer": (
-      "dreamerv3": [#footnote[https://github.com/thomasbi1/cyberrunner/blob/40cf614cb84a46bd8cf2da37ecc048166a4bd848/cyberrunner_dreamer/cyberrunner_dreamer/eval.py#L4]],
-    ),
-  ),
-  oxifmt.strfmt(
-    "
-    digraph {{
-      fontname=\"JetBrainsMono NF\"
-      node[shape=none,margin=0,height=0,width=0]
-      camera
-      edge[style=dashed,color=\"{gray}\"]
-      // interfaces -> dreamer [dir=back]
-      // interfaces -> dynamixel [dir=back]
-      // interfaces -> state_estimation [dir=back]
-      dreamer -> dreamerv3
-      dreamer -> dreamerv3 [dir=back]
-      edge[style=solid,color=\"{green}\"]
-      camera -> state_estimation -> dreamer
-      dynamixel -> dreamer [dir=back]
-    }}
-    ",
-    gray: col_gray.to-hex(),
-    green: col_green.to-hex(),
-  ),
+#let cr_nodes = diagram(
+  spacing: (0cm, 1cm),
+  node-stroke: 1pt,
+  edge-stroke: 1pt + col_green,
+  node((0, 0), `camera`, name: <camera>),
+  edge("->"),
+  node((0, 1), `state_estimation`, name: <state_estimation>),
+  edge("->"),
+  node((1, 2), `dreamer`, name: <dreamer>),
+  edge("->"),
+  node((2, 1), `dynamixel`, name: <dynamixel>),
+  node((1, 3), `dreamerv3`, name: <dreamerv3>, stroke: col_gray),
+  edge(<dreamerv3>, <dreamer>, "-->", stroke: col_gray),
 )
 
-#let crs2r_modules = diagraph.render(
-  engine: "dot",
-  labels: it => (
-    () => {
-      if it in ("pipeline_rllib", "gym_real") { return shape_module }
-      return shape_node
-    }
-  )()(it),
-  oxifmt.strfmt(
-    "
-    digraph {{
-      node[shape=none,margin=0,height=0,width=0]
-      edge[style=solid,color=\"{green}\"]
-      camera -> vision
-      vision -> gym_real
-      mpu -> gym_real
-      actuator -> gym_real [dir=back]
-      edge[style=dashed,color=\"{gray}\"]
-      gym_real -> pipeline_rllib [dir=back]
-    }}
-    ",
-    gray: col_gray.to-hex(),
-    green: col_green.to-hex(),
-  ),
+#let crs2r_modules = diagram(
+  spacing: (0cm, 1cm),
+  node-stroke: 1pt,
+  edge-stroke: 1pt + col_green,
+  node((0, 0), `camera`, name: <camera>),
+  edge("->"),
+  node((0, 1), `vision`, name: <vision>),
+  edge("->"),
+  node((1, 2), `gym_real`, name: <gym_real>, stroke: col_gray),
+  edge(<gym_real>, <actuator>, "->", stroke: col_green),
+  node((2, 1), `actuator`, name: <actuator>),
+  node((1, 1), `mpu`, name: <mpu>),
+  edge(<mpu>, <gym_real>, "->", stroke: col_green),
+  node((1, 3), `pipeline_rllib`, name: <pipeline_rllib>, stroke: col_gray),
+  edge(<pipeline_rllib>, <gym_real>, "-->", stroke: col_gray),
 )
 
 #figure(caption: [@CR nodes (left) and reimplementation (right).])[
