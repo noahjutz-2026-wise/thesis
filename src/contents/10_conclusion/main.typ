@@ -27,3 +27,7 @@ Our work provides an alternative base for researchers looking to achieve general
 // - *System Identification:* Ascertain exact friction coefficients, motor acceleration, etc.
 // - *R2S2R:* (?)
 // - *Different transfers:* R2S, S2S, R2R
+
+=== Other
+
+- *MuJoCo Playground:* One implementation, two backends (real + sim)

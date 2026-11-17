@@ -83,19 +83,17 @@ We considered patching the original codebase, for example by bridging from Gym t
 
 #include "figures/nodes.typ"
 
-// - overview
-//   - messaging: ZMQ over IPC
-//   - actuation: dynamixel-sdk + python
-//   - sensing:
-//     - Vision: OpenCV + Fisheye + PnP
-//     - IMU
-//   - control loop: linux os timer fd
-//     - local inference and batch updates
-//   - interface: gymnasium
+=== Overview
 
-=== General Architecture
+We opted for a distributed architecture wherein hardware nodes (e.g. camera, actuator) and processing nodes (e.g. @CV) each operate within their own process, and exchange messages through a @PubSub. As it pertains to its architecture, our design fundamentally differs from theirs in that its scope is more limited. Our backend neither defines @RL task-related logic such as observation shape, nor does it prescribe a certain training framework or algorithm. It merely provides low-level actuation and sensing.
 
+Due to its simplicity and lightweight design (@req:real_speed), we chose @ZMQ to pass around arbitrary data in a @PubSub pattern between processes. To guarantee reproducability (@req:real_reproducible), we lock down project dependency versions and provide @OCI:an containerfile. Thanks to @OCI:an compose file, launching the backend is merely a matter of mapping connected devices to their containers and starting them all with a single command.
 
+=== Previous Work and Learnings
+
+TODO move from above
+
+=== @CV:long
 
 == Experiment Pipeline
 

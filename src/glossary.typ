@@ -94,6 +94,10 @@
   OpenCV: (
     short: "OpenCV",
   ),
+  ZMQ: (
+    short: "ZMQ",
+    long: "ZeroMQ",
+  ),
 )
 
 #let _general = (
@@ -120,6 +124,14 @@
   PnP: (
     short: "PnP",
     long: "Perspective-n-Point",
+  ),
+  PubSub: (
+    short: "pub/sub",
+    long: "publish-subscribe pattern",
+  ),
+  OCI: (
+    short: "OCI",
+    long: "Open Container Initiative",
   ),
 )
 
