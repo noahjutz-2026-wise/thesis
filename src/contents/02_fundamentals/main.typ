@@ -126,7 +126,7 @@ $ <eq:gae>
 
 == @gl:DRL:long
 
-In settings with continuous state and action spaces, tabular representations, which store one value estimate per state or state-action pair, are not applicable. Such a table cannot enumerate an infinite set of states, and it cannot generalize from visited to unvisited states. Algorithms therefore rely on function approximation, in which policies, value functions, or environment models are represented by parametrized functions. Neural networks are a particularly expressive class of such approximators, since they can represent mappings from states to actions as well as to value estimates. In supervised learning, labeled data are available: the network output is compared with the true label, a loss function quantifies the discrepancy, the gradient of this loss with respect to the network parameters is computed via backpropagation, and the parameters are updated using optimization methods such as stochastic gradient descent.
+In settings with continuous state and action spaces, tabular representations, which store one value estimate per state or state-action pair, are not applicable. Such a table cannot enumerate an infinite set of states, and it cannot generalize from visited to unvisited states. Algorithms therefore rely on function approximation, in which policies #footnote[TODO this is duplicate of 2.2 function approximation], value functions, or environment models are represented by parametrized functions. Neural networks are a particularly expressive class of such approximators, since they can represent mappings from states to actions as well as to value estimates. In supervised learning, labeled data are available: the network output is compared with the true label, a loss function quantifies the discrepancy, the gradient of this loss with respect to the network parameters is computed via backpropagation, and the parameters are updated using optimization methods such as stochastic gradient descent.
 
 In @gl:RL, no labeled data are available. The learning signal is the reward received through interaction with the environment, so training targets must be constructed from the agent’s own experience, for example from sampled returns or from estimates of future reward produced by the network itself. Consequently, the data distribution depends on the current behavior of the agent and changes as learning progresses, in contrast to the fixed dataset assumed in supervised learning.
 
@@ -162,7 +162,7 @@ $
   L_"pred" (phi) = - ln p_phi (o_t | h_t, z_t) - ln p_phi (r_t | h_t, z_t) - ln p_phi (c_t | h_t, z_t)
 $ <eq:dreamer_pred>
 
-The transition components are trained using Kullback-Leibler (KL) divergences. The dynamics loss $L_"dyn" (phi)$ trains the prior to accurately predict the posterior. To prevent the posterior from collapsing toward the prior during this step, a stop-gradient operator $"sg" (dot)$ is applied to the posterior, as shown in @eq:dreamer_dyn.
+The transition components are trained using Kullback-Leibler (KL) divergences. The dynamics loss $L_"dyn" (phi)$ trains the prior to accurately predict the posterior. To prevent the posterior from collapsing toward the prior during this step, a stop-gradient operator $"sg" (dot)$ #footnote[TODO remove] is applied to the posterior, as shown in @eq:dreamer_dyn.
 
 $
   L_"dyn" (phi) = "KL" ("sg" (q_phi (z_t | h_t, o_t)) || p_phi (z_t | h_t))
