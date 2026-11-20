@@ -150,7 +150,7 @@ The real environment is a Gymnasium environment that wraps the real backend. It 
 
 === mjlab Environment <sec:task-sim>
 
-The simulated environment is an mjlab task #footnote[TODO cite mjlab] built on the MuJoCo backend. It declares observations, actions, rewards, and terminations through mjlab's manager-based API, and in addition defines the metrics by which policies are evaluated (@req:run_eval). Per-episode randomization of the physical parameters of the model for @gl:DR is declared in the same way (@req:run_parameterize). mjlab simulates large numbers of instances of the environment in parallel on a GPU, using MuJoCo Warp as the physics engine; this is handled by the framework and is not part of the environment definition. The simulated environment is accordingly not a Gymnasium environment, which sets it apart from the real environment even though both implement the same task definition.
+The simulated environment is an mjlab task @mjlab built on the MuJoCo backend. It declares observations, actions, rewards, and terminations through mjlab's manager-based API, and in addition defines the metrics by which policies are evaluated (@req:run_eval). Per-episode randomization of the physical parameters of the model for @gl:DR is declared in the same way (@req:run_parameterize). mjlab simulates large numbers of instances of the environment in parallel on a GPU, using MuJoCo Warp as the physics engine; this is handled by the framework and is not part of the environment definition. The simulated environment is accordingly not a Gymnasium environment, which sets it apart from the real environment even though both implement the same task definition.
 
 == Runtimes <sec:runtime>
 
@@ -164,7 +164,7 @@ A runtime trains policies in an environment. We build on existing frameworks for
 
 === Real Runtime <sec:runtime-real>
 
-Training on hardware differs from training in simulation in that the environment cannot be stepped faster than real time, cannot be reset instantaneously, and cannot be copied. The real runtime therefore wraps the real environment with the means to train in these conditions. It builds on RLlib #footnote[TODO cite RLlib] for the learning algorithms, and logs to Weights & Biases #footnote[TODO cite Weights & Biases]. It is used to train and fine-tune policies on the rig (@req:run_baselines), and to import and export them (@req:run_checkpoint). // TODO: may be succeeded by mjlab or MuJoCo Playground; revise once decided.
+Training on hardware differs from training in simulation in that the environment cannot be stepped faster than real time, cannot be reset instantaneously, and cannot be copied. The real runtime therefore wraps the real environment with the means to train in these conditions. It builds on RLlib @rllib for the learning algorithms, and logs to Weights & Biases #footnote[TODO cite Weights & Biases]. It is used to train and fine-tune policies on the rig (@req:run_baselines), and to import and export them (@req:run_checkpoint). // TODO: may be succeeded by mjlab or MuJoCo Playground; revise once decided.
 
 // TODO: elaborate. Ideas:
 - Control loop with a fixed step duration, whose clock rate is set by the runtime.
@@ -175,4 +175,4 @@ Training on hardware differs from training in simulation in that the environment
 
 === mjlab Runtime <sec:runtime-sim>
 
-The mjlab runtime is provided by the framework. Training is started through the entry points of mjlab, with the RL algorithms supplied by rsl-rl #footnote[TODO cite rsl-rl], and metrics are logged to Weights & Biases.
+The mjlab runtime is provided by the framework. Training is started through the entry points of mjlab, with the RL algorithms supplied by rsl-rl @rsl_rl2025, and metrics are logged to Weights & Biases.
