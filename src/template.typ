@@ -1,6 +1,19 @@
 #import "/src/deps.typ": booktyps, citesugar, equate, glossy
 #import "/src/glossary.typ": gl-refs, glossary
 
+#let _template_eq_refs(body) = {
+  show ref: it => {
+    if it.element == none {
+      return it
+    }
+    if it.element.func() != math.equation {
+      return it
+    }
+    link(it.target)[(#it)]
+  }
+  body
+}
+
 #let _template_subimg(body) = {
   show figure.caption: it => {
     if it.kind == "subimg" {
@@ -51,7 +64,8 @@
     term-links: true,
   )
   show: gl-refs
-  set math.equation(numbering: "(1)")
+  show: _template_eq_refs
+  set math.equation(numbering: "(1)", supplement: none)
 
   show: _template_subimg
   body
