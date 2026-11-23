@@ -134,6 +134,8 @@ In @gl:RL, no labeled data are available. The learning signal is the reward rece
 
 Two function approximators are central to the algorithms considered in this thesis. The policy (or actor) maps a state to a probability distribution over actions. The value function (or critic) estimates the expected future return from a given state and thus evaluates how good the current situation is under the policy. Methods that learn both are called actor-critic methods: the critic’s estimate is used to judge whether an action performed better or worse than expected, and the actor is adjusted accordingly. This corresponds to @gl:GPI, where the critic carries out policy evaluation and the actor carries out policy improvement via gradient updates instead of greedy maximization, which is impractical for continuous actions. Both @gl:PPO @ppo and @gl:DreamerV3 @dreamerv3 belong to this family and differ mainly in the data from which actor and critic are trained.
 
+=== @PPO:long
+
 @gl:PPO is a model-free actor-critic algorithm. It collects a batch of trajectories with the current policy in the environment and uses it to update the actor and critic networks. A central difficulty of policy-based methods is that an overly large update can degrade the policy and, because new data are collected with this policy, hinder recovery. @gl:PPO addresses this by comparing the probability of an action under the updated policy parameterized by $bold(theta)$ to its probability under the old policy parameterized by $bold(theta)_"old"$ that collected the data. The ratio is one at the old parameters, $r(bold(theta)_"old") = 1$, and is expressed as the probability ratio $r_t (bold(theta))$ in @eq:ppo_ratio @ppo.
 
 $
@@ -161,6 +163,8 @@ This promotes stable learning and allows multiple gradient updates on the same b
 // $ <eq:ppo_total>
 //
 // For continuous actions, the actor outputs the parameters of a probability distribution over actions, from which actions are sampled during training.
+
+=== @DreamerV3
 
 @gl:DreamerV3 is a model-based actor-critic algorithm @dreamerv3. Instead of learning solely from real environment interaction, it learns a world model, parameterized by $Phi$, to simulate the environment in a compact latent space. The core of this world model is the Recurrent State-Space Model (RSSM) @dreamerv1, which maintains a deterministic sequence state $h_t$ and a stochastic discrete latent state $z_t$; together they form the model state $s_t = (h_t, z_t)$. The world model consists of the six components summarized in @eq:dreamer_components @dreamerv3. The encoder maps the input $x_t$ to a categorical distribution from which the latent state $z_t$ is drawn. The sequence model carries $h_t$ forward through the previous latent state and action, which allows the dynamics predictor to roll the latent state forward on its own, predicting $hat(z)_t$ without seeing any input. Rolling these two components forward from an encoded state therefore yields imagined trajectories that never touch the environment: the actor learns from the rewards $hat(r)_t$ and continuation flags $hat(c)_t$ predicted along them, while the decoder keeps the latent space informative by reconstructing the input as $hat(x)_t$ @dreamerv3.
 
