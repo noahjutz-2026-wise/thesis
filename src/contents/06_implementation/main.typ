@@ -113,9 +113,10 @@ We ultimately chose @gl:MuJoCo @mujoco for its computational performance, in par
 While generating meshes directly is computationally faster and can accelerate procedural level generation, the present scope is restricted to a single maze level. The primary objectives are therefore dimensional accuracy and implementation simplicity. To achieve this, we eschewed direct mesh generation -- and the Unity-based @gl:SVG importer provided by @marble_maze -- in favor of a @gl:CAD\-based approach. We selected build123d @build123d, an open-source @gl:CAD modeling library, due to its Pythonic interface. This programmatic approach yields parameterized models, and establishes a foundation that can later be extended to randomized mazes and curriculum learning. The maze layout is taken from the CyberRunner project, stored as data, and converted to the coordinate conventions of the model. Because @gl:MuJoCo requires convex shapes for collision meshes, the exported geometry is decomposed automatically using @gl:CoACD @coacd.
 
 #figure(
-  todo-fig[Side-by-side view of the maze @gl:CAD model and the resulting MuJoCo scene.],
   caption: [Maze geometry in CAD and in the MuJoCo scene.],
-) <fig:maze-model>
+)[
+  #include "figures/maze_cad_geometry.typ"
+] <fig:maze-model>
 
 === MuJoCo Model <sec:sim-xml>
 
