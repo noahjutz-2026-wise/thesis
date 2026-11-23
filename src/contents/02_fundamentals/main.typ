@@ -20,8 +20,8 @@ Together, the dynamics and the policy determine how likely a trajectory is. Sinc
 
 $
   & Pr(A_t, S_(t+1), A_(t+1), ..., S_T | S_t, A_(t:T-1) ~ pi) \
-  & = pi(A_t | S_t) p(S_(t+1) | S_t, A_t) pi(A_(t+1)|S_(t+1)) ... p(S_T|S_(T-1), A_(T-1)) \
-  & = product_(k=t)^(T-1) pi(A_k | S_k) p(S_(k+1) | S_k, A_k)
+  & quad = pi(A_t | S_t) p(S_(t+1) | S_t, A_t) pi(A_(t+1)|S_(t+1)) ... p(S_T|S_(T-1), A_(T-1)) \
+  & quad = product_(k=t)^(T-1) pi(A_k | S_k) p(S_(k+1) | S_k, A_k)
 $ <eq:trajectory_distribution>
 
 Tasks differ in how a trajectory ends. _Episodic_ tasks group steps into _episodes_, each of which ends in a _terminal state_, for example when a goal is reached, a failure occurs, or a time limit expires. After that, the environment is reset and a new episode begins. This is in opposition to _continuing_ tasks, which have no terminal state and go on indefinitely, as is the case for a controller that regulates a process around the clock.
