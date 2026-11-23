@@ -1,21 +1,27 @@
 #import "/src/template.typ": template_subfigure
 #show: template_subfigure
+#show: align.with(horizon)
+
+#let shape = box.with(height: 100pt)
 #grid(
   columns: 3,
   column-gutter: 16pt,
   [
     #figure(caption: [@CAD])[
-      #rect(height: 125pt, width: 125pt, stroke: (dash: "dashed"))
+      #show: shape
+      #image("/src/assets/images/maze_build123d.png", height: 70pt)
     ] <fig:maze_cad.cad>
   ],
   [
     #figure(caption: [@CoACD Split])[
-      #image("/src/assets/images/maze_coacd_expl.png", height: 125pt)
+      #show: shape
+      #image("/src/assets/images/maze_coacd_expl.png", height: 100pt)
     ] <fig:maze_cad.mjlab>
   ],
   [
     #figure(caption: [mjlab])[
-      #image("/src/assets/images/maze_mjlab_viser.png", height: 125pt)
+      #show: shape
+      #image("/src/assets/images/maze_mjlab_viser.png", height: 100pt)
     ] <fig:maze_cad.mjlab>
   ],
 )
