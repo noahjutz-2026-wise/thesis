@@ -134,16 +134,22 @@ In @gl:RL, no labeled data are available. The learning signal is the reward rece
 
 Two function approximators are central to the algorithms considered in this thesis. The policy (or actor) maps a state to a probability distribution over actions. The value function (or critic) estimates the expected future return from a given state and thus evaluates how good the current situation is under the policy. Methods that learn both are called actor-critic methods: the critic’s estimate is used to judge whether an action performed better or worse than expected, and the actor is adjusted accordingly. This corresponds to @gl:GPI, where the critic carries out policy evaluation and the actor carries out policy improvement via gradient updates instead of greedy maximization, which is impractical for continuous actions. Both @gl:PPO @ppo and @gl:DreamerV3 @dreamerv3 belong to this family and differ mainly in the data from which actor and critic are trained.
 
-@gl:PPO is a model-free actor-critic algorithm. It collects a batch of trajectories with the current policy in the environment and uses it to update the actor and critic networks. A central difficulty of policy-based methods is that an overly large update can degrade the policy and, because new data are collected with this policy, hinder recovery. @gl:PPO addresses this by comparing the probability of an action under the updated policy parameterized by $bold(theta)$ to its probability under the old policy parameterized by $bold(theta)_"old"$ that collected the data. This is expressed as the probability ratio $r_t (bold(theta))$ in @eq:ppo_ratio.
+@gl:PPO is a model-free actor-critic algorithm. It collects a batch of trajectories with the current policy in the environment and uses it to update the actor and critic networks. A central difficulty of policy-based methods is that an overly large update can degrade the policy and, because new data are collected with this policy, hinder recovery. @gl:PPO addresses this by comparing the probability of an action under the updated policy parameterized by $bold(theta)$ to its probability under the old policy parameterized by $bold(theta)_"old"$ that collected the data. The ratio is one at the old parameters, $r(bold(theta)_"old") = 1$, and is expressed as the probability ratio $r_t (bold(theta))$ in @eq:ppo_ratio @ppo.
 
 $
   r_t (bold(theta)) = (pi_bold(theta) (a_t | s_t)) / (pi_(bold(theta)_"old") (a_t | s_t))
 $ <eq:ppo_ratio>
 
-To prevent destructively large policy updates, @gl:PPO clips this ratio to a small interval $[1-epsilon, 1+epsilon]$ around one. The clipped surrogate objective $L^"CLIP" (bold(theta))$ is defined in @eq:ppo_clip, which scales the ratio by the advantage estimate $hat(A)_t^"GAE"$ from @eq:gae. Updates that would move the policy too far from the data-collecting policy therefore receive no additional incentive.
+Before any clipping, @gl:PPO maximizes the conservative policy iteration objective $L^"CPI" (bold(theta))$ in @eq:ppo_cpi, which weights the ratio by the advantage estimate so that actions that fare better than the critic's expectation become more likely @ppo.
 
 $
-  L^"CLIP" (bold(theta)) = EE_t [min(r_t (bold(theta)) hat(A)_t^"GAE", "clip"(r_t (bold(theta)), 1-epsilon, 1+epsilon) hat(A)_t^"GAE")]
+  L^"CPI" (bold(theta)) = EE_t [r_t (bold(theta)) hat(A)_t]
+$ <eq:ppo_cpi>
+
+To prevent destructively large policy updates, @gl:PPO instead clips the ratio to a small interval $[1-epsilon, 1+epsilon]$ around one. The clipped surrogate objective $L^"CLIP" (bold(theta))$ is defined in @eq:ppo_clip, which scales the ratio by the advantage estimate $hat(A)_t$, obtained with @gl:GAE as in @eq:gae. Because the minimum selects the clipped term whenever the ratio leaves the interval, a gradient contribution arises only from updates that remain close to the data-collecting policy.
+
+$
+  L^"CLIP" (bold(theta)) = EE_t ["min"(r_t (bold(theta)) hat(A)_t, "clip"(r_t (bold(theta)), 1-epsilon, 1+epsilon) hat(A)_t)]
 $ <eq:ppo_clip>
 
 This promotes stable learning and allows multiple gradient updates on the same batch, which improves data usage compared to a single update per batch.
@@ -156,27 +162,32 @@ This promotes stable learning and allows multiple gradient updates on the same b
 //
 // For continuous actions, the actor outputs the parameters of a probability distribution over actions, from which actions are sampled during training.
 
-@gl:DreamerV3 is a model-based actor-critic algorithm. Instead of learning solely from real environment interaction, it learns a world model parameterized by $phi$ to simulate the environment in a compact latent space. The core of this world model is the Recurrent State-Space Model (RSSM), which maintains a deterministic recurrent state $h_t$ and a stochastic discrete latent state $z_t$. Given an observation $o_t$, the representation model (or posterior) encodes it into a probability distribution over the stochastic latent state, $q_phi (z_t | h_t, o_t)$. To enable imagination without real observations, a dynamics model (or prior) predicts the next stochastic state solely from the deterministic state, $p_phi (z_t | h_t)$.
-
-To ensure the latent state retains task-relevant information, three predictors are trained from the combined latent state $(h_t, z_t)$. The observation predictor reconstructs the input, the reward predictor estimates the immediate reward $r_t$, and the continuation predictor estimates the probability $c_t$ that the episode continues rather than terminates. The combined prediction loss $L_"pred" (phi)$ minimizes the negative log-likelihood for all three, as shown in @eq:dreamer_pred.
+@gl:DreamerV3 is a model-based actor-critic algorithm @dreamerv3. Instead of learning solely from real environment interaction, it learns a world model, parameterized by $Phi$, to simulate the environment in a compact latent space. The core of this world model is the Recurrent State-Space Model (RSSM) @dreamerv1, which maintains a deterministic sequence state $h_t$ and a stochastic discrete latent state $z_t$; together they form the model state $s_t = (h_t, z_t)$. The world model consists of the six components summarized in @eq:dreamer_components @dreamerv3. The encoder maps the input $x_t$ to a categorical distribution from which the latent state $z_t$ is drawn. The sequence model carries $h_t$ forward through the previous latent state and action, which allows the dynamics predictor to roll the latent state forward on its own, predicting $hat(z)_t$ without seeing any input. Rolling these two components forward from an encoded state therefore yields imagined trajectories that never touch the environment: the actor learns from the rewards $hat(r)_t$ and continuation flags $hat(c)_t$ predicted along them, while the decoder keeps the latent space informative by reconstructing the input as $hat(x)_t$ @dreamerv3.
 
 $
-  L_"pred" (phi) = - ln p_phi (o_t | h_t, z_t) - ln p_phi (r_t | h_t, z_t) - ln p_phi (c_t | h_t, z_t)
-$ <eq:dreamer_pred>
+      "Sequence model:" & h_t = f_Phi (h_(t-1), z_(t-1), a_(t-1)) \
+             "Encoder:" & z_t tilde.op q_Phi (z_t | h_t, x_t) \
+  "Dynamics predictor:" & hat(z)_t tilde.op p_Phi (hat(z)_t | h_t) \
+    "Reward predictor:" & hat(r)_t tilde.op p_Phi (hat(r)_t | h_t, z_t) \
+  "Continue predictor:" & hat(c)_t tilde.op p_Phi (hat(c)_t | h_t, z_t) \
+             "Decoder:" & hat(x)_t tilde.op p_Phi (hat(x)_t | h_t, z_t)
+$ <eq:dreamer_components>
 
-The transition components are trained using Kullback-Leibler (KL) divergences. The dynamics loss $L_"dyn" (phi)$ trains the prior to accurately predict the posterior. To prevent the posterior from collapsing toward the prior during this step, a stop-gradient operator $"sg" (dot)$ #footnote[TODO remove] is applied to the posterior, as shown in @eq:dreamer_dyn.
+Training presents the world model with sequences of $T$ inputs $x_(1:T)$, together with the actions $a_(1:T)$ taken in them and the rewards $r_(1:T)$ and continuation flags $c_(1:T)$ they produced. All components are then updated jointly by minimizing the three losses combined in @eq:dreamer_loss, weighted by $beta_"pred" = 1$, $beta_"dyn" = 1$, and $beta_"rep" = 0.1$ @dreamerv3.
 
 $
-  L_"dyn" (phi) = "KL" ("sg" (q_phi (z_t | h_t, o_t)) || p_phi (z_t | h_t))
-$ <eq:dreamer_dyn>
+  cal(L)(Phi) eq.dot EE_(q_Phi) [sum_(t=1)^T (beta_"pred" cal(L)_"pred" (Phi) + beta_"dyn" cal(L)_"dyn" (Phi) + beta_"rep" cal(L)_"rep" (Phi))]
+$ <eq:dreamer_loss>
 
-Conversely, the representation loss $L_"rep" (phi)$ trains the posterior to stay close to the prior, which regularizes the latent space. Here, the stop-gradient is applied to the prior, defined in @eq:dreamer_rep.
+The three losses are defined in @eq:dreamer_losses. The prediction loss scores how closely the decoder, the reward predictor, and the continuation predictor reproduce their respective targets, using a symlog squared loss for the first two and logistic regression for the last. Both KL terms penalize the Kullback-Leibler (KL) divergence between the dynamics predictor $p_Phi (z_t | h_t)$ and the encoder $q_Phi (z_t | h_t, x_t)$, but they pull in opposite directions: the stop-gradient operator $"sg" (dot)$ cuts the gradient path through one side of each divergence, so $cal(L)_"dyn"$ adjusts the dynamics predictor towards the representation, whereas $cal(L)_"rep"$ adjusts the representation towards the dynamics prediction. The surrounding $max(1, dot)$ lets each KL term vanish as soon as its divergence falls below one nat, so that a well-matched dynamics predictor does not dominate the gradient budget @dreamerv3.
 
 $
-  L_"rep" (phi) = "KL" (q_phi (z_t | h_t, o_t) || "sg" (p_phi (z_t | h_t)))
-$ <eq:dreamer_rep>
+  cal(L)_"pred" (Phi) & = - ln p_Phi (x_t | z_t, h_t) - ln p_Phi (r_t | z_t, h_t) - ln p_Phi (c_t | z_t, h_t) \
+   cal(L)_"dyn" (Phi) & = "max"(1, "KL"["sg"(q_Phi (z_t | h_t, x_t)) || p_Phi (z_t | h_t)]) \
+   cal(L)_"rep" (Phi) & = "max"(1, "KL"[q_Phi (z_t | h_t, x_t) || "sg"(p_Phi (z_t | h_t))])
+$ <eq:dreamer_losses>
 
-The total world model loss is a weighted sum of these three components. The algorithm then trains an actor network parameterized by $theta$ and a critic network parameterized by $psi$ on trajectories imagined entirely in this latent space. These trajectories are generated by the dynamics model and the predictors, starting from states encountered in real experience. Because imagined trajectories can be generated at no cost to the real environment, @gl:DreamerV3 requires considerably fewer real interactions than model-free methods. However, the approach depends on the accuracy of the learned world model: errors in the model can compound and mislead the actor $pi_theta$ and critic $hat(v)_psi$.
+The algorithm then trains an actor network parameterized by $theta$ and a critic network parameterized by $psi$ on trajectories imagined entirely in this latent space. These trajectories are generated by the dynamics model and the predictors, starting from states encountered in real experience. Because imagined trajectories can be generated at no cost to the real environment, @gl:DreamerV3 requires considerably fewer real interactions than model-free methods. However, the approach depends on the accuracy of the learned world model: errors in the model can compound and mislead the actor $pi_theta$ and critic $hat(v)_psi$.
 
 Despite these differences, @gl:PPO and @gl:DreamerV3 share a training structure in which data collection and parameter updates are decoupled. Instead of updating the networks on each transition as it arrives, both algorithms first gather experience and then perform multiple gradient updates on randomly drawn minibatches, which reduces the correlation between consecutive samples and allows the same data to be used repeatedly.
 
