@@ -1,7 +1,6 @@
 #table(
   columns: 5,
   table.header([*Reference*], [*Real platform*], [*@RL Algorithm*], [*Simulator*], [*@gl:S2R*]),
-  [@fischertechnik_kugellabyrinth], [Fischertechnik], [$crossmark$], [$crossmark$], [$crossmark$],
   [@waldemarkUsingReinforcementLearning1995],
   [BRIO #footnote[simplified maze]],
   [SRV-Net (@RL:short)],
@@ -20,4 +19,5 @@
   [@otaDataEfficientLearningComplex2021], [@gl:CME:short], [NMPC], [Physics+GP], [Sys-ID, GP Res.],
   [@cyberrunner], [BRIO], [DreamerV3], [$crossmark$], [$crossmark$],
   [@cyberrunner2], [BRIO], [DreamerV3 #footnote[with prioritized experience replay]], [$crossmark$], [$crossmark$],
+  [@fischertechnik_kugellabyrinth], [Fischertechnik], [$crossmark$], [$crossmark$], [$crossmark$],
 )
