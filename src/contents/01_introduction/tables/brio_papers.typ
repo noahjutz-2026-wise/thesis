@@ -1,8 +1,9 @@
 #table(
   columns: 5,
-  table.header([*Reference*], [*Real platform*], [*Simulator*], [*Algorithm*], [*@gl:S2R*]),
+  table.header([*Reference*], [*Real platform*], [*Simulator*], [*@RL Algorithm*], [*@gl:S2R*]),
+  [@fischertechnik_kugellabyrinth], [Fischertechnik], [$crossmark$], [$crossmark$], [$crossmark$],
   [@waldemarkUsingReinforcementLearning1995],
-  [simplified BRIO],
+  [BRIO #footnote[simplified maze]],
   [Custom],
   [SRV-Net (@RL:short)],
   [Direct policy transfer],
@@ -17,6 +18,6 @@
   [@jhaLearningTasksComplex], [CME], [Custom], [MF + MB RL], [✗],
   [@baarSimtoRealTransferLearning2019], [CME], [Custom], [RL], [DR],
   [@otaDataEfficientLearningComplex2021], [CME], [Physics+GP], [NMPC], [Sys-ID, GP Res.],
-  [@cyberrunner], [BRIO], [—], [DreamerV3], [✗],
-  [@cyberrunner2], [BRIO], [—], [DreamerV3 + PER], [✗],
+  [@cyberrunner], [BRIO], [$crossmark$], [DreamerV3], [$crossmark$],
+  [@cyberrunner2], [BRIO], [$crossmark$], [DreamerV3 #footnote[with prioritized experience replay]], [$crossmark$],
 )
