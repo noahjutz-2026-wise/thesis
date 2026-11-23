@@ -71,6 +71,10 @@
   DreamerV3: (
     short: "DreamerV3",
   ),
+  CME: (
+    short: "CME",
+    long: "Circular Maze Environment",
+  ),
 )
 
 #let _software = (
@@ -87,6 +91,10 @@
   MuJoCo: (
     short: "MuJoCo",
     long: "Multi-Joint dynamics with Contact",
+  ),
+  ODE: (
+    short: "ODE",
+    long: "Open Dynamics Engine",
   ),
   CoACD: (
     short: "CoACD",

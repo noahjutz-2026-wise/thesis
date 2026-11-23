@@ -8,16 +8,16 @@
   [Custom],
   [Direct policy transfer],
 
-  [@abdenebaouiConnectionistArchitectureLearning2007], [BRIO], [QCON], [ODE], [],
+  [@abdenebaouiConnectionistArchitectureLearning2007], [BRIO], [QCON], [@gl:ODE:short], [],
 
-  [@metzenBRIOLabyrinthGameA2009], [BRIO], [SARSA($lambda$) + CMAC], [ODE], [✗],
+  [@metzenBRIOLabyrinthGameA2009], [BRIO], [SARSA($lambda$) + CMAC], [@gl:ODE:short], [✗],
 
-  [@Bergatt2009Quantification], [BRIO], [$crossmark$], [ODE], [$crossmark$],
+  [@Bergatt2009Quantification], [BRIO], [$crossmark$], [@gl:ODE:short], [$crossmark$],
 
   [@ofjallCombiningVisionMachine2016], [BRIO], [LWPR], [No], [#sym.crossmark],
-  [@jhaLearningTasksComplex], [CME], [MF + MB RL], [Custom], [✗],
-  [@baarSimtoRealTransferLearning2019], [CME], [RL], [Custom], [DR],
-  [@otaDataEfficientLearningComplex2021], [CME], [NMPC], [Physics+GP], [Sys-ID, GP Res.],
+  [@jhaLearningTasksComplex], [@gl:CME:short], [MF + MB RL], [Custom], [✗],
+  [@baarSimtoRealTransferLearning2019], [@gl:CME:short], [RL], [Custom], [DR],
+  [@otaDataEfficientLearningComplex2021], [@gl:CME:short], [NMPC], [Physics+GP], [Sys-ID, GP Res.],
   [@cyberrunner], [BRIO], [DreamerV3], [$crossmark$], [$crossmark$],
   [@cyberrunner2], [BRIO], [DreamerV3 #footnote[with prioritized experience replay]], [$crossmark$], [$crossmark$],
 )
