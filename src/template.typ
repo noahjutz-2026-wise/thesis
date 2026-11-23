@@ -1,6 +1,16 @@
 #import "/src/deps.typ": booktyps, citesugar, equate, glossy
 #import "/src/glossary.typ": gl-refs, glossary
 
+#let _template_eq_numbering(body) = context {
+  let labels = query(math.equation.where(block: true)).filter(eq => eq.has("label")).map(eq => eq.label).dedup()
+  if labels.len() > 0 {
+    show selector.or(..labels): set math.equation(numbering: "(1)")
+    body
+  } else {
+    body
+  }
+}
+
 #let _template_eq_refs(body) = {
   show ref: it => {
     if it.element == none {
@@ -44,7 +54,8 @@
 #let template_base(body) = {
   show table: booktyps.booktabs.with(rule-steals-space: true)
   show cite: citesugar.citesugar
-  show: equate.equate.with(number-mode: "label")
+  set math.equation(numbering: none, supplement: none)
+  show: _template_eq_numbering
   show cite.where(form: "author"): set cite(style: "apa")
   show cite.where(form: "prose"): set cite(style: "apa")
   set document(
@@ -65,7 +76,6 @@
   )
   show: gl-refs
   show: _template_eq_refs
-  set math.equation(numbering: "(1)", supplement: none)
 
   show: _template_subimg
   body
