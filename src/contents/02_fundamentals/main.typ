@@ -16,10 +16,12 @@ $
   p(s', r | s, a) = Pr(S_t=s', R_t=r | S_(t-1)=s, A_(t-1)=a)
 $ <eq:dynamics>
 
-Together, the dynamics and the policy determine how likely a complete trajectory is. Since the agent chooses actions according to $pi(a|s)$ and the environment transitions according to the dynamics, the probability of a trajectory $tau$ under a policy $pi$ factorizes into the distribution $p(s_0)$ of the initial state times the probabilities of each action and transition along the way, as shown in @eq:trajectory_distribution.
+Together, the dynamics and the policy determine how likely a trajectory is. Since the agent chooses actions according to $pi(a|s)$ and the environment transitions according to the dynamics, the probability of a trajectory factorizes into one policy term and one transition term per step. Consider an episode that ends at the final time step $T$, starting from state $S_t$. The probability of the subsequent actions and states $A_t, S_(t+1), ..., S_T$ when the actions $A_(t:T-1)$ are selected according to $pi$ is given in @eq:trajectory_distribution @bartosutton. Here, $p(s'|s,a) = sum_r p(s', r|s, a)$ denotes the state-transition probability, obtained from the dynamics by marginalizing out the reward.
 
 $
-  p(tau) = p(s_0) product_(t=0)^oo pi(a_t|s_t) p(s_(t+1), r_(t+1) | s_t, a_t)
+  & Pr(A_t, S_(t+1), A_(t+1), ..., S_T | S_t, A_(t:T-1) ~ pi) \
+  & = pi(A_t | S_t) p(S_(t+1) | S_t, A_t) pi(A_(t+1)|S_(t+1)) ... p(S_T|S_(T-1), A_(T-1)) \
+  & = product_(k=t)^(T-1) pi(A_k | S_k) p(S_(k+1) | S_k, A_k)
 $ <eq:trajectory_distribution>
 
 Tasks differ in how a trajectory ends. _Episodic_ tasks group steps into _episodes_, each of which ends in a _terminal state_, for example when a goal is reached, a failure occurs, or a time limit expires. After that, the environment is reset and a new episode begins. This is in opposition to _continuing_ tasks, which have no terminal state and go on indefinitely, as is the case for a controller that regulates a process around the clock.
